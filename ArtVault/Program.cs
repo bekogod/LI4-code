@@ -6,6 +6,8 @@ namespace ArtVault
     {
         public static void Main(string[] args)
         {
+            
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -30,7 +32,12 @@ namespace ArtVault
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
 
+            UtilizadorDAO UtiDAO = new UtilizadorDAO();
+
+            UtiDAO.Start(); 
             app.Run();
         }
+
+        
     }
 }
