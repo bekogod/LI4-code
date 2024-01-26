@@ -1,23 +1,23 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArtVault.bundle.scp.css",
+      "Id": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArtVault.bundle.scp.css",
       "PackagePath": "staticwebassets\\ArtVault.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\app.css",
+      "Id": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
