@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using System.Data.SqlClient;
 
 namespace ArtVault.DAOs
 {
@@ -8,19 +9,17 @@ namespace ArtVault.DAOs
        
         public void Start()
         {
-            // Connection string format for SQL Server
-            string connectionString = "Data Source=localhost;Initial Catalog=ArtVault;Integrated Security=True";
+
+            // Create a DAOConfig instance with the provided credentials
+            DAOConfig daoConfig = new DAOConfig();
 
             // Create a SqlConnection using the connection string
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = daoConfig.GetConnection())
             {
                 try
                 {
-                    // Open the connection
-                    connection.Open();
 
                     // Connection is open, you can perform database operations here
-
                     Console.WriteLine("Connected to the database.");
 
                     string query = "SELECT * FROM Utilizador"; 
@@ -33,7 +32,7 @@ namespace ArtVault.DAOs
                         // Process the results
                         while (reader.Read())
                         {
-                            // Access data using reader["ColumnName"]
+
                             Console.WriteLine($"Column1: {reader["id"]}, Column2: {reader["username"]}");   
                         }
 
@@ -42,7 +41,7 @@ namespace ArtVault.DAOs
                     }
 
                     // Close the connection when done
-                    connection.Close();
+                    daoConfig.CloseConnection(connection);
                 }
                 catch (Exception ex)
                 {
