@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1DcfxfR5L4A7l2wC2kivbUUrL4iZLA9BrcF4AxF2tc4=",
+  "Hash": "1FN8R8EgYyZj3ok7xefeoj9Poij8Ie34ey9wowX3Zno=",
   "Source": "ArtVault",
   "BasePath": "_content/ArtVault",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "ArtVault\\wwwroot",
       "Source": "ArtVault",
-      "ContentRoot": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\",
       "BasePath": "_content/ArtVault",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ArtVault.styles.css",
+      "Identity": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ArtVault.styles.css",
       "SourceId": "ArtVault",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/ArtVault",
       "RelativePath": "ArtVault.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ArtVault.styles.css"
+      "OriginalItemSpec": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ArtVault.styles.css"
     },
     {
-      "Identity": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArtVault.bundle.scp.css",
+      "Identity": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArtVault.bundle.scp.css",
       "SourceId": "ArtVault",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/ArtVault",
       "RelativePath": "ArtVault.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArtVault.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ArtVault.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\app.css",
       "SourceId": "ArtVault",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\",
       "BasePath": "_content/ArtVault",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "ArtVault",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\",
       "BasePath": "_content/ArtVault",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "ArtVault",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\",
       "BasePath": "_content/ArtVault",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\favicon.png",
       "SourceId": "ArtVault",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\wwwroot\\",
       "BasePath": "_content/ArtVault",
       "RelativePath": "favicon.png",
       "AssetKind": "All",

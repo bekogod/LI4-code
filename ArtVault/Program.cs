@@ -35,7 +35,7 @@ namespace ArtVault
 
             UtilizadorDAO UtiDAO = new UtilizadorDAO();
 
-            UtiDAO.Start(); 
+            UtiDAO.InsertUtilizador("Gusto", "12345", "gusto@example.com", "Augusto Campos", "Viatodos, Barcelos", 123456789, 987654321, 1, true);
             app.Run();
         }
 
