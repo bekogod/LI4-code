@@ -1,7 +1,7 @@
-﻿namespace ArtVault.Utilizadores
+﻿namespace ArtVault.Business.Utilizadores
 {
     public abstract class Utilizador
-    {   
+    {
         protected int id;
         protected string email;
         protected string password;

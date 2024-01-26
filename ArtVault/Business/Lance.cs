@@ -1,4 +1,4 @@
-﻿namespace ArtVault
+﻿namespace ArtVault.Business
 {
     public class Lance
     {
@@ -18,10 +18,10 @@
         }
 
         public int GetId() { return id; }
-        public int GetIdUtilizador() {  return id_utilizador; }
-        public int GetIdLeilao() {  return id_leilao; }
-        public DateTime GetDataHora() {  return dataHora; }
-        public int GetValor() {  return valor; }   
+        public int GetIdUtilizador() { return id_utilizador; }
+        public int GetIdLeilao() { return id_leilao; }
+        public DateTime GetDataHora() { return dataHora; }
+        public int GetValor() { return valor; }
 
         // Não diria que set's sejam necessários
         // Depois de ser criado, um lance não é alterado

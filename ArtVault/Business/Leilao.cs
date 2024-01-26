@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.Timeouts;
 
-namespace ArtVault
+namespace ArtVault.Business
 {
     public class Leilao
     {
@@ -25,7 +25,7 @@ namespace ArtVault
             this.dataCom = dataCom;
             this.dataFim = dataFim;
             this.nome = nome;
-            this.precoReferencia = 0;
+            precoReferencia = 0;
             this.precoReserva = precoReserva;
             this.imagem = imagem;
             this.dimensoes = dimensoes;
@@ -34,17 +34,17 @@ namespace ArtVault
         }
 
         public int GetId() { return id; }
-        public int GetIdUtilizador() {  return id_utilizador; }
-        public DateTime GetDataCom() { return dataCom;}
-        public DateTime GetDataFim() {  return dataFim; }
-        public string GetNome() {  return nome; }
-        public int GetPrecoReferencia() {  return precoReferencia; }
-        public int GetPrecoReserva() {  return precoReserva; }
+        public int GetIdUtilizador() { return id_utilizador; }
+        public DateTime GetDataCom() { return dataCom; }
+        public DateTime GetDataFim() { return dataFim; }
+        public string GetNome() { return nome; }
+        public int GetPrecoReferencia() { return precoReferencia; }
+        public int GetPrecoReserva() { return precoReserva; }
         public int GetTipo() { return tipo; }
-        
+
         public string GetImagem() { return imagem; }
         public string GetDimensoes() { return dimensoes; }
-        public string GetDescricao() 
+        public string GetDescricao()
         {
             if (descricao != null) return descricao;
             else return "";
@@ -57,13 +57,13 @@ namespace ArtVault
 
         public bool ValorMinimoLance(int preco)
         {
-            if (tipo == 2) 
+            if (tipo == 2)
             {
                 return true;
             }
             else
             {
-                return (preco >= precoReferencia * 1.1);
+                return preco >= precoReferencia * 1.1;
             }
         }
 
