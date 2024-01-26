@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArtVault")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1717aa90336e967b39f33cccf8a8d10c4146817")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92a65ebffd86d13d4e438db819d5e3bcb069be29")]
+>>>>>>> 6c68fd4 (remove testdb dir)
 [assembly: System.Reflection.AssemblyProductAttribute("ArtVault")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArtVault")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -50,6 +50,7 @@ C:\Users\gimez\Desktop\LI4-code\ArtVault\testDB\runtimes\win-x64\native\sni.dll
 C:\Users\gimez\Desktop\LI4-code\ArtVault\testDB\runtimes\win-x86\native\sni.dll
 C:\Users\gimez\Desktop\LI4-code\ArtVault\testDB\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\gimez\Desktop\LI4-code\ArtVault\testDB\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+<<<<<<< HEAD
 C:\Users\super\Source\Repos\LI4-code\ArtVault\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\super\Source\Repos\LI4-code\ArtVault\bin\Debug\net8.0\appsettings.json
 C:\Users\super\Source\Repos\LI4-code\ArtVault\bin\Debug\net8.0\testDB\appsettings.Development.json
@@ -93,3 +94,10 @@ C:\Users\super\Source\Repos\LI4-code\ArtVault\obj\Debug\net8.0\refint\ArtVault.d
 C:\Users\super\Source\Repos\LI4-code\ArtVault\obj\Debug\net8.0\ArtVault.pdb
 C:\Users\super\Source\Repos\LI4-code\ArtVault\obj\Debug\net8.0\ArtVault.genruntimeconfig.cache
 C:\Users\super\Source\Repos\LI4-code\ArtVault\obj\Debug\net8.0\ref\ArtVault.dll
+=======
+C:\Users\gimez\Desktop\LI4-code\ArtVault\bin\Debug\net8.0\testDB\appsettings.Development.json
+C:\Users\gimez\Desktop\LI4-code\ArtVault\bin\Debug\net8.0\testDB\appsettings.json
+C:\Users\gimez\Desktop\LI4-code\ArtVault\bin\Debug\net8.0\testDB\ArtVault.deps.json
+C:\Users\gimez\Desktop\LI4-code\ArtVault\bin\Debug\net8.0\testDB\ArtVault.runtimeconfig.json
+C:\Users\gimez\Desktop\LI4-code\ArtVault\bin\Debug\net8.0\testDB\ArtVault.staticwebassets.runtime.json
+>>>>>>> 6c68fd4 (remove testdb dir)
