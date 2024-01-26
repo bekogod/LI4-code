@@ -1,0 +1,17 @@
+﻿namespace ArtVault.Utilizadores
+{
+    public class Artista : Utilizador
+    {
+        private bool ativo;
+        public Artista(int id, string email, string password, string username, string nome, string morada, string nif, string cc) 
+                   : base(id, email, password, username, nome, morada, nif, cc)
+        {
+            ativo = false;
+        }
+
+        public void AtivarConta()
+        {
+            ativo = true;
+        }
+    }
+}
