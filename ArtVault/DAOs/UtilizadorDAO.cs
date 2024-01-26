@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace ArtVault
+namespace ArtVault.DAOs
 {
     public class UtilizadorDAO
     {

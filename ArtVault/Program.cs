@@ -1,4 +1,5 @@
 using ArtVault.Components;
+using ArtVault.DAOs;
 
 namespace ArtVault
 {
