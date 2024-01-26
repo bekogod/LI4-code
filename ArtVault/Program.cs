@@ -32,8 +32,8 @@ namespace ArtVault
 
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
-
-            UtilizadorDAO UtiDAO = new UtilizadorDAO();
+            DAOConfig daoConfig = new DAOConfig();
+            UtilizadorDAO UtiDAO = new UtilizadorDAO(daoConfig);
 
             // UtiDAO.InsertUtilizador("Gusto", "12345", "gusto@example.com", "Augusto Campos", "Viatodos, Barcelos", 123456789, 987654321, 1, true);
             app.Run();

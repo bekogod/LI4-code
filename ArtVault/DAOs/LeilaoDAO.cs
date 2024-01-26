@@ -3,17 +3,18 @@ using System.Data.SqlClient;
 
 namespace ArtVault.DAOs
 {
-    public class UtilizadorDAO
+    public class LeilaoDAO
     {
         private DAOConfig daoConfig;
-        public UtilizadorDAO(DAOConfig dConfig)
+        public LeilaoDAO(DAOConfig dConfig)
 
         {
-          
+
             daoConfig = dConfig;
         }
 
-        public void selectAll()
+
+        public void Start()
         {
 
             // Create a SqlConnection using the connection string
@@ -25,7 +26,7 @@ namespace ArtVault.DAOs
                     // Connection is open, you can perform database operations here
                     Console.WriteLine("Connected to the database.");
 
-                    string query = "SELECT * FROM Utilizador"; 
+                    string query = "SELECT * FROM Leilao"; 
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -36,7 +37,7 @@ namespace ArtVault.DAOs
                         while (reader.Read())
                         {
 
-                            Console.WriteLine($"Column1: {reader["id"]}, Column2: {reader["username"]}");   
+                            Console.WriteLine($"Column1: {reader["id"]}");   
                         }
 
                         // Close the reader
@@ -53,27 +54,27 @@ namespace ArtVault.DAOs
                 }
             }
         }
-        public void InsertUtilizador(string username, string password, string email, string nome, string morada, int NIF, int CC, byte tipoConta, bool ativo)
+        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int precoReferencia, int? precoReserva, string imagem, string dimensoes, string descricao)
         {
             using (SqlConnection connection = daoConfig.GetConnection())
             {
                 try
                 {
-                    string query = @"INSERT INTO Utilizador (username, password, email, nome, morada, NIF, CC, tipoConta, ativo)
-                                     VALUES (@Username, @Password, @Email, @Nome, @Morada, @NIF, @CC, @TipoConta, @Ativo)";
+                    string query = @"INSERT INTO Leilao (id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao)
+                                     VALUES (@IdUtilizador, @DataCom, @DataFim, @Nome, @PrecoReferencia, @PrecoReserva, @Imagem, @Dimensoes, @Descricao)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         // Add parameters to prevent SQL injection
-                        command.Parameters.AddWithValue("@Username", username);
-                        command.Parameters.AddWithValue("@Password", password);
-                        command.Parameters.AddWithValue("@Email", email);
+                        command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
+                        command.Parameters.AddWithValue("@DataCom", dataCom);
+                        command.Parameters.AddWithValue("@DataFim", dataFim);
                         command.Parameters.AddWithValue("@Nome", nome);
-                        command.Parameters.AddWithValue("@Morada", morada);
-                        command.Parameters.AddWithValue("@NIF", NIF);
-                        command.Parameters.AddWithValue("@CC", CC);
-                        command.Parameters.AddWithValue("@TipoConta", tipoConta);
-                        command.Parameters.AddWithValue("@Ativo", ativo);
+                        command.Parameters.AddWithValue("@PrecoReferencia", precoReferencia);
+                        command.Parameters.AddWithValue("@PrecoReserva", (object)precoReserva ?? DBNull.Value); // Handle nullability
+                        command.Parameters.AddWithValue("@Imagem", imagem);
+                        command.Parameters.AddWithValue("@Dimensoes", dimensoes);
+                        command.Parameters.AddWithValue("@Descricao", descricao);
 
                         // Execute the query
                         int rowsAffected = command.ExecuteNonQuery();
@@ -93,8 +94,8 @@ namespace ArtVault.DAOs
                 }
             }
         }
-    
 
 
-}
+
+    }
 }

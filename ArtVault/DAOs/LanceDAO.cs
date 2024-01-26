@@ -3,13 +3,13 @@ using System.Data.SqlClient;
 
 namespace ArtVault.DAOs
 {
-    public class UtilizadorDAO
+    public class LanceDAO
     {
         private DAOConfig daoConfig;
-        public UtilizadorDAO(DAOConfig dConfig)
+        public LanceDAO(DAOConfig dConfig)
 
         {
-          
+
             daoConfig = dConfig;
         }
 
@@ -25,7 +25,7 @@ namespace ArtVault.DAOs
                     // Connection is open, you can perform database operations here
                     Console.WriteLine("Connected to the database.");
 
-                    string query = "SELECT * FROM Utilizador"; 
+                    string query = "SELECT * FROM Lance";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -36,7 +36,7 @@ namespace ArtVault.DAOs
                         while (reader.Read())
                         {
 
-                            Console.WriteLine($"Column1: {reader["id"]}, Column2: {reader["username"]}");   
+                            Console.WriteLine($"Column1: {reader["id"]}");
                         }
 
                         // Close the reader
@@ -53,27 +53,23 @@ namespace ArtVault.DAOs
                 }
             }
         }
-        public void InsertUtilizador(string username, string password, string email, string nome, string morada, int NIF, int CC, byte tipoConta, bool ativo)
+
+        public void InsertLance(int id_utilizador, int id_leilao, DateTime dataHora, int valor)
         {
             using (SqlConnection connection = daoConfig.GetConnection())
             {
                 try
                 {
-                    string query = @"INSERT INTO Utilizador (username, password, email, nome, morada, NIF, CC, tipoConta, ativo)
-                                     VALUES (@Username, @Password, @Email, @Nome, @Morada, @NIF, @CC, @TipoConta, @Ativo)";
+                    string query = @"INSERT INTO Lance (id_utilizador, id_leilao, dataHora, valor)
+                                     VALUES (@IdUtilizador, @IdLeilao, @DataHora, @Valor)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         // Add parameters to prevent SQL injection
-                        command.Parameters.AddWithValue("@Username", username);
-                        command.Parameters.AddWithValue("@Password", password);
-                        command.Parameters.AddWithValue("@Email", email);
-                        command.Parameters.AddWithValue("@Nome", nome);
-                        command.Parameters.AddWithValue("@Morada", morada);
-                        command.Parameters.AddWithValue("@NIF", NIF);
-                        command.Parameters.AddWithValue("@CC", CC);
-                        command.Parameters.AddWithValue("@TipoConta", tipoConta);
-                        command.Parameters.AddWithValue("@Ativo", ativo);
+                        command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
+                        command.Parameters.AddWithValue("@IdLeilao", id_leilao);
+                        command.Parameters.AddWithValue("@DataHora", dataHora);
+                        command.Parameters.AddWithValue("@Valor", valor);
 
                         // Execute the query
                         int rowsAffected = command.ExecuteNonQuery();
@@ -92,9 +88,9 @@ namespace ArtVault.DAOs
                     Console.WriteLine("Error: " + ex.Message);
                 }
             }
+
+
+
         }
-    
-
-
-}
+    }
 }
