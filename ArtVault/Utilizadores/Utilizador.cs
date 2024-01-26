@@ -8,10 +8,10 @@
         protected string username;
         protected string nome;
         protected string morada;
-        protected string nif;
-        protected string cc;
+        protected int nif;
+        protected int cc;
 
-        protected Utilizador(int id, string email, string password, string username, string nome, string morada, string nif, string cc)
+        protected Utilizador(int id, string email, string password, string username, string nome, string morada, int nif, int cc)
         {
             this.id = id;
             this.email = email;
@@ -29,8 +29,8 @@
         public string GetUsername() { return username; }
         public string GetNome() { return nome; }
         public string GetMorada() { return morada; }
-        public string GetNif() { return nif; }
-        public string GetCc() { return cc; }
+        public int GetNif() { return nif; }
+        public int GetCc() { return cc; }
 
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\ArtVault.csproj": {}
+    "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\ArtVault.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\ArtVault.csproj": {
+    "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\ArtVault.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\ArtVault.csproj",
+        "projectUniqueName": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\ArtVault.csproj",
         "projectName": "ArtVault",
-        "projectPath": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\ArtVault.csproj",
-        "packagesPath": "C:\\Users\\gimez\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gimez\\Desktop\\LI4-code\\ArtVault\\obj\\",
+        "projectPath": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\ArtVault.csproj",
+        "packagesPath": "C:\\Users\\super\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\super\\Source\\Repos\\LI4-code\\ArtVault\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gimez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\super\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
