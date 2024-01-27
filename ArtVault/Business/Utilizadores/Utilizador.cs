@@ -32,5 +32,10 @@
         public int GetNif() { return nif; }
         public int GetCc() { return cc; }
 
+        public bool ValidPassword(string password)
+        {
+            return this.password == password;
+        }
+
     }
 }
