@@ -39,6 +39,14 @@
       box-sizing: border-box;
     }
 
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+    }
+
+
+
     .login-container button {
             background-color: #305673;
       color: #fff;
@@ -48,8 +56,8 @@
       cursor: pointer;
       font-size: 16px;
       margin: 0 auto;
-      
-    }
+       
+    }   
 
     .login-container button:hover {
                 background-color: #25445c;
@@ -65,12 +73,16 @@
 
     <label for="password">Palavra-passe:</label>
         <input type="password" id="password" name="password" @bind="Password" required>
-        <button type="button" @onclick="SubmitForm" style="transform: translate(10%, 0%);">Iniciar Sessão</button>
-        <button type="button" @onclick="Register" style="transform: translate(150%, 0%);">Registar</button>
+        <div class="button-container">
+            <button type="button" @onclick="SubmitForm" >Iniciar Sessão</button>
+            <button type="button" @onclick="Register" >Registar</button>
+        </div>
+       
         @if (!string.IsNullOrEmpty(ErrorMessage))
         {
             <div class="error-message">@ErrorMessage</div>
         }
+    
     </form>
 </div>
 
