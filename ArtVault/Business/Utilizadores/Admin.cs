@@ -6,5 +6,7 @@
                 : base(id, email, password, username, nome, morada, nif, cc)
         {
         }
+
+        public override int UserType() { return 3; }
     }
 }

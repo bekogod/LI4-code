@@ -14,5 +14,7 @@
         {
             ativo = true;
         }
+
+        public override int UserType() { return 2; }
     }
 }

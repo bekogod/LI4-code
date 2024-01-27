@@ -17,23 +17,24 @@ namespace ArtVault.Business
             leilao_atual = leilao;
         }
 
-        // return 0 se credenciais inválidas
-        // return 1 se sucesso Padrao
-        // return 2 se sucesso Artista
-        // return 3 se sucesso Admin
         /*
-        public int Login(string email, string password)
+        public bool CheckCredentials(string email, string password)
         {
             Utilizador u = GetUserByEmail(email);
             if (u != null && u.ValidPassword(password)) 
             {
                 SetUserAtual(u);
-                if (u is Padrao) { return 1; }
-                if (u is Artista) { return 2; }
-                if (u is Admin) { return 3; }
+                return true;
             }
-            return 0;
+            return false;
         } */
+
+        public int GetUserType()
+        {
+            return user_atual.UserType();
+        }
+
+
 
     }
 }

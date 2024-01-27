@@ -11,5 +11,7 @@
         {
             return this.password.Equals(password);
         }
+
+        public override int UserType() { return 1; }
     }
 }

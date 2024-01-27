@@ -37,5 +37,7 @@
             return this.password == password;
         }
 
+        public abstract int UserType();
+
     }
 }
