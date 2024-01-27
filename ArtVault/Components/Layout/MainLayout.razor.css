@@ -1,7 +1,12 @@
 .bg-grey {
     background-color: var(--bs-gray-200)
 }
-
+.page-body{
+    display:flex;
+    align-content:center;
+    justify-content:center;
+    padding-top:70px;
+}
 .footer {
     background-color: var(--bs-gray-200)
 }
