@@ -1,11 +1,12 @@
 ﻿using ArtVault.Business.Utilizadores;
-
+using ArtVault.DAOs.IDatabaseFacade;
 namespace ArtVault.Business
 {
     public class IArtVaultFacade
     {
         private Utilizador user_atual;
         private Leilao leilao_atual;
+        private IDatabaseFacade IDBFacade = new IDatabaseFacade();
 
         public void SetUserAtual(Utilizador user)
         {
@@ -20,7 +21,7 @@ namespace ArtVault.Business
         
         public bool CheckCredentials(string email, string password)
         {   
-            string user = GetUserByEmail(email);
+            string user = IDBFacade.GetUserByEmail(email);
             if (user != null)
             {
                 string[] sUser = user.Split(';');
