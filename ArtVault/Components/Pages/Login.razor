@@ -1,6 +1,7 @@
 ﻿@page "/login"
 @inject NavigationManager NavManager
 @inject IArtVaultFacade IAVFacade;
+
 <style>
     body {
       font-family: Arial, sans-serif;
@@ -66,39 +67,44 @@
   <h2>Iniciar Sessão</h2>
   <form>
     <label for="username">Email:</label>
-    <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" @bind="Username"  required>
 
     <label for="password">Palavra-passe:</label>
-    <input type="password" id="password" name="password" required>
-        <button type="submit" style="transform: translate(10%, 0%);">Iniciar Sessão</button>
-        <button type="submit" style="transform: translate(150%, 0%);">Registar</button>
-  </form>
+        <input type="password" id="password" name="password" @bind="Password" required>
+        <button type="button" @onclick="SubmitForm" style="transform: translate(10%, 0%);">Iniciar Sessão</button>
+        <button type="button" @onclick="Register" style="transform: translate(150%, 0%);">Registar</button>
+        @if (!string.IsNullOrEmpty(ErrorMessage))
+        {
+            <div class="error-message">@ErrorMessage</div>
+        }
+    </form>
 </div>
 
 @code {
     @using Business
     private string Username { get; set; }
     private string Password { get; set; }
-
-
-    public Login()
-    {
-    }
+    private string ErrorMessage { get; set; }
 
     private async Task SubmitForm()
     {
+        bool isValid = await IAVFacade.CheckCredentials(Username, Password);
 
-    bool isValid = await IAVFacade.CheckCredentials(Username, Password);
-
-    if (isValid)
-    {
-        // Redirect to a success page or perform other actions
+        if (isValid)
+        {
+            // Redirect to a success page or perform other actions
             NavManager.NavigateTo("/");
+        }
+        else
+        {
+            // Handle invalid credentials, show an error message, etc.
+            ErrorMessage = "Invalid credentials. Please try again.";
+        }
     }
-    else
+
+    private void Register()
     {
-        // Handle invalid credentials, show an error message, etc.
-        Console.WriteLine("Invalid credentials!");
-    }
+        // Handle registration logic
+        Console.WriteLine("Redirect to registration page or perform registration logic.");
     }
 }
