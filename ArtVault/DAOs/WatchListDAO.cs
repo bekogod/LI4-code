@@ -89,7 +89,44 @@ namespace ArtVault.DAOs
         }
 
 
+        public string GetLeiloesWatchListByUserId(int id_utilizador)
+        {
+            string leiloesString = "";
 
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"SELECT Leilao.* FROM WatchList 
+                             INNER JOIN Leilao ON WatchList.id_leilao = Leilao.id 
+                             WHERE WatchList.id_utilizador = @IdUtilizador";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
+                                leiloesString += leilaoString + ";;";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+            return leiloesString;
+        }
 
     }
 }
