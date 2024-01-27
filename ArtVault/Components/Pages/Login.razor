@@ -86,10 +86,10 @@
     private string Password { get; set; }
     private string ErrorMessage { get; set; }
 
-    private async Task SubmitForm()
+    private void SubmitForm()
     {
-        bool isValid = await IAVFacade.CheckCredentials(Username, Password);
-
+        // bool isValid =  IAVFacade.CheckCredentials(Username, Password);
+        bool isValid = true;
         if (isValid)
         {
             // Redirect to a success page or perform other actions
@@ -104,7 +104,7 @@
 
     private void Register()
     {
-        // Handle registration logic
-        Console.WriteLine("Redirect to registration page or perform registration logic.");
+        Console.WriteLine("Register button clicked");
+        NavManager.NavigateTo("/register");
     }
 }

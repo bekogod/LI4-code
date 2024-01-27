@@ -1,0 +1,122 @@
+﻿@page "/register"
+@inject NavigationManager NavManager
+@inject IArtVaultFacade IAVFacade;
+
+<style>
+    /* Same styles as the login page */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .login-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        
+        width: 100vw;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, 40%);
+    }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        .login-container button {
+            background-color: #305673;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 auto;
+        }
+
+            .login-container button:hover {
+                background-color: #25445c;
+            }
+</style>
+
+<div class="login-container">
+    <h2>Registar</h2>
+    <form>
+        <label for="username">Nome de Usuário:</label>
+        <input type="text" id="username" name="username" @bind="Username" required>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" @bind="Email" required>
+
+        <label for="password">Palavra-passe:</label>
+        <input type="password" id="password" name="password" @bind="Password" required>
+
+        <label for="confirmPassword">Confirmar Palavra-passe:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" @bind="ConfirmPassword" required>
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" @bind="Nome" required>
+
+        <label for="morada">Morada:</label>
+        <input type="text" id="morada" name="morada" @bind="Morada" required>
+
+        <label for="NIF">NIF:</label>
+        <input type="text" id="NIF" name="NIF" @bind="NIF" required>
+
+        <label for="CC">CC:</label>
+        <input type="text" id="CC" name="CC" @bind="CC" required>
+
+        <label for="tipoConta">Tipo de Conta:</label>
+        <input type="text" id="tipoConta" name="tipoConta" @bind="TipoConta" required>
+
+        <button type="button" @onclick="RegisterUser">Registar</button>
+        <button type="button" @onclick="GoToLogin">Voltar para Iniciar Sessão</button>
+
+        @if (!string.IsNullOrEmpty(ErrorMessage))
+        {
+            <div class="error-message">@ErrorMessage</div>
+        }
+    </form>
+</div>
+
+@code {
+    @using Business
+    private string Username { get; set; }
+    private string Email { get; set; }
+    private string Password { get; set; }
+    private string ConfirmPassword { get; set; }
+    private string Nome { get; set; }
+    private string Morada { get; set; }
+    private string NIF { get; set; }
+    private string CC { get; set; }
+    private string TipoConta { get; set; }
+    private string ErrorMessage { get; set; }
+
+    private async Task RegisterUser()
+    {
+        // Add validation logic here if needed
+
+        // For simplicity, let's assume registration is successful
+        // In a real application, you would handle user registration logic, possibly using a service
+        // and checking for duplicate emails, password strength, etc.
+        NavManager.NavigateTo("/login");
+    }
+
+    private void GoToLogin()
+    {
+        NavManager.NavigateTo("/login");
+    }
+}
