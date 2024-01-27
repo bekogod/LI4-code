@@ -3,98 +3,115 @@
 @inject IArtVaultFacade IAVFacade;
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-    }
+     body {
+         font-family: Arial, sans-serif;
+         background-color: #f4f4f4;
+     }
 
-    .login-container {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        position: relative;
-        max-width: 1600px;
-        width: 100%;
-    }
+     .login-container {
+         background-color: #ffffff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         position: relative;
+         max-width: 1600px;
+         width: 100%;
+     }
 
-        .login-container h2 {
-            text-align: center;
-        }
+         .login-container h2 {
+             text-align: center;
+         }
 
-    .form-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-    }
+     .form-grid {
+         display: grid;
+         grid-template-columns: repeat(2, 1fr);
+         gap: 16px;
+     }
 
-    .login-container label {
-        margin-bottom: 8px;
-        display: block;
-    }
+     .login-container label {
+         margin-bottom: 8px;
+         display: block;
+     }
 
-    .login-container input {
-        padding: 8px;
-        margin-bottom: 16px;
-        width: 100%;
-        box-sizing: border-box;
-    }
+     .login-container input {
+         padding: 8px;
+         margin-bottom: 16px;
+         width: 100%;
+         box-sizing: border-box;
+     }
 
-    .button-container {
-        display: flex;
-        justify-content:space-evenly;
-        margin-top: 20px;
-        margin-bottom:20px;
-    }
+     .button-container {
+         display: flex;
+         justify-content:space-evenly;
+         margin-top: 25px;
+     }
 
-    .login-container button {
-        background-color: #305673;
-        color: #fff;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-    }
+     .login-container button {
+         background-color: #305673;
+         color: #fff;
+         padding: 10px;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         font-size: 16px;
+     }
 
-        .login-container button:hover {
-            background-color: #25445c;
-        }
+         .login-container button:hover {
+             background-color: #25445c;
+         }
 
-    .error-message {
-        color: red;
-    }
+     .error-message {
+         color: red;
+     }
 </style>
 
 <div class="login-container">
     <h2>Registar</h2>
-    <form>
-        <label for="username">Nome de Usuário:</label>
-        <input type="text" id="username" name="username" @bind="Username" required>
+    <form class="form-grid">
+        <label for="username">
+            Nome de Usuário:
+            <input type="text" id="username" name="username" @bind="Username" required>
+        </label>
 
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" @bind="Email" required>
+        <label for="email">
+            Email:
+            <input type="text" id="email" name="email" @bind="Email" required>
+        </label>
 
-        <label for="password">Palavra-passe:</label>
-        <input type="password" id="password" name="password" @bind="Password" required>
+        <label for="password">
+            Palavra-passe:
+            <input type="password" id="password" name="password" @bind="Password" required>
+        </label>
 
-        <label for="confirmPassword">Confirmar Palavra-passe:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" @bind="ConfirmPassword" required>
+        <label for="confirmPassword">
+            Confirmar Palavra-passe:
+            <input type="password" id="confirmPassword" name="confirmPassword" @bind="ConfirmPassword" required>
+        </label>
 
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" @bind="Nome" required>
+        <label for="nome">
+            Nome:
+            <input type="text" id="nome" name="nome" @bind="Nome" required>
+        </label>
 
-        <label for="morada">Morada:</label>
-        <input type="text" id="morada" name="morada" @bind="Morada" required>
+        <label for="morada">
+            Morada:
+            <input type="text" id="morada" name="morada" @bind="Morada" required>
+        </label>
 
-        <label for="NIF">NIF:</label>
-        <input type="text" id="NIF" name="NIF" @bind="NIF" required>
+        <label for="NIF">
+            NIF:
+            <input type="text" id="NIF" name="NIF" @bind="NIF" required>
+        </label>
 
-        <label for="CC">CC:</label>
-        <input type="text" id="CC" name="CC" @bind="CC" required>
+        <label for="CC">
+            CC:
+            <input type="text" id="CC" name="CC" @bind="CC" required>
+        </label>
 
-        <label for="tipoConta">Tipo de Conta:</label>
-        <input type="text" id="tipoConta" name="tipoConta" @bind="TipoConta" required>
+        <label for="tipoConta">
+            Tipo de Conta:
+            <input type="text" id="tipoConta" name="tipoConta" @bind="TipoConta" required>
+        </label>
 
         <div class="button-container">
             <button type="button" @onclick="RegisterUser">Registar</button>
@@ -107,6 +124,7 @@
         }
     </form>
 </div>
+
 
 
 
