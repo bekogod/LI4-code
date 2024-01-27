@@ -212,7 +212,44 @@ namespace ArtVault.DAOs
             return leilaoString;
         }
 
+        public string GetXLancesByLeilaoId(int id_leilao, int x)
+        {
+            string? lancesString = null;
 
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"SELECT TOP(@X) * FROM Lance WHERE id_leilao = @IdLeilao ORDER BY dataHora DESC";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdLeilao", id_leilao);
+                        command.Parameters.AddWithValue("@X", x);
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string lanceString = $"{reader["id"]};{reader["id_utilizador"]};{reader["id_leilao"]};{reader["dataHora"]};{reader["valor"]}";
+                                lancesString += lanceString + ";;";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+            return lancesString;
+        }
 
     }
 }
