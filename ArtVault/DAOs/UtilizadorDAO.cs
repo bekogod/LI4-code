@@ -94,7 +94,48 @@ namespace ArtVault.DAOs
             }
         }
 
-        
+        public string GetUserByEmail(string email)
+        {
+            string? userString = null;
+
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"SELECT * FROM Utilizador WHERE email = @Email";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // Add parameter for email
+                        command.Parameters.AddWithValue("@Email", email);
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            // Check if the reader has rows (user found)
+                            if (reader.Read())
+                            {
+                                // Construct the user string with parameters separated by ";"
+                                userString = $"{reader["id"]};{reader["username"]};{reader["password"]};{reader["email"]};{reader["nome"]};{reader["morada"]};{reader["NIF"]};{reader["CC"]};{reader["tipoConta"]};{reader["ativo"]}";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle any exceptions that occur during the search
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    // Close the connection when done
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+            return userString;
+        }
 
     }
 }
