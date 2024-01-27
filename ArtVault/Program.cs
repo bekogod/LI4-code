@@ -1,5 +1,6 @@
 using ArtVault.Components;
 using ArtVault.DAOs;
+using ArtVault.Business;
 
 namespace ArtVault
 {
@@ -14,6 +15,8 @@ namespace ArtVault
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+
+            builder.Services.AddScoped<IArtVaultFacade>();
 
             var app = builder.Build();
 
