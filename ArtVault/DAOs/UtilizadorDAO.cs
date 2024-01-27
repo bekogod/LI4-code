@@ -138,6 +138,49 @@ namespace ArtVault.DAOs
         }
 
 
+        public int ExisteUtilizador(int NIF, int CC, string username, string email)
+        {
+            int existeUtilizador = 0;
+
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"SELECT COUNT(*) FROM Utilizador 
+                             WHERE NIF = @NIF AND CC = @CC AND username = @Username AND email = @Email";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@NIF", NIF);
+                        command.Parameters.AddWithValue("@CC", CC);
+                        command.Parameters.AddWithValue("@Username", username);
+                        command.Parameters.AddWithValue("@Email", email);
+                        connection.Open();
+                        int count;
+                        count = (int)command.ExecuteScalar();
+                        if (count > 0)
+                        {
+                            existeUtilizador = 1;
+                        }
+                    }
+                }
+
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+
+
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+
+            }
+            return existeUtilizador;
+        }
+
 
 
     }
