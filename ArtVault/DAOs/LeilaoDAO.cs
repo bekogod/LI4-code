@@ -176,41 +176,6 @@ namespace ArtVault.DAOs
         }
 
 
-        public string GetLeilaoByUserID(int id_utilizador)
-        {
-            string? leilaoString = null;
-
-            using (SqlConnection connection = daoConfig.GetConnection())
-            {
-                try
-                {
-                    string query = @"SELECT * FROM Leilao WHERE id_utilizador = @IdUtilizador";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
-                }
-                finally
-                {
-                    daoConfig.CloseConnection(connection);
-                }
-            }
-
-            return leilaoString;
-        }
 
         public string GetXLancesByLeilaoId(int id_leilao, int x)
         {
