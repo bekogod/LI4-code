@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting.Server;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace ArtVault.DAOs
 {
@@ -109,18 +110,53 @@ namespace ArtVault.DAOs
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        // Add parameter for id
                         command.Parameters.AddWithValue("@Id", id);
 
                         connection.Open();
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            // Check if the reader has rows (leilao found)
                             if (reader.Read())
                             {
-                                // Construct the leilao string with fields separated by ";"
                                 leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+            return leilaoString;
+        }
+
+        public string GetXLeiloes (int x)
+        {
+            string? leiloesString = null;
+
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"SELECT TOP(@X) * FROM Leilao";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@X", x);
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
+                                leiloesString = leilaoString + ";;";
                             }
                         }
                     }
@@ -132,15 +168,12 @@ namespace ArtVault.DAOs
                 }
                 finally
                 {
-                    // Close the connection when done
                     daoConfig.CloseConnection(connection);
                 }
             }
 
-            return leilaoString;
+            return leiloesString;
         }
-
-        public int 
 
     }
 }
