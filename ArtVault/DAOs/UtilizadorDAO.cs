@@ -94,10 +94,6 @@ namespace ArtVault.DAOs
             }
         }
 
-        // return 0 se credenciais inválidas
-        // return 1 se sucesso Padrao
-        // return 2 se sucesso Artista
-        // return 3 se sucesso Admin
         public string GetUserByEmail(string email)
         {
             string? userString = null;

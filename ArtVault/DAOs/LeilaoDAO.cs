@@ -97,5 +97,50 @@ namespace ArtVault.DAOs
 
 
 
+        public string GetLeilaoByID(int id)
+        {
+            string? leilaoString = null;
+
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"SELECT * FROM Leilao WHERE id = @Id";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // Add parameter for id
+                        command.Parameters.AddWithValue("@Id", id);
+
+                        connection.Open();
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            // Check if the reader has rows (leilao found)
+                            if (reader.Read())
+                            {
+                                // Construct the leilao string with fields separated by ";"
+                                leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle any exceptions that occur during the search
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    // Close the connection when done
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+            return leilaoString;
+        }
+
+        public int 
+
     }
 }
