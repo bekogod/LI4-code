@@ -3,7 +3,6 @@
 @inject IArtVaultFacade IAVFacade;
 
 <style>
-    /* Same styles as the login page */
     body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
@@ -14,76 +13,93 @@
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-        
-        width: 100vw;
         position: relative;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, 40%);
+        max-width: 1600px;
+        width: 100%;
     }
 
-        .login-container label {
-            display: block;
-            margin-bottom: 8px;
+        .login-container h2 {
+            text-align: center;
         }
 
-        .login-container input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .login-container label {
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .login-container input {
+        padding: 8px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content:space-evenly;
+        margin-top: 20px;
+        margin-bottom:20px;
+    }
+
+    .login-container button {
+        background-color: #305673;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        .login-container button:hover {
+            background-color: #25445c;
         }
 
-        .login-container button {
-            background-color: #305673;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 0 auto;
-        }
-
-            .login-container button:hover {
-                background-color: #25445c;
-            }
+    .error-message {
+        color: red;
+    }
 </style>
 
 <div class="login-container">
     <h2>Registar</h2>
     <form>
-        <label for="username">Nome de Usuário</label>
+        <label for="username">Nome de Usuário:</label>
         <input type="text" id="username" name="username" @bind="Username" required>
 
-        <label for="email">Email</label>
+        <label for="email">Email:</label>
         <input type="text" id="email" name="email" @bind="Email" required>
 
-        <label for="password">Palavra-Passe</label>
+        <label for="password">Palavra-passe:</label>
         <input type="password" id="password" name="password" @bind="Password" required>
 
-        <label for="confirmPassword">Confirmar Palavra-Passe</label>
+        <label for="confirmPassword">Confirmar Palavra-passe:</label>
         <input type="password" id="confirmPassword" name="confirmPassword" @bind="ConfirmPassword" required>
 
-        <label for="nome">Nome</label>
+        <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" @bind="Nome" required>
 
-        <label for="morada">Morada</label>
+        <label for="morada">Morada:</label>
         <input type="text" id="morada" name="morada" @bind="Morada" required>
 
-        <label for="NIF">NIF</label>
+        <label for="NIF">NIF:</label>
         <input type="text" id="NIF" name="NIF" @bind="NIF" required>
 
-        <label for="CC">CC</label>
+        <label for="CC">CC:</label>
         <input type="text" id="CC" name="CC" @bind="CC" required>
 
-        <label for="tipoConta">Tipo de Conta</label>
+        <label for="tipoConta">Tipo de Conta:</label>
         <input type="text" id="tipoConta" name="tipoConta" @bind="TipoConta" required>
 
-        <button type="button" @onclick="RegisterUser">Registar</button>
-        <button type="button" @onclick="GoToLogin">Voltar para Iniciar Sessão</button>
+        <div class="button-container">
+            <button type="button" @onclick="RegisterUser">Registar</button>
+            <button type="button" @onclick="GoToLogin">Voltar para Iniciar Sessão</button>
+        </div>
 
         @if (!string.IsNullOrEmpty(ErrorMessage))
         {
@@ -91,6 +107,8 @@
         }
     </form>
 </div>
+
+
 
 @code {
     @using Business
@@ -105,7 +123,7 @@
     private string TipoConta { get; set; }
     private string ErrorMessage { get; set; }
 
-    private async Task RegisterUser()
+    private void RegisterUser()
     {
         // Add validation logic here if needed
 

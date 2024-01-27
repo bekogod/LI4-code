@@ -5,3 +5,8 @@
 .footer {
     background-color: var(--bs-gray-200)
 }
+
+.clear {
+    clear: both;
+    height: 60px;
+}
