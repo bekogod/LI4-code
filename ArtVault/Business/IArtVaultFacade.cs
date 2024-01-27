@@ -17,17 +17,38 @@ namespace ArtVault.Business
             leilao_atual = leilao;
         }
 
-        /*
+        
         public bool CheckCredentials(string email, string password)
-        {
-            Utilizador u = GetUserByEmail(email);
-            if (u != null && u.ValidPassword(password)) 
+        {   
+            string user = GetUserByEmail(email);
+            if (user != null)
             {
-                SetUserAtual(u);
-                return true;
+                string[] sUser = user.Split(';');
+                if (sUser.Length == 10)
+                {
+                    string type = sUser[8];
+                    Utilizador u;
+                    if (type == "1")
+                    {
+                        u = new Padrao(int.Parse(sUser[0]), sUser[3], sUser[2], sUser[1], sUser[4], sUser[5], int.Parse(sUser[6]), int.Parse(sUser[7]));
+                    }
+                    else if (type == "2")
+                    {
+                        u = new Artista(int.Parse(sUser[0]), sUser[3], sUser[2], sUser[1], sUser[4], sUser[5], int.Parse(sUser[6]), int.Parse(sUser[7]), int.Parse(sUser[9]));
+                    }
+                    else
+                    {
+                        u = new Admin(int.Parse(sUser[0]), sUser[3], sUser[2], sUser[1], sUser[4], sUser[5], int.Parse(sUser[6]), int.Parse(sUser[7]));
+                    }
+                    if (u.ValidPassword(password))
+                    {
+                        SetUserAtual(u);
+                        return true;
+                    }
+                }
             }
             return false;
-        } */
+        } 
 
         public int GetUserType()
         {
