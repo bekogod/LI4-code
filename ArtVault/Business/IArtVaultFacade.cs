@@ -113,11 +113,11 @@ namespace ArtVault.Business
         {
             if (decisao)
             {
-                //método DB de mudar ativo para sim
+                IDBFacade.ActivateUtilizador(id_artista);
             }
             else
             {
-                //método DB eliminar user pelo id
+                IDBFacade.DeleteUtilizador(id_artista);
             }
                 return true;
         }

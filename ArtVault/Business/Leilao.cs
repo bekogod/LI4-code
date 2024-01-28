@@ -86,5 +86,11 @@ namespace ArtVault.Business
             }
         }
 
+        public string GetTempoRestante()
+        {
+            TimeSpan tempoRestante = dataFim - DateTime.Now;
+            return $"{tempoRestante.Days} dias, {tempoRestante.Hours} horas, {tempoRestante.Minutes} minutos, {tempoRestante.Seconds} segundos";
+        }
+
     }
 }
