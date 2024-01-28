@@ -152,5 +152,9 @@ namespace ArtVault.Business
             return result;
         }
 
+        public void AddLeilaoToWL(int id_leilao)
+        {
+            IDBFacade.InsertWatchlist(user_atual.GetId(), id_leilao);
+        }
     }
 }
