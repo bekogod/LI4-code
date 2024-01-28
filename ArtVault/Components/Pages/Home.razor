@@ -26,13 +26,4 @@
 }
 </div>
 
-@code {
-    private string UserName;
 
-    protected override void OnInitialized()
-    {
-        // Call the getUser method from IArtVaultFacade to get the user's name
-        if (IAVFacade.GetUserAtual() != null) UserName = IAVFacade.GetUtilizadorAtualName();
-        else UserName = "Stranger";
-    }
-}
