@@ -160,6 +160,10 @@ namespace ArtVault.Business
                 {
                     leilao.SetInWL(true);
                 }
+                else
+                {
+                    leilao.SetInWL(false);
+                }
             }
             return result;
         }
