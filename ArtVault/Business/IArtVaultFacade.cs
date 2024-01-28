@@ -45,15 +45,15 @@ namespace ArtVault.Business
                     Utilizador u;
                     if (type == "1")
                     {
-                        u = new Padrao(int.Parse(sUser[0]), sUser[3], sUser[2], sUser[1], sUser[4], sUser[5], int.Parse(sUser[6]), int.Parse(sUser[7]));
+                        u = new Padrao(sUser);
                     }
                     else if (type == "2")
                     {
-                        u = new Artista(int.Parse(sUser[0]), sUser[3], sUser[2], sUser[1], sUser[4], sUser[5], int.Parse(sUser[6]), int.Parse(sUser[7]), int.Parse(sUser[9]));
+                        u = new Artista(sUser);
                     }
                     else
                     {
-                        u = new Admin(int.Parse(sUser[0]), sUser[3], sUser[2], sUser[1], sUser[4], sUser[5], int.Parse(sUser[6]), int.Parse(sUser[7]));
+                        u = new Admin(sUser);
                     }
                     if (u.ValidPassword(password))
                     {
@@ -86,6 +86,20 @@ namespace ArtVault.Business
             Leilao l = null;// new Leilao(IDBFacade.GetLeilaoWithId(leilaoId));
             return l;
 
+        }
+
+        public bool TryLance(int valor)
+        {
+            if (leilao_atual.ValorMinimoLance(valor)) // se o valor do lance for válido
+            {
+                DateTime dateTime = DateTime.Now;
+                IDBFacade.InsertLance(user_atual.GetId(), leilao_atual.GetId(), dateTime, valor);
+                //alterar preço referência do leilão se for caso disso
+                leilao_atual.SetPrecoReferencia(valor);
+                //alterar valor na base de dados
+                return true;
+            };
+            return false;
         }
 
 

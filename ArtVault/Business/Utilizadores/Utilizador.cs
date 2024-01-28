@@ -23,6 +23,18 @@
             this.cc = cc;
         }
 
+        protected Utilizador(string[] array)
+        {
+            id = int.Parse(array[0]);
+            email = array[3];
+            password = array[2];
+            username = array[1];
+            nome = array[4];
+            morada = array[5];
+            nif = int.Parse(array[6]);
+            cc = int.Parse(array[7]);
+        }
+
         public int GetId() { return id; }
         public string GetEmail() { return email; }
         public string GetPassword() { return password; }

@@ -7,6 +7,10 @@
         {
         }
 
+        public Padrao(string[] array) : base(array)
+        {
+        }
+
         public bool VerificarPassword(string password)
         {
             return this.password.Equals(password);
