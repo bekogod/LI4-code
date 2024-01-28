@@ -72,6 +72,8 @@ namespace ArtVault.Business
             else return "";
         }
 
+        public bool GetInWL() {  return inWL; }
+
         public void SetPrecoReferencia(int novoPreco)
         {
             precoReferencia = novoPreco;
