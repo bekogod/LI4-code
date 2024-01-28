@@ -88,15 +88,19 @@
 @code {
     [Parameter]
     public Leilao LeilaoInstance { get; set; }
-        
+
     [Inject]
     public IArtVaultFacade IAVFacade { get; set; }
 
     private void AddToWatchlist()
     {
-        if(!LeilaoInstance.GetInWL())
-        IAVFacade.AddLeilaoToWL(LeilaoInstance.GetId());
-        else IAVFacade.RemLeilaoFromWL(LeilaoInstance.GetId());
-    
+        if (!LeilaoInstance.GetInWL())
+        {
+            IAVFacade.AddLeilaoToWL(LeilaoInstance.GetId());
+
+        }
+        else{
+            IAVFacade.RemoveFromWL(LeilaoInstance.GetId());
+        }
     }
 }
