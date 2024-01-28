@@ -213,5 +213,46 @@ namespace ArtVault.DAOs
 
             return leilaoString;
         }
+
+
+        public void UpdatePrecoReferencia(int idLeilao, int novoPrecoReferencia)
+        {
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"UPDATE Leilao SET precoreferencia = @NovoPrecoReferencia WHERE id = @IdLeilao";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@NovoPrecoReferencia", novoPrecoReferencia);
+                        command.Parameters.AddWithValue("@IdLeilao", idLeilao);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
 }
