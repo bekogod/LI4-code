@@ -52,7 +52,10 @@
             <p><strong>Artista: </strong> @IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador()) </p>
             <p><strong>Nome: </strong> @LeilaoInstance.GetNome()</p>
             <p><strong>Tempo Restante: </strong> <br />@LeilaoInstance.GetTempoRestante()</p>
-            <p><strong>Bid atual: </strong> @LeilaoInstance.GetPrecoReferencia()</p>
+            @if (LeilaoInstance.GetTipo() == 1)
+            {
+                <p><strong>Bid atual: </strong> @LeilaoInstance.GetPrecoReferencia()</p>
+            }
             <p><strong>Tipo:</strong> @(LeilaoInstance.GetTipo() == 1 ? "Normal" : "Sealed")</p>
         </div>
 
@@ -75,6 +78,6 @@
 
     private void AddToWatchlist()
     {
-        // Logic for adding the current leilao to the watchlist goes here
+        IAVFacade.AddLeilaoToWL(LeilaoInstance.GetId());
     }
 }
