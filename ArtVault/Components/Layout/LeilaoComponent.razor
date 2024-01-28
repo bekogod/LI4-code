@@ -40,12 +40,17 @@
         .heart-button:hover {
             color: red; /* Hover color */
         }
+
+    .scaleA {
+        width: 100%;
+        max-width: max-content;
+    }
 </style>
 
 <div class="leilao-container">
     <div class="leilao-grid">
         <div class="leilao-details">
-            <img class="leilao-image" src="@LeilaoInstance.GetImagem()" alt="Imagem do Leilão" />
+            <img class="leilao-image scaleA" src="./imgs/@LeilaoInstance.GetImagem()" alt="Imagem do Leilão" />
         </div>
 
         <div class="leilao-details">
