@@ -135,6 +135,11 @@ namespace ArtVault.Business
             return l;
         }
 
+        public string GetNomeArtista(int id_artista)
+        {
+            return IDBFacade.GetUserNameByID(id_artista);
+            
+        }
 
     }
 }
