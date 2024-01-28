@@ -97,9 +97,9 @@ namespace ArtVault.DAOs
             {
                 try
                 {
-                    string query = @"SELECT Leilao.* FROM WatchList 
-                             INNER JOIN Leilao ON WatchList.id_leilao = Leilao.id 
-                             WHERE WatchList.id_utilizador = @IdUtilizador";
+                    string query = @"SELECT Leilao.* FROM Watchlist 
+                             INNER JOIN Leilao ON Watchlist.id_leilao = Leilao.id 
+                             WHERE Watchlist.id_utilizador = @IdUtilizador";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -145,7 +145,7 @@ namespace ArtVault.DAOs
             {
                 try
                 {
-                    string query = @"DELETE FROM WatchList WHERE id_utilizador = @IdUtilizador AND id_leilao = @IdLeilao";
+                    string query = @"DELETE FROM Watchlist WHERE id_utilizador = @IdUtilizador AND id_leilao = @IdLeilao";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -177,7 +177,7 @@ namespace ArtVault.DAOs
                 {
                     foreach (int id in id_leilao)
                     {
-                        string query = @"SELECT COUNT(*) FROM WatchList WHERE id_utilizador = @IdUtilizador AND id_leilao = @IdLeilao";
+                        string query = @"SELECT COUNT(*) FROM Watchlist WHERE id_utilizador = @IdUtilizador AND id_leilao = @IdLeilao";
 
                         using (SqlCommand command = new SqlCommand(query, connection))
                         {
