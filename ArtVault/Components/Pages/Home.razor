@@ -1,13 +1,29 @@
 ﻿@page "/"
 @using ArtVault.Business
+@using ArtVault.Components.Layout
 @inject NavigationManager NavManager
 @inject IArtVaultFacade IAVFacade
 
+<style>
+    
+
+    .leilao-grid-container {
+        width:1000px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 300px); /* Adjust column width as needed */
+        gap: 220px;
+    }
+
+</style>
+
 <PageTitle>artVault</PageTitle>
 
-<h1>Hello, @UserName!</h1>
-
-<h2>Welcome ArtVault!!</h2>
+<div class="leilao-grid-container">
+@foreach (Leilao l in IAVFacade.GetXLeiloes(8))
+{
+    <LeilaoComponent LeilaoInstance=l/>
+}
+</div>
 
 @code {
     private string UserName;
