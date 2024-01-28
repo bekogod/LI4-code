@@ -122,7 +122,7 @@ namespace ArtVault.DAOs
                                 }
                                 else
                                 {
-                                    lancesString += ";;" + lanceString;
+                                    lancesString += "|" + lanceString;
                                 }
                             }
                         }
