@@ -90,7 +90,7 @@ namespace ArtVault.Business
                 IDBFacade.InsertLance(user_atual.GetId(), leilao_atual.GetId(), dateTime, valor);
                 
                 //alterar preço referência do leilão se for caso disso
-                if (leilao_atual.GetTipo() == 1 || (leilao_atual.GetTipo() == 2 && valor > leilao_atual.GetPrecoReferencia()))
+                if (leilao_atual.GetTipo() == 1)
                 {
                     IDBFacade.UpdatePrecoReferencia(leilao_atual.GetId(), valor);
                     leilao_atual.SetPrecoReferencia(valor);
