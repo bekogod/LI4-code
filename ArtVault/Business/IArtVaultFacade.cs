@@ -178,5 +178,18 @@ namespace ArtVault.Business
         {
             IDBFacade.RemoveFromWL(user_atual.GetId(), id_leilao);
         }
+
+        public List<Leilao> GetLeiloesWL()
+        {
+            List<Leilao> result = new List<Leilao>();
+            string leiloes = IDBFacade.GetAllLeiloesInWLofUtilizadorString(user_atual.GetId());
+            string[] larray = leiloes.Split('|');
+            foreach (string l in larray)
+            {
+                Leilao novo_leilao = new Leilao(l);
+                result.Add(novo_leilao);
+            }
+            return result;
+        }
     }
 }
