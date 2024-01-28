@@ -1,4 +1,4 @@
-<img src='uminho.png' width="35%"/>
+<img src='uminho.png' width="20%"/>
 
 <h3 align="center">Licenciatura em Engenharia Informática <br> Laboratórios de Informática IV <br> 2023/2024 </h3>
 
