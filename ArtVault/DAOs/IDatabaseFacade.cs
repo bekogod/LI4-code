@@ -67,6 +67,12 @@ namespace ArtVault.DAOs
         }
 
 
+        public string GetXLancesByLeilaoID(int id_leilao, int x)
+        {
+            return leilaoDAO.GetXLancesByLeilaoID(id_leilao, x);
+        }
+
+
         public void UpdatePrecoReferencia(int idLeilao, int novoPrecoReferencia)
         {
             leilaoDAO.UpdatePrecoReferencia(idLeilao, novoPrecoReferencia);
