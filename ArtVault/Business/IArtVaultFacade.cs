@@ -1,17 +1,31 @@
 ﻿using ArtVault.Business.Utilizadores;
-//using ArtVault.DAOs.IDatabaseFacade;
+using ArtVault.DAOs;
 namespace ArtVault.Business
 {
     public class IArtVaultFacade
     {
         private Utilizador user_atual;
         private Leilao leilao_atual;
-        //private IDatabaseFacade IDBFacade = new IDatabaseFacade();
+        private IDatabaseFacade IDBFacade = new IDatabaseFacade();
+
+        public IArtVaultFacade()
+        {
+            user_atual = null;
+        }
 
         public void SetUserAtual(Utilizador user)
         {
             user_atual = user;
         }
+        public Utilizador GetUserAtual()
+        {
+            return user_atual;
+        }
+        public string GetUtilizadorAtualName()
+        {
+            return user_atual.GetNome();
+        }
+
 
         public void SetLeilaoAtual(Leilao leilao)
         {
@@ -21,7 +35,7 @@ namespace ArtVault.Business
         
         public bool CheckCredentials(string email, string password)
         {
-            string user = null;// IDBFacade.GetUserByEmail(email);
+            string user = IDBFacade.GetUserByEmail(email);
             if (user != null)
             {
                 string[] sUser = user.Split(';');
@@ -56,6 +70,12 @@ namespace ArtVault.Business
             return user_atual.UserType();
         }
 
+        public Leilao getLeilaoWithId(int leilaoId)
+        {
+            Leilao l = null;// new Leilao(IDBFacade.GetLeilaoWithId(leilaoId));
+            return l;
+
+        }
 
 
     }
