@@ -111,8 +111,6 @@ namespace ArtVault.DAOs
                     {
                         command.Parameters.AddWithValue("@Id", id);
 
-                        connection.Open();
-
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
@@ -152,7 +150,6 @@ namespace ArtVault.DAOs
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@X", x);
-                        connection.Open();
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -191,7 +188,6 @@ namespace ArtVault.DAOs
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
-                        connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
@@ -227,7 +223,6 @@ namespace ArtVault.DAOs
                     {
                         command.Parameters.AddWithValue("@NovoPrecoReferencia", novoPrecoReferencia);
                         command.Parameters.AddWithValue("@IdLeilao", idLeilao);
-                        connection.Open();
                         command.ExecuteNonQuery();
                     }
                 }
