@@ -33,6 +33,25 @@ namespace ArtVault.Business
             this.tipo = tipo;
         }
 
+        public Leilao(string leilao)
+        {
+            string[] array = leilao.Split(';');
+            if (array.Length == 11)
+            {
+                id = int.Parse(array[0]);
+                id_utilizador = int.Parse(array[1]);
+                dataCom = DateTime.Parse(array[2]);
+                dataFim = DateTime.Parse(array[3]);
+                nome = array[4];
+                precoReferencia = int.Parse(array[5]);
+                precoReserva = int.Parse(array[6]);
+                imagem = array[7];
+                dimensoes = array[8];
+                descricao = array[9];
+                tipo = int.Parse(array[10]);
+            }
+        }
+
         public int GetId() { return id; }
         public int GetIdUtilizador() { return id_utilizador; }
         public DateTime GetDataCom() { return dataCom; }
