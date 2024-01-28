@@ -211,6 +211,31 @@ namespace ArtVault.DAOs
             }
         }
 
+        public void DeleteUtilizador(int idUtilizador)
+        {
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"DELETE FROM Utilizador WHERE id = @IdUtilizador";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUtilizador", idUtilizador);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+        }
 
 
 
