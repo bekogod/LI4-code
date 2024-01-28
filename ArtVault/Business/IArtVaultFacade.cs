@@ -144,20 +144,19 @@ namespace ArtVault.Business
             List<Leilao> result = new List<Leilao>();
             string leiloes = IDBFacade.GetXLeiloes(x);
             string[] larray = leiloes.Split('|');
-
+            List<int> ids = new List<int>();
             foreach (string l in larray)
             {
                 Leilao novo_leilao = new Leilao(l);
+                ids.Add(novo_leilao.GetId());
                 novo_leilao.SetInWL(false);
                 result.Add(novo_leilao);
             }
-            /*
-            int[] ids = 
 
-            foreach (Leilao a in result)
-            {
+            //List<int> inWL = IDBFacade.VariosInWL(ids, user_atual.GetId());
+            
+            
 
-            }*/
             return result;
         }
 
@@ -165,6 +164,11 @@ namespace ArtVault.Business
         public void AddLeilaoToWL(int id_leilao)
         {
             IDBFacade.InsertWatchlist(user_atual.GetId(), id_leilao);
+        }
+
+        public void RemoveFromWL(int id_leilao)
+        {
+            IDBFacade.RemoveFromWL(user_atual.GetId(), id_leilao);
         }
     }
 }
