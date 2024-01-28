@@ -212,46 +212,6 @@ namespace ArtVault.DAOs
 
 
 
-        public string GetXLancesByLeilaoID(int id_leilao, int x)
-        {
-            string? lancesString = null;
-
-            using (SqlConnection connection = daoConfig.GetConnection())
-            {
-                try
-                {
-                    string query = @"SELECT TOP(@X) * FROM Lance WHERE id_leilao = @IdLeilao ORDER BY dataHora DESC";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IdLeilao", id_leilao);
-                        command.Parameters.AddWithValue("@X", x);
-
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string lanceString = $"{reader["id"]};{reader["id_utilizador"]};{reader["id_leilao"]};{reader["dataHora"]};{reader["valor"]}";
-                                lancesString += lanceString + ";;";
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
-                }
-                finally
-                {
-                    daoConfig.CloseConnection(connection);
-                }
-            }
-            return lancesString;
-        }
-
-
-
-
         public void UpdatePrecoReferencia(int idLeilao, int novoPrecoReferencia)
         {
             using (SqlConnection connection = daoConfig.GetConnection())

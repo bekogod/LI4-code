@@ -36,6 +36,12 @@ namespace ArtVault.DAOs
             lanceDAO.InsertLance(id_utilizador, id_leilao, dataHora, valor);
         }
 
+        public string GetXLancesByLeilaoID(int id_leilao, int x)
+        {
+            return lanceDAO.GetXLancesByLeilaoID(id_leilao, x);
+        }
+
+
 
 
 
@@ -65,13 +71,6 @@ namespace ArtVault.DAOs
         {
             return leilaoDAO.GetLeilaoByUserID(id_utilizador);
         }
-
-
-        public string GetXLancesByLeilaoID(int id_leilao, int x)
-        {
-            return leilaoDAO.GetXLancesByLeilaoID(id_leilao, x);
-        }
-
 
         public void UpdatePrecoReferencia(int idLeilao, int novoPrecoReferencia)
         {
