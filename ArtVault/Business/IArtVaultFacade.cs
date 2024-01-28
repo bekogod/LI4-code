@@ -139,5 +139,18 @@ namespace ArtVault.Business
             
         }
 
+        public List<Leilao> GetXLeiloes(int x)
+        {
+            List<Leilao> result = new List<Leilao>();
+            string leiloes = IDBFacade.GetXLeiloes(x);
+            string[] larray = leiloes.Split('|');
+            foreach (string l in larray)
+            {
+                Leilao novo_leilao = new Leilao(l);
+                result.Add(novo_leilao);
+            }
+            return result;
+        }
+
     }
 }

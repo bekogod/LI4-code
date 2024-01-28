@@ -156,7 +156,7 @@ namespace ArtVault.DAOs
                             while (reader.Read())
                             {
                                 string leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
-                                leiloesString = leilaoString + ";;";
+                                leiloesString = leilaoString + "|";
                             }
                         }
                     }
