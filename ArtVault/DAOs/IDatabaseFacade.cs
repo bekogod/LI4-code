@@ -153,6 +153,13 @@ namespace ArtVault.DAOs
             watchlistDAO.RemoveFromWL(id_utilizador,id_leilao);
         }
 
+
+        public List<int> VariosInWL(List<int> id_leilao, int id_utilizador)
+        {
+            return watchlistDAO.VariosInWL(id_leilao, id_utilizador);
+        }
+
+
     }
 }
         

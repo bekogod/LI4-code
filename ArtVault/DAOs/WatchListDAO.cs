@@ -167,5 +167,47 @@ namespace ArtVault.DAOs
 
 
 
+        public List<int> VariosInWL(List<int> id_leilao, int id_utilizador)
+        {
+            List<int> result = [];
+
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    foreach (int id in id_leilao)
+                    {
+                        string query = @"SELECT COUNT(*) FROM WatchList WHERE id_utilizador = @IdUtilizador AND id_leilao = @IdLeilao";
+
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
+                            command.Parameters.AddWithValue("@IdLeilao", id);
+
+                            int count = (int)command.ExecuteScalar();
+
+                            if (count > 0)
+                            {
+                                result.Add(id);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+
+            return result;
+        }
     }
+
+
+}
 }
