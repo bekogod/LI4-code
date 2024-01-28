@@ -7,7 +7,7 @@
 
 **Leilões**<i>**Online**</i>
 
-- Motivação
+- Motivação:
   Passar à Cadeira
 ---
 <h3 align="center">Equipa</h3>
