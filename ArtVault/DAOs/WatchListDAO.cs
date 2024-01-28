@@ -151,6 +151,8 @@ namespace ArtVault.DAOs
                     {
                         command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
                         command.Parameters.AddWithValue("@IdLeilao", id_leilao);
+                        Console.WriteLine(command);
+
                         command.ExecuteNonQuery();
                     }
                 }

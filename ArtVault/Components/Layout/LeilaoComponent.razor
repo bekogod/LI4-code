@@ -50,7 +50,7 @@
     }
 
         .heart-button:hover {
-            color: @((LeilaoInstance.GetInWL()) ? "grey" : "red");
+            color: @((LeilaoInstance.GetInWL()) ? " grey" : "red");
         }
 
     .scaleA {
@@ -97,7 +97,6 @@
         if (!LeilaoInstance.GetInWL())
         {
             IAVFacade.AddLeilaoToWL(LeilaoInstance.GetId());
-
         }
         else{
             IAVFacade.RemoveFromWL(LeilaoInstance.GetId());
