@@ -55,21 +55,21 @@
         </div>
 
         <div class="leilao-details">
-             <p><strong>Artista: </strong> @IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador()) </p> 
+            <p><strong>Artista: </strong> @IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador()) </p>
             <p><strong>Nome: </strong> @LeilaoInstance.GetNome()</p>
-            <p><strong>Tempo Restante: </strong> <br/>@LeilaoInstance.GetTempoRestante()</p>
+            <p><strong>Tempo Restante: </strong> <br />@LeilaoInstance.GetTempoRestante()</p>
             <p><strong>Bid atual: </strong> @LeilaoInstance.GetPrecoReferencia()</p>
             <p><strong>Tipo:</strong> @(LeilaoInstance.GetTipo() == 1 ? "Normal" : "Sealed")</p>
         </div>
 
         <div class="leilao-details">
             <p><strong>Dimensões:</strong> @LeilaoInstance.GetDimensoes()</p>
-            <p><strong>Descrição:</strong><br/> @LeilaoInstance.GetDescricao()</p>
+            <p><strong>Descrição:</strong><br /> @LeilaoInstance.GetDescricao()</p>
         </div>
     </div>
 
     <button class="heart-button" @onclick="AddToWatchlist"><i class="fas fa-heart"></i></button>
-    
+
 </div>
 
 @code {
@@ -81,6 +81,7 @@
     private void AddToWatchlist()
     {
         // Logic for adding the current leilao to the watchlist goes here
+        
     }
     protected override void OnInitialized()
     {
