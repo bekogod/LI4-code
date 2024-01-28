@@ -24,29 +24,64 @@ namespace ArtVault.DAOs
             watchlistDAO = new WatchListDAO(config);
         }
 
-        public void InsertUtilizador(string username, string password, string email, string nome, string morada, int NIF, int CC, byte tipoConta, bool ativo)
-        {
-            utilizadorDAO.InsertUtilizador(username, password, email, nome, morada, NIF, CC, tipoConta, ativo);
-        }
 
+
+        //LANCE DAO 
+        //LANCE DAO
+        //LANCE DAO 
+        //LANCE DAO
+        
         public void InsertLance(int id_utilizador, int id_leilao, DateTime dataHora, int valor)
         {
             lanceDAO.InsertLance(id_utilizador, id_leilao, dataHora, valor);
         }
+
+
+
+
+        //LEILAO DAO
+        //LEILAO DAO
+        //LEILAO DAO
+        //LEILAO DAO
+
 
         public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int precoReferencia, int? precoReserva, string imagem, string dimensoes, string? descricao)
         {
             leilaoDAO.InsertLeilao(id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao);
         }
 
-        public void InsertWatchlist(int id_utilizador, int id_leilao)
+       
+        public string GetLeilaoByID(int id)
         {
-            watchlistDAO.InsertWatchlist(id_utilizador, id_leilao);
+            return leilaoDAO.GetLeilaoByID(id);
         }
 
-        public string GetUserByEmail(string email)
+        public string GetXLeiloes(int x)
         {
-            return utilizadorDAO.GetUserByEmail(email);
+            return leilaoDAO.GetXLeiloes(x);
+        }
+
+        public string GetLeilaoByUserID(int id_utilizador)
+        {
+            return leilaoDAO.GetLeilaoByUserID(id_utilizador);
+        }
+
+
+        public void UpdatePrecoReferencia(int idLeilao, int novoPrecoReferencia)
+        {
+            leilaoDAO.UpdatePrecoReferencia(idLeilao, novoPrecoReferencia);
+        }
+
+
+
+        //UTILIZADOR DAO
+        //UTILIZADOR DAO
+        //UTILIZADOR DAO
+        //UTILIZADOR DAO
+
+        public void InsertUtilizador(string username, string password, string email, string nome, string morada, int NIF, int CC, byte tipoConta, bool ativo)
+        {
+            utilizadorDAO.InsertUtilizador(username, password, email, nome, morada, NIF, CC, tipoConta, ativo);
         }
 
         public int ExisteUtilizador(int NIF, int CC, string username, string email)
@@ -54,9 +89,44 @@ namespace ArtVault.DAOs
             return utilizadorDAO.ExisteUtilizador(NIF, CC, username, email);
         }
 
-        public string GetLeilaoByID(int id)
+        public string GetUserByEmail(string email)
         {
-            return leilaoDAO.GetLeilaoByID(id);
+            return utilizadorDAO.GetUserByEmail(email);
+        }
+
+
+        public void ActivateUtilizador(int idUtilizador)
+        {
+            utilizadorDAO.ActivateUtilizador(idUtilizador);
+        }
+
+        public void DeleteUtilizador(int idUtilizador)
+        {
+            utilizadorDAO.DeleteUtilizador(idUtilizador);
+        }
+
+
+
+
+
+
+
+
+        //WATCHLIST DAO
+        //WATCHLIST DAO
+        //WATCHLIST DAO
+        //WATCHLIST DAO
+
+
+        public void InsertWatchlist(int id_utilizador, int id_leilao)
+        {
+            watchlistDAO.InsertWatchlist(id_utilizador, id_leilao);
+        }
+
+
+        public string GetLeiloesWatchListByUserId(int id_utilizador)
+        {
+            return watchlistDAO.GetLeiloesWatchListByUserId(id_utilizador);
         }
     }
 }
