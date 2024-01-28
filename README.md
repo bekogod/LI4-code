@@ -19,8 +19,8 @@
 |------------------------|--------|
 | Augusto C.O. Campos    | A93320 |
 | Carlos A.F.D. da Silva | A93199 |
-| Tiago A. Silva         | A93182 |
-| Tiago P. Silva         | A93285 |
+| Tiago A.F. Silva       | A93182 |
+| Tiago P. da Silva      | A93285 |
 
 
 </div>
