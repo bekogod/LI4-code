@@ -149,14 +149,18 @@ namespace ArtVault.Business
             {
                 Leilao novo_leilao = new Leilao(l);
                 ids.Add(novo_leilao.GetId());
-                novo_leilao.SetInWL(false);
                 result.Add(novo_leilao);
             }
 
-            //List<int> inWL = IDBFacade.VariosInWL(ids, user_atual.GetId());
+            List<int> inWL = IDBFacade.VariosInWL(ids, user_atual.GetId());
             
-            
-
+            foreach (Leilao leilao in result)
+            {
+                if (inWL.Contains(leilao.GetId()))
+                {
+                    leilao.SetInWL(true);
+                }
+            }
             return result;
         }
 
