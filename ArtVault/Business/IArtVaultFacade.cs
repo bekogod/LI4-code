@@ -65,6 +65,17 @@ namespace ArtVault.Business
             return false;
         } 
 
+        public bool TryRegisto(string email, string password, string username, string nome, string morada, int nif, int cc, byte tipo)
+        {
+            int valid = IDBFacade.ExisteUtilizador(nif, cc, username, email);
+            if (valid == 0)
+            {
+                IDBFacade.InsertUtilizador(username, password, email, nome, morada, nif, cc, tipo, true);
+                return true;
+            }
+            return false;
+        }
+
         public int GetUserType()
         {
             return user_atual.UserType();

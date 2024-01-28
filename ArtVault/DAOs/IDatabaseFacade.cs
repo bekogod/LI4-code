@@ -48,6 +48,11 @@ namespace ArtVault.DAOs
         {
             return utilizadorDAO.GetUserByEmail(email);
         }
+
+        public int ExisteUtilizador(int NIF, int CC, string username, string email)
+        {
+            return utilizadorDAO.ExisteUtilizador(NIF, CC, username, email);
+        }
     }
 }
         
