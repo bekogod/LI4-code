@@ -94,6 +94,9 @@
 
     private void AddToWatchlist()
     {
+        if(!LeilaoInstance.GetInWL())
         IAVFacade.AddLeilaoToWL(LeilaoInstance.GetId());
+        else IAVFacade.RemLeilaoFromWL(LeilaoInstance.GetId());
+    
     }
 }
