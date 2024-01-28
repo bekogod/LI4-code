@@ -102,6 +102,13 @@ namespace ArtVault.Business
             return false;
         }
 
+        public bool TryLeilao(string nome, int tipo, int precoInicial, int? precoReservado, string imagem, string dimensoes, DateTime dataFim, string? descricao)
+        {   
+            DateTime dataCom = DateTime.Now;
+            IDBFacade.InsertLeilao(user_atual.GetId(), dataCom, dataFim, nome, precoInicial, precoReservado, imagem, dimensoes, descricao);
+            return true;
+        }
+
 
     }
 }

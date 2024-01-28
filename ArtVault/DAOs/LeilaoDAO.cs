@@ -55,7 +55,7 @@ namespace ArtVault.DAOs
                 }
             }
         }
-        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int precoReferencia, int? precoReserva, string imagem, string dimensoes, string descricao)
+        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int precoReferencia, int? precoReserva, string imagem, string dimensoes, string? descricao)
         {
             using (SqlConnection connection = daoConfig.GetConnection())
             {

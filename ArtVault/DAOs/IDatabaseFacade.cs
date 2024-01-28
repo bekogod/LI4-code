@@ -34,7 +34,7 @@ namespace ArtVault.DAOs
             lanceDAO.InsertLance(id_utilizador, id_leilao, dataHora, valor);
         }
 
-        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int precoReferencia, int? precoReserva, string imagem, string dimensoes, string descricao)
+        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int precoReferencia, int? precoReserva, string imagem, string dimensoes, string? descricao)
         {
             leilaoDAO.InsertLeilao(id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao);
         }
