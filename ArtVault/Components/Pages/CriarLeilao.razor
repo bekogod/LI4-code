@@ -1,0 +1,187 @@
+﻿@page "/criarleilao"
+@inject NavigationManager NavManager;
+@inject IArtVaultFacade IAVFacade;
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .login-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        max-width: 800px;
+        width: 100%;
+    }
+
+        .login-container h2 {
+            text-align: center;
+        }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .login-container label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .login-container input {
+        padding: 8px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+
+    .button-container {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 25px;
+    }
+
+    .login-container button {
+        background-color: #305673;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        .login-container button:hover {
+            background-color: #25445c;
+        }
+</style>
+
+<div>
+    <h2>Criar Leilão</h2>
+
+    <label for="imagem">
+        Imagem:
+        <InputFile onchange="@LoadFile" accept="image/jpeg, image/png" />
+    </label>
+
+    @if (errors.Count > 0)
+    {
+        <h2>Erros</h2>
+        @foreach (var error in errors)
+        {
+            <li>@error</li>
+        }
+    }
+
+    <form class="form-grid">
+
+
+        <label for="nome">
+            Nome:
+            <input type="text" id="nome" name="nome" @bind="Nome" required>
+        </label>
+
+        <label for="dimensoes">
+            Dimensões:
+            <input type="text" id="dimensoes" name="nome" @bind="Dimensoes" required>
+        </label>
+
+        <label for="precores">
+            Preço Reserva:
+            <input type="number" id="precores" name="precores" min="1" @bind="PrecoRes">
+        </label>
+
+        <label for="precoini">
+            Preço Inicial:
+            <input type="number" id="precoini" name="prcoini" min="1" @bind="PrecoIni" required>
+        </label>
+
+        <label for="tipoLeilao">
+            Tipo de Leilão:
+            <select id="tipoLeilao" name="tipoLeilao" @bind="TipoLeilao" required>
+                <option value="1">Leilão Inglês</option>
+                <option value="2">Leilão Sealed-Bid</option>
+            </select>
+        </label>
+
+        <label for="datafim">
+            Data Final:
+            <input type="date" @bind="DataFim">
+        </label>
+
+        <label for="hora">
+            Hora Final:
+            <select id="hora" name="hora" @bind="Hora">
+                @for (int i = 0; i <= 23; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            :
+            <select id="min" name="min" @bind="Min">
+                @for (int j = 0; j <= 59; j++)
+                {
+                    <option value="@j">@j</option>
+                }
+            </select>
+        </label>
+
+    </form>
+</div>
+
+@code {
+    @using Business
+    private byte[] image { get; set; }
+    private string Nome{ get; set; }
+    private string Dimensoes{ get; set; }
+    private int PrecoRes{ get; set; }
+    private int PrecoIni{ get; set; }
+    private string TipoLeilao{ get; set; }
+    private string Descricao{ get; set; }
+    private DateTime DataFim { get; set; } = DateTime.Now;
+    private int Hora { get; set; }
+    private int Min { get; set; }
+    private long maxFileSize = 1024 * 1024 * 15;
+    private List<string> errors = new();
+
+
+    private async Task LoadFile (InputFileChangeEventArgs e)
+    {
+        errors.Clear();
+        var file = e.File;
+
+        if (file != null)
+        {
+            if (file.Size > maxFileSize)
+            {
+                errors.Add("The file is too large. Please upload a file smaller than 15 MB.");
+                return;
+            }
+
+            try
+            {
+                image = await ConvertToByteArray(file);
+            }
+            catch (Exception ex)
+            {
+                errors.Add("An error occurred while uploading the file.");
+            }
+        }
+    }
+
+    private async Task<byte[]> ConvertToByteArray(IBrowserFile file)
+    {
+        using var memoryStream = new MemoryStream();
+        await file.OpenReadStream().CopyToAsync(memoryStream);
+        return memoryStream.ToArray();
+    }
+
+
+
+}
