@@ -145,7 +145,8 @@ namespace ArtVault.DAOs
             {
                 try
                 {
-                    string query = @"SELECT TOP(@X) * FROM Leilao";
+                    string query = @"
+                    SELECT TOP(@X) * FROM Leilao WHERE dataFim > GETDATE()";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {

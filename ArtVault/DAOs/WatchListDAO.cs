@@ -117,7 +117,7 @@ namespace ArtVault.DAOs
                                 }
                                 else
                                 {
-                                    leiloesString += ";;" + leilaoString;
+                                    leiloesString += "|" + leilaoString;
                                 }
                                 
                             }
