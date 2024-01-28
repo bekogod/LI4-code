@@ -111,10 +111,19 @@ namespace ArtVault.DAOs
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                            bool primeiroLance = true;
                             while (reader.Read())
                             {
                                 string lanceString = $"{reader["id"]};{reader["id_utilizador"]};{reader["id_leilao"]};{reader["dataHora"]};{reader["valor"]}";
-                                lancesString += lanceString + ";;";
+                                if (primeiroLance)
+                                {
+                                    lancesString = lanceString;
+                                    primeiroLance = false;
+                                }
+                                else
+                                {
+                                    lancesString += ";;" + lanceString;
+                                }
                             }
                         }
                     }

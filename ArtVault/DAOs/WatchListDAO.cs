@@ -91,7 +91,7 @@ namespace ArtVault.DAOs
 
         public string GetLeiloesWatchListByUserId(int id_utilizador)
         {
-            string leiloesString = "";
+            string? leiloesString = null;
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {
@@ -106,10 +106,20 @@ namespace ArtVault.DAOs
                         command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                            bool primeiroLeilao = true;
                             while (reader.Read())
                             {
                                 string leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
-                                leiloesString += leilaoString + ";;";
+                                if (primeiroLeilao)
+                                {
+                                    leiloesString = leilaoString;
+                                    primeiroLeilao = false;
+                                }
+                                else
+                                {
+                                    leiloesString += ";;" + leilaoString;
+                                }
+                                
                             }
                         }
                     }
