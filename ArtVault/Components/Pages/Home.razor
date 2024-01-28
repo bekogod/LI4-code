@@ -4,12 +4,26 @@
 @inject NavigationManager NavManager
 @inject IArtVaultFacade IAVFacade
 
+<style>
+    
+
+    .leilao-grid-container {
+        width:1000px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 300px); /* Adjust column width as needed */
+        gap: 220px;
+    }
+
+</style>
+
 <PageTitle>artVault</PageTitle>
 
-@foreach(Leilao l in IAVFacade.getXLeiloes(10))
+<div class="leilao-grid-container">
+@foreach (Leilao l in IAVFacade.GetXLeiloes(8))
 {
     <LeilaoComponent LeilaoInstance=l/>
 }
+</div>
 
 @code {
     private string UserName;
