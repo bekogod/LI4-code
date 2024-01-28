@@ -1,9 +1,4 @@
-﻿@page "/leilao/{id}"
-@using ArtVault.Business
-
-@inject IArtVaultFacade IAVFacade
-@inject NavigationManager NavManager
-
+﻿@using ArtVault.Business
 <style>
     .leilao-container {
         font-size: 10px;
@@ -21,7 +16,7 @@
     }
 
     .leilao-details {
-        margin:0;
+        margin: 0;
     }
 
         .leilao-details p {
@@ -36,15 +31,14 @@
 
     .heart-button {
         background: none;
-        border:none;
+        border: none;
         cursor: pointer;
         font-size: 24px;
         color: grey; /* Heart color */
-       
     }
 
         .heart-button:hover {
-            color:red; /* Hover color */
+            color: red; /* Hover color */
         }
 </style>
 
@@ -69,26 +63,19 @@
     </div>
 
     <button class="heart-button" @onclick="AddToWatchlist"><i class="fas fa-heart"></i></button>
-
 </div>
+
+<LeilaoComponent LeilaoInstance=@LeilaoInstance />
 
 @code {
     [Parameter]
-    public string Id { get; set; }
-    public Leilao LeilaoInstance;
+    public Leilao LeilaoInstance { get; set; }
 
-   
+    [Inject]
+    public IArtVaultFacade IAVFacade { get; set; }
+
     private void AddToWatchlist()
     {
         // Logic for adding the current leilao to the watchlist goes here
-        
-    }
-    protected override void OnInitialized()
-    {
-        // Initialize the LeilaoInstance based on the provided Id or any other logic
-        int leilaoId = Convert.ToInt32(Id);
-        LeilaoInstance = IAVFacade.GetLeilaoWithID(leilaoId);
-
-        Console.WriteLine(LeilaoInstance);
     }
 }

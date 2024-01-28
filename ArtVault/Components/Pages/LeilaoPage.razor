@@ -1,0 +1,94 @@
+﻿@page "/leilao/{id}"
+@using ArtVault.Business
+
+@inject IArtVaultFacade IAVFacade
+@inject NavigationManager NavManager
+
+<style>
+    .leilao-container {
+        font-size: 10px;
+        width: 500px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .leilao-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .leilao-details {
+        margin:0;
+    }
+
+        .leilao-details p {
+            margin-bottom: 8px;
+        }
+
+    .leilao-image {
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    .heart-button {
+        background: none;
+        border:none;
+        cursor: pointer;
+        font-size: 24px;
+        color: grey; /* Heart color */
+       
+    }
+
+        .heart-button:hover {
+            color:red; /* Hover color */
+        }
+</style>
+
+<div class="leilao-container">
+    <div class="leilao-grid">
+        <div class="leilao-details">
+            <img class="leilao-image" src="@LeilaoInstance.GetImagem()" alt="Imagem do Leilão" />
+        </div>
+
+        <div class="leilao-details">
+            <p><strong>Artista: </strong> @IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador()) </p>
+            <p><strong>Nome: </strong> @LeilaoInstance.GetNome()</p>
+            <p><strong>Tempo Restante: </strong> <br />@LeilaoInstance.GetTempoRestante()</p>
+            <p><strong>Bid atual: </strong> @LeilaoInstance.GetPrecoReferencia()</p>
+            <p><strong>Tipo:</strong> @(LeilaoInstance.GetTipo() == 1 ? "Normal" : "Sealed")</p>
+        </div>
+
+        <div class="leilao-details">
+            <p><strong>Dimensões:</strong> @LeilaoInstance.GetDimensoes()</p>
+            <p><strong>Descrição:</strong><br /> @LeilaoInstance.GetDescricao()</p>
+        </div>
+    </div>
+
+    <button class="heart-button" @onclick="AddToWatchlist"><i class="fas fa-heart"></i></button>
+
+</div>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    public Leilao LeilaoInstance;
+
+   
+    private void AddToWatchlist()
+    {
+        // Logic for adding the current leilao to the watchlist goes here
+
+    }
+    protected override void OnInitialized()
+    {
+        // Initialize the LeilaoInstance based on the provided Id or any other logic
+        int leilaoId = Convert.ToInt32(Id);
+        LeilaoInstance = IAVFacade.GetLeilaoWithID(leilaoId);
+
+        Console.WriteLine(LeilaoInstance);
+    }
+}
