@@ -111,10 +111,6 @@ namespace ArtVault.DAOs
                     {
                         command.Parameters.AddWithValue("@Id", id);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> remove 2x open connect
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
