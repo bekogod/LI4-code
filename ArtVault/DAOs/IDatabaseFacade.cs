@@ -174,7 +174,7 @@ namespace ArtVault.DAOs
 
 
 
-        public string GetAllLeiloesInWLofUtilizadorString(List<int> id_leilao, int id_utilizador)
+        public string GetAllLeiloesInWLofUtilizadorString(int id_utilizador)
         {
             string? leiloesExtenso = null;
 
