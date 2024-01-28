@@ -109,7 +109,6 @@ namespace ArtVault.DAOs
                         // Add parameter for email
                         command.Parameters.AddWithValue("@Email", email);
 
-                        connection.Open();
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -118,6 +117,7 @@ namespace ArtVault.DAOs
                             {
                                 // Construct the user string with parameters separated by ";"
                                 userString = $"{reader["id"]};{reader["username"]};{reader["password"]};{reader["email"]};{reader["nome"]};{reader["morada"]};{reader["NIF"]};{reader["CC"]};{reader["tipoConta"]};{reader["ativo"]}";
+                                Console.WriteLine(userString);
                             }
                         }
                     }
@@ -126,7 +126,7 @@ namespace ArtVault.DAOs
                 {
                     // Handle any exceptions that occur during the search
                     Console.WriteLine("Error: " + ex.Message);
-                }
+                }   
                 finally
                 {
                     // Close the connection when done
