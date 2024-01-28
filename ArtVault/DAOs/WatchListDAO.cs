@@ -104,7 +104,6 @@ namespace ArtVault.DAOs
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
-                        connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())

@@ -155,7 +155,6 @@ namespace ArtVault.DAOs
                         command.Parameters.AddWithValue("@CC", CC);
                         command.Parameters.AddWithValue("@Username", username);
                         command.Parameters.AddWithValue("@Email", email);
-                        connection.Open();
                         int count;
                         count = (int)command.ExecuteScalar();
                         if (count > 0)
@@ -196,7 +195,6 @@ namespace ArtVault.DAOs
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@IdUtilizador", idUtilizador);
-                        connection.Open();
                         command.ExecuteNonQuery();
                     }
                 }
@@ -222,7 +220,6 @@ namespace ArtVault.DAOs
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@IdUtilizador", idUtilizador);
-                        connection.Open();
                         command.ExecuteNonQuery();
                     }
                 }
