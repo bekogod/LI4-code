@@ -129,7 +129,7 @@ namespace ArtVault.DAOs
                     daoConfig.CloseConnection(connection);
                 }
             }
-
+            Console.WriteLine(leilaoString);
             return leilaoString;
         }
 
