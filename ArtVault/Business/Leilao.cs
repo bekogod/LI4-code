@@ -15,6 +15,7 @@ namespace ArtVault.Business
         private string dimensoes;
         private string? descricao;
         private int tipo; //1-normal 2-sealed
+        private bool inWL;
 
         public Leilao(int id, int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int precoReserva, string imagem, string dimensoes, string? descricao, int tipo)
         {
@@ -76,6 +77,10 @@ namespace ArtVault.Business
             precoReferencia = novoPreco;
         }
 
+        public void SetInWL(bool inWL)
+        {
+            this.inWL = inWL;
+        }
         public bool ValorMinimoLance(int preco)
         {
             if (tipo == 2)

@@ -144,13 +144,23 @@ namespace ArtVault.Business
             List<Leilao> result = new List<Leilao>();
             string leiloes = IDBFacade.GetXLeiloes(x);
             string[] larray = leiloes.Split('|');
+
             foreach (string l in larray)
             {
                 Leilao novo_leilao = new Leilao(l);
+                novo_leilao.SetInWL(false);
                 result.Add(novo_leilao);
             }
+            /*
+            int[] ids = 
+
+            foreach (Leilao a in result)
+            {
+
+            }*/
             return result;
         }
+
 
         public void AddLeilaoToWL(int id_leilao)
         {
