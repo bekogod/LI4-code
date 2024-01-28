@@ -1,13 +1,15 @@
 ﻿@page "/"
 @using ArtVault.Business
+@using ArtVault.Components.Layout
 @inject NavigationManager NavManager
 @inject IArtVaultFacade IAVFacade
 
 <PageTitle>artVault</PageTitle>
 
-<h1>Hello, @UserName!</h1>
-
-<h2>Welcome ArtVault!!</h2>
+@foreach(Leilao l in IAVFacade.getXLeiloes(10))
+{
+    <LeilaoComponent LeilaoInstance=l/>
+}
 
 @code {
     private string UserName;
