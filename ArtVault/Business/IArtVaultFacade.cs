@@ -81,7 +81,12 @@ namespace ArtVault.Business
             return user_atual.UserType();
         }
 
-        
+        public Leilao getLeilaoWithId(int leilaoId)
+        {
+            Leilao l = null;// new Leilao(IDBFacade.GetLeilaoWithId(leilaoId));
+            return l;
+
+        }
 
         public bool TryLance(int valor)
         {
@@ -89,9 +94,13 @@ namespace ArtVault.Business
             {
                 DateTime dateTime = DateTime.Now;
                 IDBFacade.InsertLance(user_atual.GetId(), leilao_atual.GetId(), dateTime, valor);
+                
                 //alterar preço referência do leilão se for caso disso
-                leilao_atual.SetPrecoReferencia(valor);
-                //alterar valor na base de dados
+                if (leilao_atual.GetTipo() == 1 || (leilao_atual.GetTipo() == 2 && valor > leilao_atual.GetPrecoReferencia()))
+                {
+                    IDBFacade.UpdatePrecoReferencia(leilao_atual.GetId(), valor);
+                    leilao_atual.SetPrecoReferencia(valor);
+                }
                 return true;
             };
             return false;
@@ -123,7 +132,7 @@ namespace ArtVault.Business
             //método DB que elimina esse leilão dado o id
         }
 
-        public Leilao GetLeilaoWithID(int id_leilao)
+        public Leilao GetLeilaoByID(int id_leilao)
         {
             string leilao = IDBFacade.GetLeilaoByID(id_leilao);
             Leilao l = new Leilao(leilao);
