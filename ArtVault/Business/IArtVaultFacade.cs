@@ -128,6 +128,13 @@ namespace ArtVault.Business
             //método DB que elimina esse leilão dado o id
         }
 
+        public Leilao GetLeilaoByID(int id_leilao)
+        {
+            string leilao = IDBFacade.GetLeilaoByID(id_leilao);
+            Leilao l = new Leilao(leilao);
+            return l;
+        }
+
 
     }
 }

@@ -53,6 +53,11 @@ namespace ArtVault.DAOs
         {
             return utilizadorDAO.ExisteUtilizador(NIF, CC, username, email);
         }
+
+        public string GetLeilaoByID(int id)
+        {
+            return leilaoDAO.GetLeilaoByID(id);
+        }
     }
 }
         
