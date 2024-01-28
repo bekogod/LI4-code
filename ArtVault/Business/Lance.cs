@@ -17,6 +17,19 @@
             this.valor = valor;
         }
 
+        public Lance(string lance)
+        {
+            string[] array = lance.Split(';');
+            if (array.Length == 5)
+            {
+                id = int.Parse(array[0]);
+                id_utilizador = int.Parse(array[1]);
+                id_leilao = int.Parse(array[2]);
+                dataHora = DateTime.Parse(array[3]);
+                valor = int.Parse(array[4]);
+            }
+        }
+
         public int GetId() { return id; }
         public int GetIdUtilizador() { return id_utilizador; }
         public int GetIdLeilao() { return id_leilao; }
