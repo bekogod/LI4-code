@@ -137,5 +137,35 @@ namespace ArtVault.DAOs
             return leiloesString;
         }
 
+
+
+        public void RemoveFromWL(int id_utilizador, int id_leilao)
+        {
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"DELETE FROM WatchList WHERE id_utilizador = @IdUtilizador AND id_leilao = @IdLeilao";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
+                        command.Parameters.AddWithValue("@IdLeilao", id_leilao);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+        }
+
+
+
     }
 }

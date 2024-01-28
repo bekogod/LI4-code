@@ -146,6 +146,13 @@ namespace ArtVault.DAOs
         {
             return watchlistDAO.GetLeiloesWatchListByUserId(id_utilizador);
         }
+
+
+        public void RemoveFromWL(int id_utilizador, int id_leilao)
+        {
+            watchlistDAO.RemoveFromWL(id_utilizador,id_leilao);
+        }
+
     }
 }
         
