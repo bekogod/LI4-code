@@ -60,6 +60,20 @@
              background-color: #25445c;
          }
 
+     #tipoConta {
+        padding: 8px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;
+     }
+
+       #tipoConta option{
+            padding: 8px;
+            margin-bottom: 16px;
+            width: 100%;
+            box-sizing: border-box;
+       }
+
      .error-message {
          color: red;
      }
@@ -110,7 +124,10 @@
 
         <label for="tipoConta">
             Tipo de Conta:
-            <input type="text" id="tipoConta" name="tipoConta" @bind="TipoConta" required>
+            <select id="tipoConta" name="tipoConta" @bind="TipoConta" required>
+                <option value="Comprador">Comprador</option>
+                <option value="Vendedor">Vendedor</option>
+            </select>
         </label>
 
         <div class="button-container">
