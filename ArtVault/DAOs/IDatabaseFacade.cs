@@ -79,6 +79,9 @@ namespace ArtVault.DAOs
             leilaoDAO.UpdatePrecoReferencia(idLeilao, novoPrecoReferencia);
         }
 
+       
+
+
 
 
         //UTILIZADOR DAO
@@ -158,6 +161,48 @@ namespace ArtVault.DAOs
         {
             return watchlistDAO.VariosInWL(id_leilao, id_utilizador);
         }
+
+
+        public List<int> GetLeiloesOfUtilizadorInWatchList(int id_utilizador)
+        {
+            return watchlistDAO.GetLeiloesOfUtilizadorInWatchList(id_utilizador);
+        }
+
+
+
+
+
+
+
+        public string GetAllLeiloesInWLofUtilizadorString(List<int> id_leilao, int id_utilizador)
+        {
+            string? leiloesExtenso = null;
+
+            List<int> idLeilaoList = watchlistDAO.GetLeiloesOfUtilizadorInWatchList(id_utilizador);
+
+            foreach (int idLeilao in idLeilaoList)
+            {
+
+                string leilaoExtenso = leilaoDAO.GetLeilaoByID(idLeilao);
+
+                leiloesExtenso += leilaoExtenso + "|";
+            }
+
+            if (leiloesExtenso.Length > 0)
+            {
+                leiloesExtenso = leiloesExtenso.Remove(leiloesExtenso.Length - 1); // Remove the last character
+            }
+
+            return leiloesExtenso;
+
+        }
+
+
+
+
+
+
+
 
 
     }

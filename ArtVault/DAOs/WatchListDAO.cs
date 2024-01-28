@@ -206,7 +206,50 @@ namespace ArtVault.DAOs
 
             return result;
         }
+
+
+        public List<int> GetLeiloesOfUtilizadorInWatchList(int id_utilizador)
+        {
+            List<int> result = [];
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"SELECT id_leilao FROM Watchlist WHERE id_utilizador = @IdUtilizador";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int idLeilao = (int)reader["id_leilao"];
+                                result.Add(idLeilao);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+            return result;
+        }
+
+
+
+
+
+
+
+
+
     }
-
-
 }
