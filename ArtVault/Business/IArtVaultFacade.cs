@@ -81,12 +81,6 @@ namespace ArtVault.Business
             return user_atual.UserType();
         }
 
-        public Leilao getLeilaoWithId(int leilaoId)
-        {
-            Leilao l = null;// new Leilao(IDBFacade.GetLeilaoWithId(leilaoId));
-            return l;
-
-        }
 
         public bool TryLance(int valor)
         {
@@ -132,7 +126,7 @@ namespace ArtVault.Business
             //método DB que elimina esse leilão dado o id
         }
 
-        public Leilao GetLeilaoByID(int id_leilao)
+        public Leilao GetLeilaowithID(int id_leilao)
         {
             string leilao = IDBFacade.GetLeilaoByID(id_leilao);
             Leilao l = new Leilao(leilao);
