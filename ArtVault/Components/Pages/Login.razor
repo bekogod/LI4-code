@@ -90,8 +90,7 @@
 
     private void SubmitForm()
     {
-        // bool isValid =  IAVFacade.CheckCredentials(Username, Password);
-        bool isValid = true;
+        bool isValid =  IAVFacade.CheckCredentials(Username, Password);
         if (isValid)
         {
             // Redirect to a success page or perform other actions
