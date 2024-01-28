@@ -5,7 +5,7 @@
 ---
 
 
-**Leilões**<i>**Online**</i>
+<i>**Leilões</i>**<i>**Online**</i>
 
 - Motivação:
   Passar à Cadeira
