@@ -109,6 +109,19 @@ namespace ArtVault.Business
             return true;
         }
 
+        public bool ValidarArtista(int id_artista, bool decisao)
+        {
+            if (decisao)
+            {
+                //método DB de mudar ativo para sim
+            }
+            else
+            {
+                //método DB eliminar user pelo id
+            }
+                return true;
+        }
+
 
     }
 }
