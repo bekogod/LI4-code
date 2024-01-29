@@ -36,6 +36,14 @@ namespace ArtVault.DAOs
             lanceDAO.InsertLance(id_utilizador, id_leilao, dataHora, valor);
         }
 
+        public string GetXLancesByLeilaoID(int id_leilao, int x)
+        {
+            return lanceDAO.GetXLancesByLeilaoID(id_leilao, x);
+        }
+
+
+
+
 
 
 
@@ -66,17 +74,13 @@ namespace ArtVault.DAOs
             return leilaoDAO.GetLeilaoByUserID(id_utilizador);
         }
 
-
-        public string GetXLancesByLeilaoID(int id_leilao, int x)
-        {
-            return leilaoDAO.GetXLancesByLeilaoID(id_leilao, x);
-        }
-
-
         public void UpdatePrecoReferencia(int idLeilao, int novoPrecoReferencia)
         {
             leilaoDAO.UpdatePrecoReferencia(idLeilao, novoPrecoReferencia);
         }
+
+       
+
 
 
 
@@ -145,6 +149,63 @@ namespace ArtVault.DAOs
         {
             return watchlistDAO.GetLeiloesWatchListByUserId(id_utilizador);
         }
+
+
+        public void RemoveFromWL(int id_utilizador, int id_leilao)
+        {
+            watchlistDAO.RemoveFromWL(id_utilizador,id_leilao);
+        }
+
+
+        public List<int> VariosInWL(List<int> id_leilao, int id_utilizador)
+        {
+            return watchlistDAO.VariosInWL(id_leilao, id_utilizador);
+        }
+
+
+        public List<int> GetLeiloesOfUtilizadorInWatchList(int id_utilizador)
+        {
+            return watchlistDAO.GetLeiloesOfUtilizadorInWatchList(id_utilizador);
+        }
+
+
+
+
+
+
+
+        public string GetAllLeiloesInWLofUtilizadorString(int id_utilizador)
+        {
+            string? leiloesExtenso = null;
+
+            List<int> idLeilaoList = watchlistDAO.GetLeiloesOfUtilizadorInWatchList(id_utilizador);
+
+            foreach (int idLeilao in idLeilaoList)
+            {
+
+                string leilaoExtenso = leilaoDAO.GetLeilaoByID(idLeilao);
+
+                leiloesExtenso += leilaoExtenso + "|";
+            }
+
+            if (leiloesExtenso.Length > 0)
+            {
+                leiloesExtenso = leiloesExtenso.Remove(leiloesExtenso.Length - 1); // Remove the last character
+            }
+
+            return leiloesExtenso;
+
+        }
+
+
+
+
+
+
+
+
+
+
     }
 }
         

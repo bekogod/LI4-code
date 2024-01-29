@@ -1,0 +1,27 @@
+﻿@page "/watchlist"
+@using ArtVault.Business
+@using ArtVault.Components.Layout
+@inject NavigationManager NavManager
+@inject IArtVaultFacade IAVFacade
+
+<style>
+
+
+    .leilao-grid-container {
+        width: 1000px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 300px); /* Adjust column width as needed */
+        column-gap: 220px;
+        row-gap: 20px;
+    }
+
+</style>
+
+<PageTitle>artVault</PageTitle>
+
+<div class="leilao-grid-container">
+    @foreach (Leilao l in IAVFacade.GetXLeiloes(8))
+    {
+        <LeilaoComponent LeilaoInstance=l />
+    }
+</div>

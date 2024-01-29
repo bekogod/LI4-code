@@ -90,7 +90,7 @@ namespace ArtVault.Business
                 IDBFacade.InsertLance(user_atual.GetId(), leilao_atual.GetId(), dateTime, valor);
                 
                 //alterar preço referência do leilão se for caso disso
-                if (leilao_atual.GetTipo() == 1 || (leilao_atual.GetTipo() == 2 && valor > leilao_atual.GetPrecoReferencia()))
+                if (leilao_atual.GetTipo() == 1)
                 {
                     IDBFacade.UpdatePrecoReferencia(leilao_atual.GetId(), valor);
                     leilao_atual.SetPrecoReferencia(valor);
@@ -139,5 +139,58 @@ namespace ArtVault.Business
             
         }
 
+        public List<Leilao> GetXLeiloes(int x)
+        {
+            List<Leilao> result = new List<Leilao>();
+            string leiloes = IDBFacade.GetXLeiloes(x);
+            string[] larray = leiloes.Split('|');
+            List<int> ids = new List<int>();
+            foreach (string l in larray)
+            {
+                Leilao novo_leilao = new Leilao(l);
+                ids.Add(novo_leilao.GetId());
+                result.Add(novo_leilao);
+            }
+
+            List<int> inWL = IDBFacade.VariosInWL(ids, user_atual.GetId());
+            
+            foreach (Leilao leilao in result)
+            {
+                if (inWL.Contains(leilao.GetId()))
+                {
+                    leilao.SetInWL(true);
+                }
+                else
+                {
+                    leilao.SetInWL(false);
+                }
+            }
+            return result;
+        }
+
+
+        public void AddLeilaoToWL(int id_leilao)
+        {
+            IDBFacade.InsertWatchlist(user_atual.GetId(), id_leilao);
+        }
+
+        public void RemoveFromWL(int id_leilao)
+        {
+            IDBFacade.RemoveFromWL(user_atual.GetId(), id_leilao);
+        }
+
+        public List<Leilao> GetLeiloesWL()
+        {
+            List<Leilao> result = new List<Leilao>();
+            string leiloes = IDBFacade.GetAllLeiloesInWLofUtilizadorString(user_atual.GetId());
+            string[] larray = leiloes.Split('|');
+            foreach (string l in larray)
+            {
+                Leilao novo_leilao = new Leilao(l);
+                novo_leilao.SetInWL(true);
+                result.Add(novo_leilao);
+            }
+            return result;
+        }
     }
 }

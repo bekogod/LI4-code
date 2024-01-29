@@ -91,25 +91,35 @@ namespace ArtVault.DAOs
 
         public string GetLeiloesWatchListByUserId(int id_utilizador)
         {
-            string leiloesString = "";
+            string? leiloesString = null;
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {
                 try
                 {
-                    string query = @"SELECT Leilao.* FROM WatchList 
-                             INNER JOIN Leilao ON WatchList.id_leilao = Leilao.id 
-                             WHERE WatchList.id_utilizador = @IdUtilizador";
+                    string query = @"SELECT Leilao.* FROM Watchlist 
+                             INNER JOIN Leilao ON Watchlist.id_leilao = Leilao.id 
+                             WHERE Watchlist.id_utilizador = @IdUtilizador";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                            bool primeiroLeilao = true;
                             while (reader.Read())
                             {
                                 string leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
-                                leiloesString += leilaoString + ";;";
+                                if (primeiroLeilao)
+                                {
+                                    leiloesString = leilaoString;
+                                    primeiroLeilao = false;
+                                }
+                                else
+                                {
+                                    leiloesString += "|" + leilaoString;
+                                }
+                                
                             }
                         }
                     }
@@ -126,6 +136,122 @@ namespace ArtVault.DAOs
 
             return leiloesString;
         }
+
+
+
+        public void RemoveFromWL(int id_utilizador, int id_leilao)
+        {
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"DELETE FROM Watchlist WHERE id_utilizador = @IdUtilizador AND id_leilao = @IdLeilao";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
+                        command.Parameters.AddWithValue("@IdLeilao", id_leilao);
+                        Console.WriteLine(command);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+        }
+
+
+
+        public List<int> VariosInWL(List<int> id_leilao, int id_utilizador)
+        {
+            List<int> result = [];
+
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    foreach (int id in id_leilao)
+                    {
+                        string query = @"SELECT COUNT(*) FROM Watchlist WHERE id_utilizador = @IdUtilizador AND id_leilao = @IdLeilao";
+
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
+                            command.Parameters.AddWithValue("@IdLeilao", id);
+
+                            int count = (int)command.ExecuteScalar();
+
+                            if (count > 0)
+                            {
+                                result.Add(id);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+
+            return result;
+        }
+
+
+        public List<int> GetLeiloesOfUtilizadorInWatchList(int id_utilizador)
+        {
+            List<int> result = [];
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"SELECT id_leilao FROM Watchlist WHERE id_utilizador = @IdUtilizador";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int idLeilao = (int)reader["id_leilao"];
+                                result.Add(idLeilao);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+            return result;
+        }
+
+
+
+
+
+
+
+
 
     }
 }

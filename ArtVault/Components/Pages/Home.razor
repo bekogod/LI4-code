@@ -1,21 +1,60 @@
 ﻿@page "/"
 @using ArtVault.Business
+@using ArtVault.Components.Layout
 @inject NavigationManager NavManager
 @inject IArtVaultFacade IAVFacade
 
+<style>
+    .leilao-grid-container {
+        width: 1000px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 300px); 
+        column-gap: 220px;
+        row-gap: 20px;
+    }
+
+    .redirect-container {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .loading-spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        border-top: 4px solid #3498db;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+</style>
+
 <PageTitle>artVault</PageTitle>
 
-<h1>Hello, @UserName!</h1>
+@if (IAVFacade.GetUserAtual() != null)
+{
+    <div class="leilao-grid-container">
+        @foreach (Leilao l in IAVFacade.GetXLeiloes(8))
+        {
+            <LeilaoComponent LeilaoInstance=l />
+        }
+    </div>
+}
+else
+{
+    <div class="redirect-container">
+        <p>Redirecting to login...</p>
+        <div class="loading-spinner"></div>
+    </div>
 
-<h2>Welcome ArtVault!!</h2>
-
-@code {
-    private string UserName;
-
-    protected override void OnInitialized()
+    @code {
+    protected override async Task OnInitializedAsync()
     {
-        // Call the getUser method from IArtVaultFacade to get the user's name
-        if (IAVFacade.GetUserAtual() != null) UserName = IAVFacade.GetUtilizadorAtualName();
-        else UserName = "Stranger";
+        base.OnInitialized();
+        await Task.Delay(1000); 
+        if (IAVFacade.GetUserAtual() == null)
+        NavManager.NavigateTo("/login");
+    
+    }
     }
 }

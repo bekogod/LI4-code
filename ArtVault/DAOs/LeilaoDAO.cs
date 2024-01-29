@@ -145,7 +145,8 @@ namespace ArtVault.DAOs
             {
                 try
                 {
-                    string query = @"SELECT TOP(@X) * FROM Leilao";
+                    string query = @"
+                    SELECT TOP(@X) * FROM Leilao WHERE dataFim > GETDATE()";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -153,10 +154,21 @@ namespace ArtVault.DAOs
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+
+                            bool primeiroLeilao = true; //verificar se é o primeiro leilão
                             while (reader.Read())
                             {
                                 string leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
-                                leiloesString = leilaoString + ";;";
+                                if (primeiroLeilao)
+                                {
+                                    leiloesString = leilaoString;
+                                    primeiroLeilao = false;
+                                }
+                                else
+                                {
+                                    leiloesString += "|" + leilaoString;
+                                }
+                             
                             }
                         }
                     }
@@ -209,46 +221,6 @@ namespace ArtVault.DAOs
 
             return leilaoString;
         }
-
-
-
-        public string GetXLancesByLeilaoID(int id_leilao, int x)
-        {
-            string? lancesString = null;
-
-            using (SqlConnection connection = daoConfig.GetConnection())
-            {
-                try
-                {
-                    string query = @"SELECT TOP(@X) * FROM Lance WHERE id_leilao = @IdLeilao ORDER BY dataHora DESC";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IdLeilao", id_leilao);
-                        command.Parameters.AddWithValue("@X", x);
-
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string lanceString = $"{reader["id"]};{reader["id_utilizador"]};{reader["id_leilao"]};{reader["dataHora"]};{reader["valor"]}";
-                                lancesString += lanceString + ";;";
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
-                }
-                finally
-                {
-                    daoConfig.CloseConnection(connection);
-                }
-            }
-            return lancesString;
-        }
-
 
 
 

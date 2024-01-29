@@ -1,5 +1,23 @@
 ﻿@using ArtVault.Business
 <style>
+
+    .leilao-image-container {
+        position: relative;
+        overflow: hidden;
+        height:120px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .leilao-image {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
     .leilao-container {
         font-size: 10px;
         width: 500px;
@@ -23,36 +41,38 @@
             margin-bottom: 8px;
         }
 
-    .leilao-image {
-        height: auto;
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-
     .heart-button {
         background: none;
         border: none;
         cursor: pointer;
         font-size: 24px;
-        color: grey; /* Heart color */
+        color: @((LeilaoInstance.GetInWL()) ? "red" : "grey");
     }
 
         .heart-button:hover {
-            color: red; /* Hover color */
+            color: @((LeilaoInstance.GetInWL()) ? " grey" : "red");
         }
+
+    .scaleA {
+        width: 100%;
+        max-width: max-content;
+    }
 </style>
 
 <div class="leilao-container">
     <div class="leilao-grid">
-        <div class="leilao-details">
-            <img class="leilao-image" src="@LeilaoInstance.GetImagem()" alt="Imagem do Leilão" />
-        </div>
+            <div class="leilao-image-container">
+                <img class="leilao-image scaleA" src="./imgs/@LeilaoInstance.GetImagem()" alt="Imagem do Leilão" />
+            </div>
 
         <div class="leilao-details">
             <p><strong>Artista: </strong> @IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador()) </p>
             <p><strong>Nome: </strong> @LeilaoInstance.GetNome()</p>
             <p><strong>Tempo Restante: </strong> <br />@LeilaoInstance.GetTempoRestante()</p>
-            <p><strong>Bid atual: </strong> @LeilaoInstance.GetPrecoReferencia()</p>
+            @if (LeilaoInstance.GetTipo() == 1)
+            {
+                <p><strong>Bid atual: </strong> @LeilaoInstance.GetPrecoReferencia()</p>
+            }
             <p><strong>Tipo:</strong> @(LeilaoInstance.GetTipo() == 1 ? "Normal" : "Sealed")</p>
         </div>
 
@@ -65,8 +85,6 @@
     <button class="heart-button" @onclick="AddToWatchlist"><i class="fas fa-heart"></i></button>
 </div>
 
-<LeilaoComponent LeilaoInstance=@LeilaoInstance />
-
 @code {
     [Parameter]
     public Leilao LeilaoInstance { get; set; }
@@ -76,6 +94,12 @@
 
     private void AddToWatchlist()
     {
-        // Logic for adding the current leilao to the watchlist goes here
+        if (!LeilaoInstance.GetInWL())
+        {
+            IAVFacade.AddLeilaoToWL(LeilaoInstance.GetId());
+        }
+        else{
+            IAVFacade.RemoveFromWL(LeilaoInstance.GetId());
+        }
     }
 }
