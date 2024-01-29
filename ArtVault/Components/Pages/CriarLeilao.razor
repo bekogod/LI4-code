@@ -253,11 +253,13 @@
 
             try
             {
-                imageName = Path.Combine(IAVFacade.GetUserAtualID(), Nome);
                 var stream = file.OpenReadStream();
                 var buffer = new byte[file.Size];
                 await stream.ReadAsync(buffer);
                 var mimeType = file.ContentType;
+                string extensaoDoArquivo = Path.GetExtension(file.Name);
+                imageName = IAVFacade.GetUserAtualId() +  Nome + extensaoDoArquivo;
+                Console.WriteLine(mimeType);
                 imagePreview = $"data:{mimeType};base64,{Convert.ToBase64String(buffer)}";
                 StateHasChanged();
                 image = await ConvertToByteArray(file);

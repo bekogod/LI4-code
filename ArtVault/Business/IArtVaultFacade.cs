@@ -117,7 +117,7 @@ namespace ArtVault.Business
 
         public bool TryLeilao(string nome, int tipo, int precoReservado, int? precoInicial, string imageName, string dimensoes, DateTime dataFim, string? descricao, byte[] bImagem)
         {
-            IArtVaultFacade.SalvarImagem(bImagem, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imgs", imageName));
+            IArtVaultFacade.SalvarImagem(bImagem,  "/ImgsLeiloes/" + imageName);
             DateTime dataCom = DateTime.Now;
             IDBFacade.InsertLeilao(user_atual.GetId(), dataCom, dataFim, nome, precoInicial, precoReservado, imageName, dimensoes, descricao);
             return true;
