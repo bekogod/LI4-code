@@ -27,6 +27,10 @@ namespace ArtVault.Business
             return user_atual.GetNome();
         }
 
+        public string GetUserAtualId()
+        {
+            return user_atual.GetId().ToString();
+        }
 
         public void SetLeilaoAtual(Leilao leilao)
         {
@@ -221,6 +225,27 @@ namespace ArtVault.Business
                     int id_utilizador = novo_lance.GetIdUtilizador();
                     novo_lance.SetUsername(IDBFacade.GetUserNameByID(id_utilizador));
                     result.Add(novo_lance);
+                }
+            }
+            return result;
+        }
+
+        public List<Utilizador> GetUsersPorValidar()
+        {
+            List<Utilizador> result = new List<Utilizador>();
+            string users = IDBFacade.GetInactiveUsers();
+            if (users.Length != 0)
+            {
+                string[] uarray = users.Split('|');
+                foreach(string u in uarray)
+                {
+                    string[] sUser = u.Split(';');
+                    string type = sUser[8];
+                    if (type == "2")
+                    {
+                        Utilizador artista = new Artista(sUser);
+                        result.Add(artista);
+                    }
                 }
             }
             return result;
