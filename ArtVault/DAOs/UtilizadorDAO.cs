@@ -96,7 +96,7 @@ namespace ArtVault.DAOs
 
         public string GetUserByEmail(string email)
         {
-            string? userString = null;
+            string userString ="";
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {
@@ -140,7 +140,7 @@ namespace ArtVault.DAOs
 
         public string GetUserByID(int id)
         {
-            string? userString = null;
+            string userString = "";
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {
@@ -177,7 +177,7 @@ namespace ArtVault.DAOs
 
         public string GetUserNameByID(int id)
         {
-            string? nome = null;
+            string nome = "";
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {
@@ -323,7 +323,7 @@ namespace ArtVault.DAOs
 
         public string GetInactiveUsers()
         {
-            string? inactiveUsersString = null;
+            string inactiveUsersString = "";
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {

@@ -91,7 +91,7 @@ namespace ArtVault.DAOs
 
         public string GetLeiloesWatchListByUserId(int id_utilizador)
         {
-            string? leiloesString = null;
+            string leiloesString = "";
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {

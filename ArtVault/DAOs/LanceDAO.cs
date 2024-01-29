@@ -96,7 +96,7 @@ namespace ArtVault.DAOs
 
         public string GetXLancesByLeilaoID(int id_leilao, int x)
         {
-            string? lancesString = null;
+            string lancesString ="";
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {
