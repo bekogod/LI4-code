@@ -137,7 +137,9 @@ namespace ArtVault.DAOs
                     daoConfig.CloseConnection(connection);
                 }
             }
-            return lancesString;
+            if (lancesString == null) return "";
+
+            else return lancesString;
         }
 
 

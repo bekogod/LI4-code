@@ -320,5 +320,58 @@ namespace ArtVault.DAOs
 
 
 
+
+        public string GetInactiveUsers()
+        {
+            string? inactiveUsersString = null;
+
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"SELECT * FROM Utilizador WHERE ativo = 0";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            bool isFirstUser = true;
+                            while (reader.Read())
+                            {
+                                string userString = $"{reader["id"]};{reader["username"]};{reader["password"]};{reader["email"]};{reader["nome"]};{reader["morada"]};{reader["NIF"]};{reader["CC"]};{reader["tipoConta"]};{reader["ativo"]}";
+
+                                if (!isFirstUser)
+                                {
+                                    inactiveUsersString += "|";
+                                }
+                                else
+                                {
+                                    isFirstUser = false;
+                                }
+
+                                inactiveUsersString += userString;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+
+            if (inactiveUsersString == null) return "";
+            else return inactiveUsersString;
+        }
+
+
+
+
+
     }
 }
