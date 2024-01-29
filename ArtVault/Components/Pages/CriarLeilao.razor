@@ -208,7 +208,7 @@
                     <option value="@j">@j</option>
                 }
             </select>
-        </label>
+            </label>
         </div>
 
     </form>
@@ -220,6 +220,7 @@
 
 @code {
     @using Business
+    private string imageName { get; set; }
     private byte[] image { get; set; }
     private string Nome{ get; set; }
     private string Dimensoes{ get; set; }
@@ -252,6 +253,7 @@
 
             try
             {
+                imageName = Path.Combine(IAVFacade.GetUserAtual().GetId().ToString(), Nome);
                 var stream = file.OpenReadStream();
                 var buffer = new byte[file.Size];
                 await stream.ReadAsync(buffer);
@@ -274,13 +276,79 @@
         return memoryStream.ToArray();
     }
 
+    private bool ValidateFields()
+    {
+        // Check if string fields are not null or empty
+        if (string.IsNullOrWhiteSpace(Nome) ||
+            string.IsNullOrWhiteSpace(Dimensoes))
+        {
+            errors.Add("Faltam preencher campos");
+            return false;
+        }
+
+        // Check if image is not null
+        if (image == null || image.Length == 0 || string.IsNullOrWhiteSpace(imageName))
+        {
+            errors.Add("Falta escolher uma image");
+            return false;
+        }
+
+        // Check if PrecoRes is more than 1
+        if (PrecoRes <= 1)
+        {
+            errors.Add("O preço de reserva não é valido");
+            return false;
+        }
+        if(TipoLeilao == 1)
+        {
+            if(PrecoIni <= 1)
+            {
+                errors.Add("O preço inicial não é valido");
+                return false;
+            }
+        }
+
+        // Check if TipoLeilao is either 1 or 2
+        if (TipoLeilao != 1 && TipoLeilao != 2)
+        {
+            errors.Add("Escolha um tipo de Leilão");
+            return false;
+        }
+
+        // Check if Hora is between 0 and 23
+        if (Hora < 0 || Hora > 23)
+        {
+            errors.Add("Escolha uma hora valida");
+            return false;
+        }
+
+        // Check if Min is between 0 and 59
+        if (Min < 0 || Min > 59)
+        {
+            errors.Add("Escolha uma hora valida");
+            return false;
+        }
+
+        // All checks passed
+        return true;
+    }
+
+
+
     private void Criarleilao()
     {
-        //enviar a informacao para a camada de business
-        NavManager.NavigateTo("");
+        if (ValidateFields())
+        {
+            DateTime combined = new DateTime(DataFim.Year, DataFim.Month, DataFim.Day, Hora, Min, 0);
+            IAVFacade.TryLeilao(Nome, TipoLeilao, PrecoRes, PrecoIni, imageName, Dimensoes, combined, Descricao, image);
+            NavManager.NavigateTo("");
+        }
+        
     }
+
     private void Voltar()
     {
         NavManager.NavigateTo("");
     }
 }
+
