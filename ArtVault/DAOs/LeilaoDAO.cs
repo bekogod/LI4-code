@@ -183,6 +183,71 @@ namespace ArtVault.DAOs
             return leiloesString;
         }
 
+
+
+        public string GetBotXLeiloes(int x)
+        {
+            string leiloesString = "";
+
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @" SELECT * FROM  (SELECT *, ROW_NUMBER() OVER (ORDER BY id DESC) AS RowNum FROM Leilao ) AS LeiloesWithRowNum WHERE RowNum <= @X ORDER BY id DESC";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@X", x);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            bool primeiroLeilao = true;
+                            while (reader.Read())
+                            {
+                                string leilaoString = $"{reader["id"]};{reader["id_utilizador"]};{reader["datacom"]};{reader["datafim"]};{reader["nome"]};{reader["precoreferencia"]};{reader["precoreserva"]};{reader["imagem"]};{reader["dimensoes"]};{reader["descricao"]};{reader["tipoleilao"]}";
+                                if (primeiroLeilao)
+                                {
+                                    leiloesString = leilaoString;
+                                    primeiroLeilao = false;
+                                }
+                                else
+                                {
+                                    leiloesString += "|" + leilaoString;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+
+            return leiloesString;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public string GetLeilaoByUserID(int id_utilizador)
         {
             string leilaoString = "";

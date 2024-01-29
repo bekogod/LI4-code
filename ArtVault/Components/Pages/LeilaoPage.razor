@@ -67,7 +67,7 @@ else
     {
         // Implement your logic to place a bid here
         // Use 'bidAmount' to get the bid amount entered by the user
-        IAVFacade.TryLance(bidAmount);
+        IAVFacade.TryLance(LeilaoInstance.GetId(),bidAmount);
 
         int idInt = int.Parse(id);
         LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);

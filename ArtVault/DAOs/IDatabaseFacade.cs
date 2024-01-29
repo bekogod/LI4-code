@@ -53,12 +53,11 @@ namespace ArtVault.DAOs
         //LEILAO DAO
 
 
-        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int precoReserva, string imagem, string dimensoes, string? descricao)
+        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int precoReserva, string imagem, string dimensoes, string? descricao, int tipo)
         {
-            leilaoDAO.InsertLeilao(id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao);
+            leilaoDAO.InsertLeilao(id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao,tipo);
         }
 
-       
         public string GetLeilaoByID(int id)
         {
             return leilaoDAO.GetLeilaoByID(id);
@@ -67,6 +66,11 @@ namespace ArtVault.DAOs
         public string GetXLeiloes(int x)
         {
             return leilaoDAO.GetXLeiloes(x);
+        }
+
+        public string GetBotXLeiloes(int x)
+        {
+            return leilaoDAO.GetBotXLeiloes(x);
         }
 
         public string GetLeilaoByUserID(int id_utilizador)

@@ -87,8 +87,10 @@ namespace ArtVault.Business
         }
 
 
-        public bool TryLance(int valor)
+        public bool TryLance(int id_leilao, int valor)
         {
+            string l = IDBFacade.GetLeilaoByID(id_leilao);
+            leilao_atual = new Leilao(l);
             if (leilao_atual.ValorMinimoLance(valor)) // se o valor do lance for válido
             {
                 DateTime dateTime = DateTime.Now;
@@ -119,7 +121,7 @@ namespace ArtVault.Business
         {
             IArtVaultFacade.SalvarImagem(bImagem,  "./ImgsLeiloes/" + imageName);
             DateTime dataCom = DateTime.Now;
-            IDBFacade.InsertLeilao(user_atual.GetId(), dataCom, dataFim, nome, precoInicial, precoReservado, imageName, dimensoes, descricao);
+            IDBFacade.InsertLeilao(user_atual.GetId(), dataCom, dataFim, nome, precoInicial, precoReservado, imageName, dimensoes, descricao, tipo);
             return true;
         }
 
@@ -158,7 +160,7 @@ namespace ArtVault.Business
         public List<Leilao> GetXLeiloes(int x)
         {
             List<Leilao> result = new List<Leilao>();
-            string leiloes = IDBFacade.GetXLeiloes(x);
+            string leiloes = IDBFacade.GetBotXLeiloes(x);
             string[] larray = leiloes.Split('|');
             List<int> ids = new List<int>();
             foreach (string l in larray)
