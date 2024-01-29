@@ -87,8 +87,10 @@ namespace ArtVault.Business
         }
 
 
-        public bool TryLance(int valor)
+        public bool TryLance(int id_leilao, int valor)
         {
+            string l = IDBFacade.GetLeilaoByID(id_leilao);
+            leilao_atual = new Leilao(l);
             if (leilao_atual.ValorMinimoLance(valor)) // se o valor do lance for válido
             {
                 DateTime dateTime = DateTime.Now;
