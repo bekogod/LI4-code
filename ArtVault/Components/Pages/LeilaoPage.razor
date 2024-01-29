@@ -30,7 +30,7 @@
             <ul>
                 @foreach (var bid in BidHistory)
                 {
-                    <li>@bid.Usuario.Username placed a bid of @bid.Valor at @bid.Data</li>
+                    <li>@bid.GetIdUtilizador() placed a bid of @bid.GetValor() at @bid.GetDataHora()</li>
                 }
             </ul>
         }
@@ -60,7 +60,7 @@ else
         LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
         IAVFacade.SetLeilaoAtual(LeilaoInstance);
 
-        BidHistory = IAVFacade.GetXLancesByLeilaoId(idInt);
+        BidHistory = IAVFacade.GetXLancesByLeilaoID(idInt,8);
     }
 
     private void PlaceBid()
@@ -73,5 +73,7 @@ else
         LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
 
         // You may also add additional logic or error handling as needed
+        BidHistory = IAVFacade.GetXLancesByLeilaoID(idInt, 8);
+
     }
 }
