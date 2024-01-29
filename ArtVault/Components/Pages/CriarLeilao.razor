@@ -8,13 +8,14 @@
         background-color: #f4f4f4;
     }
 
-    .login-container {
+    .leilao-container {
         background-color: #ffffff;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         position: relative;
-        max-width: 800px;
+        max-width: 1600px;
+        height: 690px;
         width: 100%;
     }
 
@@ -22,24 +23,53 @@
             text-align: center;
         }
 
-    .form-grid {
+    .leilao-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 64px;
     }
+
+    .leilao-details {
+        margin: 0;
+    }
+
+    .image-container{
+        width:300px;
+        height:300px;
+        margin-bottom: 10px ;
+        object-fit: contain;
+    }
+
+        .image-container img {
+            max-width: 300px; /* Maximum width */
+            max-height: 300px; /* Maximum height */
+            width: auto; /* Width is automatically adjusted */
+            height: auto; /* Height is automatically adjusted */
+            object-fit: contain; /* Image will be scaled to maintain its aspect ratio */
+        }
 
     .login-container label {
         display: block;
         margin-bottom: 8px;
     }
 
-    .login-container input {
+    .leilao-details input {
         padding: 8px;
         margin-bottom: 16px;
         width: 100%;
         box-sizing: border-box;
     }
-    
+    .large-input{
+        width: 600px; /* Adjust as needed */
+        height: 100px; /* Adjust as needed */
+        padding: 10px; /* Optional, for internal spacing */
+        grid-column: 2 / 5;
+
+    }
+    .leilao-details select{
+        padding: 11px;
+        box-sizing: border-box;
+    }
 
     .button-container {
         display: flex;
@@ -60,28 +90,50 @@
         .login-container button:hover {
             background-color: #25445c;
         }
-</style>
 
-<div>
-    <h2>Criar Leilão</h2>
-
-    <label for="imagem">
-        Imagem:
-        <InputFile OnChange="@LoadFile" accept="image/jpeg, image/png" />
-    </label>
-
-    @if (errors.Count > 0)
-    {
-        <h2>Erros</h2>
-        @foreach (var error in errors)
-        {
-            <li>@error</li>
-        }
+    textarea {
+        width: 100%; /* Make it fill the container */
+        height: 150px; /* Adjust height as needed */
+        padding: 10px; /* Padding inside the textarea */
+        box-sizing: border-box; /* Include padding and border in the width and height */
+        border: 1px solid #ccc; /* Border style */
+        border-radius: 4px; /* Rounded corners */
+        font-size: 16px; /* Font size */
     }
 
-    <form class="form-grid">
+    #tipoLeilao {
+        padding: 8px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
 
+    
+</style>
 
+<div class="leilao-container">
+    <h2>Criar Leilão</h2>
+    <form class="leilao-grid">
+        <div class="leilao-details">
+        <label for="imagem">
+            <div class="image-container">
+                <img src="@imagePreview" width="300px" alt="Insira a sua imagem"/>
+            </div>
+            <InputFile OnChange="@LoadFile" accept="image/*" />
+      
+        </label>
+
+        @if (errors.Count > 0)
+        {
+            <h2>Erros</h2>
+            @foreach (var error in errors)
+            {
+                <li>@error</li>
+            }
+        }
+        </div>
+        
+        <div class="leilao-details"> 
         <label for="nome">
             Nome:
             <input type="text" id="nome" name="nome" @bind="Nome" required>
@@ -94,30 +146,54 @@
 
         <label for="precores">
             Preço Reserva:
-            <input type="number" id="precores" name="precores" min="1" @bind="PrecoRes">
+            <input type="number" id="precores" name="precores" min="1" @bind="PrecoRes" required>
         </label>
 
-        <label for="precoini">
-            Preço Inicial:
-            <input type="number" id="precoini" name="prcoini" min="1" @bind="PrecoIni" required>
-        </label>
+        @if (ShowPrecoIni)
+        {
+            <label for="precoini">
+                Preço Inicial:
 
+            <input type="number" id="precoini" name="prcoini" min="1" @bind="PrecoIni">
+            </label>
+        }
+
+            <label for="descricao">
+                Description:
+                <textarea id="descricao" name="descricai" rows="4" @bind="Descricao">Enter text here...
+                </textarea>
+            </label>
+        </div>
+
+    
+
+
+        <div class="leilao-details">
         <label for="tipoLeilao">
             Tipo de Leilão:
-            <select id="tipoLeilao" name="tipoLeilao" @bind="TipoLeilao" required>
-                <option value="1">Leilão Inglês</option>
-                <option value="2">Leilão Sealed-Bid</option>
+                <select id="tipoLeilao" name="tipoLeilao" @bind="TipoLeilao" required style="padding: 11px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;">
+                    <option value="1" @onclick="StateHasChanged">Leilão Inglês</option>
+                    <option value="2" @onclick=" StateHasChanged">Leilão Sealed-Bid</option>
             </select>
         </label>
 
+        </div>
+
+        <div class="leilao-details">
         <label for="datafim">
             Data Final:
-            <input type="date" @bind="DataFim">
+                <input type="date" @bind="DataFim">
         </label>
+        </div>
 
+        <div class="leilao-details">
         <label for="hora">
             Hora Final:
-            <select id="hora" name="hora" @bind="Hora">
+            <br />
+            <select id="hora" name="hora" @bind="Hora" >
                 @for (int i = 0; i <= 23; i++)
                 {
                     <option value="@i">@i</option>
@@ -131,8 +207,13 @@
                 }
             </select>
         </label>
+        </div>
 
     </form>
+    <div class="button-container">
+        <button type="button" @onclick="Criarleilao">Criar Leilão</button>
+        <button type="button" @onclick="Voltar">Voltar para Home</button>
+    </div>
 </div>
 
 @code {
@@ -142,13 +223,16 @@
     private string Dimensoes{ get; set; }
     private int PrecoRes{ get; set; }
     private int PrecoIni{ get; set; }
-    private string TipoLeilao{ get; set; }
+    private int TipoLeilao{ get; set; }
     private string Descricao{ get; set; }
     private DateTime DataFim { get; set; } = DateTime.Now;
     private int Hora { get; set; }
     private int Min { get; set; }
     private long maxFileSize = 1024 * 1024 * 15;
     private List<string> errors = new();
+    private bool ShowPrecoIni => TipoLeilao == 1;
+    private string imagePreview = "/imgs/insert_image.png";
+
 
 
     private async Task LoadFile (InputFileChangeEventArgs e)
@@ -166,6 +250,12 @@
 
             try
             {
+                var stream = file.OpenReadStream();
+                var buffer = new byte[file.Size];
+                await stream.ReadAsync(buffer);
+                var mimeType = file.ContentType;
+                imagePreview = $"data:{mimeType};base64,{Convert.ToBase64String(buffer)}";
+                StateHasChanged();
                 image = await ConvertToByteArray(file);
             }
             catch (Exception ex)
@@ -182,6 +272,13 @@
         return memoryStream.ToArray();
     }
 
-
-
+    private void Criarleilao()
+    {
+        //enviar a informacao para a camada de business
+        NavManager.NavigateTo("");
+    }
+    private void Voltar()
+    {
+        NavManager.NavigateTo("");
+    }
 }
