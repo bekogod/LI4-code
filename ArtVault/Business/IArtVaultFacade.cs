@@ -207,5 +207,21 @@ namespace ArtVault.Business
             }
             return result;
         }
+
+        public List<Lance> GetXLancesByLeilaoID(int id_leilao, int x)
+        {
+            List<Lance> result = new List<Lance>();
+            string lances = IDBFacade.GetXLancesByLeilaoID(id_leilao, x);
+            if (lances.Length != 0)
+            {
+                string[] larray = lances.Split('|');
+                foreach(string l in larray)
+                {
+                    Lance novo_lance = new Lance(l);
+                    result.Add(novo_lance);
+                }
+            }
+            return result;
+        }
     }
 }
