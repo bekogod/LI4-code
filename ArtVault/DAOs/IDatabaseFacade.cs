@@ -188,10 +188,11 @@ namespace ArtVault.DAOs
                 leiloesExtenso += leilaoExtenso + "|";
             }
 
-            if (leiloesExtenso.Length > 0)
+            if (leiloesExtenso != null)
             {
                 leiloesExtenso = leiloesExtenso.Remove(leiloesExtenso.Length - 1); // Remove the last character
             }
+            else return "";
 
             return leiloesExtenso;
 

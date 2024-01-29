@@ -195,12 +195,31 @@ namespace ArtVault.Business
         {
             List<Leilao> result = new List<Leilao>();
             string leiloes = IDBFacade.GetAllLeiloesInWLofUtilizadorString(user_atual.GetId());
-            string[] larray = leiloes.Split('|');
-            foreach (string l in larray)
+            if (leiloes.Length != 0)
             {
-                Leilao novo_leilao = new Leilao(l);
-                novo_leilao.SetInWL(true);
-                result.Add(novo_leilao);
+                string[] larray = leiloes.Split('|');
+                foreach (string l in larray)
+                {
+                    Leilao novo_leilao = new Leilao(l);
+                    novo_leilao.SetInWL(true);
+                    result.Add(novo_leilao);
+                }
+            }
+            return result;
+        }
+
+        public List<Lance> GetXLancesByLeilaoID(int id_leilao, int x)
+        {
+            List<Lance> result = new List<Lance>();
+            string lances = IDBFacade.GetXLancesByLeilaoID(id_leilao, x);
+            if (lances.Length != 0)
+            {
+                string[] larray = lances.Split('|');
+                foreach(string l in larray)
+                {
+                    Lance novo_lance = new Lance(l);
+                    result.Add(novo_lance);
+                }
             }
             return result;
         }
