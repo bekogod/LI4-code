@@ -1,0 +1,60 @@
+﻿@using ArtVault.Business
+@inject NavigationManager NavManager
+
+<style>
+    .user-container {
+        font-size: 10px;
+        width: 500px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .user-details {
+        margin: 0;
+    }
+
+        .user-details p {
+            margin-bottom: 8px;
+        }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+    }
+
+
+
+    .button-container button {
+        background-color: #305673;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 0 auto;
+    }
+
+        .button-container button:hover {
+            background-color: #25445c;
+        }
+
+</style>
+
+
+
+
+<h3>UserComponent</h3>
+
+@code {
+
+}
