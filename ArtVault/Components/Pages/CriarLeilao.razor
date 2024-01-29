@@ -63,7 +63,6 @@
         width: 600px; /* Adjust as needed */
         height: 100px; /* Adjust as needed */
         padding: 10px; /* Optional, for internal spacing */
-        grid-column: 2 / 5;
 
     }
     .leilao-details select{
@@ -99,6 +98,7 @@
         border: 1px solid #ccc; /* Border style */
         border-radius: 4px; /* Rounded corners */
         font-size: 16px; /* Font size */
+        grid-column: 2 / 4;
     }
 
     #tipoLeilao {
@@ -158,12 +158,14 @@
             </label>
         }
 
-            <label for="descricao">
-                Description:
-                <textarea id="descricao" name="descricai" rows="4" @bind="Descricao">Enter text here...
-                </textarea>
-            </label>
+        <label for="descricao">
+            Description:
+            <textarea id="descricao" name="descricai" rows="4" @bind="Descricao" style="grid-column: 2/5">Enter text here...
+            </textarea>
+        </label>
+
         </div>
+
 
     
 
