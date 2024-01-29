@@ -6,15 +6,8 @@
 
         public Artista(string[] array) : base(array)
         {
-            int a = int.Parse(array[9]);
-            if (a == 0)
-            {
-                ativo = false;
-            }
-            else
-            {
-                ativo = true;
-            }
+            bool ativo = bool.Parse( array[9]);
+            
         }
 
         public Artista(int id, string email, string password, string username, string nome, string morada, int nif, int cc, int ativo)
