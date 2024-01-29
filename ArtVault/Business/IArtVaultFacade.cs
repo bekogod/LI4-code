@@ -160,7 +160,7 @@ namespace ArtVault.Business
         public List<Leilao> GetXLeiloes(int x)
         {
             List<Leilao> result = new List<Leilao>();
-            string leiloes = IDBFacade.GetXLeiloes(x);
+            string leiloes = IDBFacade.GetBotXLeiloes(x);
             string[] larray = leiloes.Split('|');
             List<int> ids = new List<int>();
             foreach (string l in larray)
