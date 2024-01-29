@@ -7,6 +7,7 @@
         private int id_leilao;
         private DateTime dataHora;
         private int valor;
+        private string username;
 
         public Lance(int id, int id_utilizador, int id_leilao, DateTime dataHora, int valor)
         {
@@ -36,8 +37,9 @@
         public DateTime GetDataHora() { return dataHora; }
         public int GetValor() { return valor; }
 
-        // Não diria que set's sejam necessários
-        // Depois de ser criado, um lance não é alterado
+        public string GetUsername() { return username; }
+
+        public void SetUsername(string username) {  this.username = username; }
 
     }
 }

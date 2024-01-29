@@ -218,6 +218,8 @@ namespace ArtVault.Business
                 foreach(string l in larray)
                 {
                     Lance novo_lance = new Lance(l);
+                    int id_utilizador = novo_lance.GetIdUtilizador();
+                    novo_lance.SetUsername(IDBFacade.GetUserNameByID(id_utilizador));
                     result.Add(novo_lance);
                 }
             }
