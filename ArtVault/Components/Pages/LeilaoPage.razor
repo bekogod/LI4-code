@@ -23,6 +23,22 @@
         <input type="number" id="bidAmount" @bind="bidAmount" />
         <button @onclick="PlaceBid">Place Bid</button>
     </div>
+    <div>
+        <h4>Bid History</h4>
+        @if (BidHistory != null && BidHistory.Any())
+        {
+            <ul>
+                @foreach (var bid in BidHistory)
+                {
+                    <li>@bid.Usuario.Username placed a bid of @bid.Valor at @bid.Data</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No bid history available.</p>
+        }
+    </div>
 }
 else
 {
@@ -35,6 +51,7 @@ else
 
     private Leilao LeilaoInstance;
     private int bidAmount;
+    private List<Lance> BidHistory;
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,6 +59,8 @@ else
     int idInt=int.Parse(id);
         LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
         IAVFacade.SetLeilaoAtual(LeilaoInstance);
+
+        BidHistory = IAVFacade.GetXLancesByLeilaoId(idInt);
     }
 
     private void PlaceBid()
