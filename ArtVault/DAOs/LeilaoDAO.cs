@@ -68,11 +68,11 @@ namespace ArtVault.DAOs
                         command.Parameters.AddWithValue("@DataCom", dataCom);
                         command.Parameters.AddWithValue("@DataFim", dataFim);
                         command.Parameters.AddWithValue("@Nome", nome);
-                        command.Parameters.AddWithValue("@PrecoReferencia", precoReferencia);
+                        command.Parameters.AddWithValue("@PrecoReferencia", (object)precoReserva ?? DBNull.Value);
                         command.Parameters.AddWithValue("@PrecoReserva", (object)precoReserva ?? DBNull.Value); // Handle nullability
                         command.Parameters.AddWithValue("@Imagem", imagem);
                         command.Parameters.AddWithValue("@Dimensoes", dimensoes);
-                        command.Parameters.AddWithValue("@Descricao", descricao);
+                        command.Parameters.AddWithValue("@Descricao", (object)descricao ?? DBNull.Value);
 
 
                         int rowsAffected = command.ExecuteNonQuery();
