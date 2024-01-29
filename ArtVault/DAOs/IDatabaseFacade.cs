@@ -53,7 +53,7 @@ namespace ArtVault.DAOs
         //LEILAO DAO
 
 
-        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int precoReferencia, int? precoReserva, string imagem, string dimensoes, string? descricao)
+        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int precoReserva, string imagem, string dimensoes, string? descricao)
         {
             leilaoDAO.InsertLeilao(id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao);
         }

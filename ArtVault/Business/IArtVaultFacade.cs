@@ -1,5 +1,6 @@
 ﻿using ArtVault.Business.Utilizadores;
 using ArtVault.DAOs;
+using System.IO;
 namespace ArtVault.Business
 {
     public class IArtVaultFacade
@@ -100,10 +101,21 @@ namespace ArtVault.Business
             return false;
         }
 
-        public bool TryLeilao(string nome, int tipo, int precoInicial, int? precoReservado, string imagem, string dimensoes, DateTime dataFim, string? descricao)
-        {   
+        static void SalvarImagem(byte[] bytesDaImagem, string caminhoDoArquivo)
+        {
+            // Use FileStream para criar ou abrir o arquivo no modo de escrita
+            using (FileStream fs = new FileStream(caminhoDoArquivo, FileMode.Create))
+            {
+                // Escreva os bytes da imagem no arquivo
+                fs.Write(bytesDaImagem, 0, bytesDaImagem.Length);
+            }
+        }
+
+        public bool TryLeilao(string nome, int tipo, int precoReservado, int? precoInicial, string imageName, string dimensoes, DateTime dataFim, string? descricao, byte[] bImagem)
+        {
+            IArtVaultFacade.SalvarImagem(bImagem, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imgs", imageName));
             DateTime dataCom = DateTime.Now;
-            IDBFacade.InsertLeilao(user_atual.GetId(), dataCom, dataFim, nome, precoInicial, precoReservado, imagem, dimensoes, descricao);
+            IDBFacade.InsertLeilao(user_atual.GetId(), dataCom, dataFim, nome, precoInicial, precoReservado, imageName, dimensoes, descricao);
             return true;
         }
 
