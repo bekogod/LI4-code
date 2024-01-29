@@ -187,6 +187,7 @@ namespace ArtVault.Business
             foreach (string l in larray)
             {
                 Leilao novo_leilao = new Leilao(l);
+                novo_leilao.SetInWL(true);
                 result.Add(novo_leilao);
             }
             return result;
