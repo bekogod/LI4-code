@@ -195,7 +195,7 @@ namespace ArtVault.Business
         {
             List<Leilao> result = new List<Leilao>();
             string leiloes = IDBFacade.GetAllLeiloesInWLofUtilizadorString(user_atual.GetId());
-            if (leiloes != null)
+            if (leiloes.Length != 0)
             {
                 string[] larray = leiloes.Split('|');
                 foreach (string l in larray)
