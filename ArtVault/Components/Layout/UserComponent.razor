@@ -66,10 +66,13 @@
             <p><strong>CC: </strong>@ArtistaInstance.GetCc()</p>
             <p><strong>NIF: </strong>@ArtistaInstance.GetNif()</p>
         </div>
-        <div class="button-container">
-            <button type="button" @onclick="Aceitar">Aceitar</button>
-            <button type="button" @onclick="Rejeitar">Rejeitar</button>
-        </div>
+        @if (showButtons)
+        {
+            <div class="button-container">
+                <button type="button" @onclick="Aceitar">Aceitar</button>
+                <button type="button" @onclick="Rejeitar">Rejeitar</button>
+            </div>
+        }
     </div>
 </div>
 
@@ -81,20 +84,18 @@
     [Inject]
     public IArtVaultFacade IAVFacade { get; set; }
 
+    private bool showButtons = true;
+
     public async Task Aceitar()
     {
         IAVFacade.ValidarArtista(ArtistaInstance.GetId(), true);
-        await RefreshPage();
+        showButtons = false;
 
     }
 
     public async Task Rejeitar()
     {
         IAVFacade.ValidarArtista(ArtistaInstance.GetId(), false);
-        await RefreshPage();
+        showButtons = false;
     }   
-    private async Task RefreshPage()
-    {
-        await JSRuntime.InvokeVoidAsync("location.reload");        
-    }
 }
