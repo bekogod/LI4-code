@@ -36,6 +36,7 @@
     <div class="leilao-grid-container">
         @foreach (Leilao l in IAVFacade.GetXLeiloes(8))
         {
+            Console.WriteLine(l.GetInWL());
             <LeilaoComponent LeilaoInstance=l />
         }
     </div>

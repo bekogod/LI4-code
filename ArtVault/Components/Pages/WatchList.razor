@@ -20,7 +20,7 @@
 <PageTitle>artVault</PageTitle>
 
 <div class="leilao-grid-container">
-    @foreach (Leilao l in IAVFacade.GetXLeiloes(8))
+    @foreach (Leilao l in IAVFacade.GetLeiloesWL())
     {
         <LeilaoComponent LeilaoInstance=l />
     }

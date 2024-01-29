@@ -1,4 +1,5 @@
 ﻿@using ArtVault.Business
+@inject NavigationManager NavManager
 <style>
 
     .leilao-image-container {
@@ -7,7 +8,8 @@
         height:120px;
         border-radius: 8px;
         margin-bottom: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
     }
 
     .leilao-image {
@@ -46,11 +48,10 @@
         border: none;
         cursor: pointer;
         font-size: 24px;
-        color: @((LeilaoInstance.GetInWL()) ? "red" : "grey");
     }
 
         .heart-button:hover {
-            color: @((LeilaoInstance.GetInWL()) ? " grey" : "red");
+            color: @heartHoverColor;
         }
 
     .scaleA {
@@ -59,14 +60,15 @@
     }
 </style>
 
-<div class="leilao-container">
+<div class="leilao-container" >
     <div class="leilao-grid">
-            <div class="leilao-image-container">
+        <div class="leilao-image-container" @onclick="NavigateToLeilaoPage">
                 <img class="leilao-image scaleA" src="./imgs/@LeilaoInstance.GetImagem()" alt="Imagem do Leilão" />
             </div>
 
         <div class="leilao-details">
             <p><strong>Artista: </strong> @IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador()) </p>
+            <p><strong>WL: </strong> @LeilaoInstance.GetInWL()</p>
             <p><strong>Nome: </strong> @LeilaoInstance.GetNome()</p>
             <p><strong>Tempo Restante: </strong> <br />@LeilaoInstance.GetTempoRestante()</p>
             @if (LeilaoInstance.GetTipo() == 1)
@@ -82,7 +84,10 @@
         </div>
     </div>
 
-    <button class="heart-button" @onclick="AddToWatchlist"><i class="fas fa-heart"></i></button>
+    <button class="heart-button" style="color: @heartColor;" @onclick="AddToWatchlist"><i class="fas fa-heart"></i></button>
+
+    
+   
 </div>
 
 @code {
@@ -92,14 +97,42 @@
     [Inject]
     public IArtVaultFacade IAVFacade { get; set; }
 
+    private string heartColor;
+    private string heartHoverColor;
+
+    protected override void  OnInitialized()
+    {
+        if(LeilaoInstance.GetInWL() == true)
+        {
+            heartColor = "red";
+            heartHoverColor = "grey";
+        }
+        else
+        {
+            heartColor = "grey";
+            heartHoverColor = "red";
+        }
+    }
+
     private void AddToWatchlist()
     {
+
         if (!LeilaoInstance.GetInWL())
         {
             IAVFacade.AddLeilaoToWL(LeilaoInstance.GetId());
+            heartColor = "grey";
+            heartHoverColor = "red";
         }
         else{
             IAVFacade.RemoveFromWL(LeilaoInstance.GetId());
+            heartColor = "red";
+            heartHoverColor = "grey";
         }
+
+    }
+    private void NavigateToLeilaoPage()
+    {
+        Console.WriteLine($"Going to /leilao/{LeilaoInstance.GetId()}");
+        NavManager.NavigateTo($"/leilao/{LeilaoInstance.GetId()}");
     }
 }
