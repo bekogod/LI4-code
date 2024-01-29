@@ -85,10 +85,12 @@
     public void Aceitar()
     {
         IAVFacade.ValidarArtista(ArtistaInstance.GetId(), true);
+        NavManager.NavigateTo("/admin");
     }
 
     public void Rejeitar()
     {
         IAVFacade.ValidarArtista(ArtistaInstance.GetId(), false);
+        NavManager.NavigateTo("/admin");
     }
 }
