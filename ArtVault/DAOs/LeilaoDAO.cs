@@ -52,14 +52,14 @@ namespace ArtVault.DAOs
                 }
             }
         }
-        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int? precoReserva, string imagem, string dimensoes, string? descricao)
+        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int? precoReserva, string imagem, string dimensoes, string? descricao,int tipoLeilao)
         {
             using (SqlConnection connection = daoConfig.GetConnection())
             {
                 try
                 {
-                    string query = @"INSERT INTO Leilao (id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao)
-                                     VALUES (@IdUtilizador, @DataCom, @DataFim, @Nome, @PrecoReferencia, @PrecoReserva, @Imagem, @Dimensoes, @Descricao)";
+                    string query = @"INSERT INTO Leilao (id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao,tipoLeilao)
+                                     VALUES (@IdUtilizador, @DataCom, @DataFim, @Nome, @PrecoReferencia, @PrecoReserva, @Imagem, @Dimensoes, @Descricao,@TipoLeilao)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -73,6 +73,7 @@ namespace ArtVault.DAOs
                         command.Parameters.AddWithValue("@Imagem", imagem);
                         command.Parameters.AddWithValue("@Dimensoes", dimensoes);
                         command.Parameters.AddWithValue("@Descricao", (object)descricao ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@TipoLeilao", tipoLeilao);
 
 
                         int rowsAffected = command.ExecuteNonQuery();
