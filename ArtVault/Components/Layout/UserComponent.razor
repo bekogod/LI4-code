@@ -1,5 +1,6 @@
 ﻿@using ArtVault.Business.Utilizadores
 @using ArtVault.Business
+@inject IJSRuntime JSRuntime
 @inject NavigationManager NavManager
 
 <style>
@@ -23,7 +24,7 @@
     }
 
         .user-details p {
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
     .button-container {
@@ -37,7 +38,8 @@
     .button-container button {
         background-color: #305673;
         color: #fff;
-        padding: 10px;
+        height:60px;
+        padding: 5px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -79,15 +81,20 @@
     [Inject]
     public IArtVaultFacade IAVFacade { get; set; }
 
-    public void Aceitar()
+    public async Task Aceitar()
     {
         IAVFacade.ValidarArtista(ArtistaInstance.GetId(), true);
-        NavManager.NavigateTo("/admin");
+        await RefreshPage();
+
     }
 
-    public void Rejeitar()
+    public async Task Rejeitar()
     {
         IAVFacade.ValidarArtista(ArtistaInstance.GetId(), false);
-        NavManager.NavigateTo("/admin");
+        await RefreshPage();
+    }   
+    private async Task RefreshPage()
+    {
+        await JSRuntime.InvokeVoidAsync("location.reload");        
     }
 }
