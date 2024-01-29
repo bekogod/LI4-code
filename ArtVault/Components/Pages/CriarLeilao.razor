@@ -253,7 +253,7 @@
 
             try
             {
-                imageName = Path.Combine(IAVFacade.GetUserAtual().GetId().ToString(), Nome);
+                imageName = Path.Combine(IAVFacade.GetUserAtualID(), Nome);
                 var stream = file.OpenReadStream();
                 var buffer = new byte[file.Size];
                 await stream.ReadAsync(buffer);
