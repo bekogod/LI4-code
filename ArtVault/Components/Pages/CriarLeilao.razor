@@ -15,7 +15,7 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         position: relative;
         max-width: 1600px;
-        height: 550px;
+        height: 650px;
         width: 100%;
     }
 
@@ -160,12 +160,11 @@
 
         <label for="descricao">
             Description:
-            <textarea id="descricao" name="descricai" rows="4" @bind="Descricao" style="grid-column: 2/5">Enter text here...
-            </textarea>
+            <textarea id="descricao" name="descricai" rows="4" @bind="Descricao" style="grid-column: 2/5">Escreva uma Descrição da Arte</textarea>
         </label>
 
         </div>
-
+        
 
     
 
@@ -254,11 +253,13 @@
 
             try
             {
-                imageName = Path.Combine(IAVFacade.GetUserAtual().GetId().ToString(), Nome);
                 var stream = file.OpenReadStream();
                 var buffer = new byte[file.Size];
                 await stream.ReadAsync(buffer);
                 var mimeType = file.ContentType;
+                string extensaoDoArquivo = Path.GetExtension(file.Name);
+                imageName = IAVFacade.GetUserAtualId() +  Nome + extensaoDoArquivo;
+                Console.WriteLine(mimeType);
                 imagePreview = $"data:{mimeType};base64,{Convert.ToBase64String(buffer)}";
                 StateHasChanged();
                 image = await ConvertToByteArray(file);
