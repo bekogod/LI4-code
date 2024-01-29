@@ -126,6 +126,10 @@ namespace ArtVault.DAOs
             utilizadorDAO.DeleteUtilizador(idUtilizador);
         }
 
+        public string GetInactiveUsers()
+        {
+            return utilizadorDAO.GetInactiveUsers();
+        }
 
 
 

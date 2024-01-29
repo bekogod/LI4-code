@@ -99,7 +99,7 @@ namespace ArtVault.DAOs
 
         public string GetLeilaoByID(int id)
         {
-            string? leilaoString = null;
+            string leilaoString = "";
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {
@@ -139,7 +139,7 @@ namespace ArtVault.DAOs
 
         public string GetXLeiloes(int x)
         {
-            string? leiloesString = null;
+            string leiloesString = "";
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {
@@ -189,7 +189,7 @@ namespace ArtVault.DAOs
 
         public string GetLeilaoByUserID(int id_utilizador)
         {
-            string? leilaoString = null;
+            string leilaoString = "";
 
             using (SqlConnection connection = daoConfig.GetConnection())
             {

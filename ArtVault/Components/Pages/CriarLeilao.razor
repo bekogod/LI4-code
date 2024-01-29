@@ -15,7 +15,7 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         position: relative;
         max-width: 1600px;
-        height: 690px;
+        height: 550px;
         width: 100%;
     }
 
@@ -59,12 +59,7 @@
         width: 100%;
         box-sizing: border-box;
     }
-    .large-input{
-        width: 600px; /* Adjust as needed */
-        height: 100px; /* Adjust as needed */
-        padding: 10px; /* Optional, for internal spacing */
 
-    }
     .leilao-details select{
         padding: 11px;
         box-sizing: border-box;
@@ -73,25 +68,30 @@
     .button-container {
         display: flex;
         justify-content: space-evenly;
-        margin-top: 25px;
+        margin-bottom: 50px;
+        margin-right: 50px;
+        position:absolute;
+        bottom: 0;
+        right: 0;
     }
 
-    .login-container button {
+    .button-container button {
         background-color: #305673;
         color: #fff;
         padding: 10px;
         border: none;
+        margin-right: 15px;
         border-radius: 4px;
         cursor: pointer;
         font-size: 16px;
     }
 
-        .login-container button:hover {
+        .button-container button:hover {
             background-color: #25445c;
         }
 
     textarea {
-        width: 100%; /* Make it fill the container */
+        width: 229%; /* Make it fill the container */
         height: 150px; /* Adjust height as needed */
         padding: 10px; /* Padding inside the textarea */
         box-sizing: border-box; /* Include padding and border in the width and height */
@@ -208,14 +208,15 @@
                     <option value="@j">@j</option>
                 }
             </select>
+                <div class="button-container">
+                    <button type="button" @onclick="Criarleilao">Criar Leilão</button>
+                    <button type="button" @onclick="Voltar">Voltar para Home</button>
+                </div>
             </label>
         </div>
 
     </form>
-    <div class="button-container">
-        <button type="button" @onclick="Criarleilao">Criar Leilão</button>
-        <button type="button" @onclick="Voltar">Voltar para Home</button>
-    </div>
+
 </div>
 
 @code {
