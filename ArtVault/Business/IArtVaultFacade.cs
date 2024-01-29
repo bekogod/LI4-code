@@ -121,7 +121,7 @@ namespace ArtVault.Business
         {
             IArtVaultFacade.SalvarImagem(bImagem,  "./ImgsLeiloes/" + imageName);
             DateTime dataCom = DateTime.Now;
-            IDBFacade.InsertLeilao(user_atual.GetId(), dataCom, dataFim, nome, precoInicial, precoReservado, imageName, dimensoes, descricao);
+            IDBFacade.InsertLeilao(user_atual.GetId(), dataCom, dataFim, nome, precoInicial, precoReservado, imageName, dimensoes, descricao, tipo);
             return true;
         }
 
