@@ -5,8 +5,54 @@
 @inject IArtVaultFacade IAVFacade
 @inject NavigationManager NavManager
 
+<h3>Auction Details for ID: @id</h3>
+
+@if (LeilaoInstance != null)
+{
+    <div>
+        <h4>LeilaoInstance Information</h4>
+        <p><strong>Name:</strong> @LeilaoInstance.GetNome()</p>
+        <p><strong>Artist:</strong> @IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador())</p>
+        <p><strong>Description:</strong> @LeilaoInstance.GetDescricao()</p>
+        <p><strong>Current Bid:</strong> @LeilaoInstance.GetPrecoReferencia()</p>
+    </div>
+
+    <div>
+        <h4>Place Bid</h4>
+        <label for="bidAmount">Bid Amount:</label>
+        <input type="number" id="bidAmount" @bind="bidAmount" />
+        <button @onclick="PlaceBid">Place Bid</button>
+    </div>
+}
+else
+{
+    <p>LeilaoInstance not found.</p>
+}
+
 @code {
     [Parameter]
     public string id { get; set; }
 
+    private Leilao LeilaoInstance;
+    private int bidAmount;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Retrieve auction infosrmation based on the provided ID
+    int idInt=int.Parse(id);
+        LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
+        IAVFacade.SetLeilaoAtual(LeilaoInstance);
+    }
+
+    private void PlaceBid()
+    {
+        // Implement your logic to place a bid here
+        // Use 'bidAmount' to get the bid amount entered by the user
+        IAVFacade.TryLance(bidAmount);
+
+        int idInt = int.Parse(id);
+        LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
+
+        // You may also add additional logic or error handling as needed
+    }
 }
