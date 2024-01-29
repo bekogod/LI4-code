@@ -5,29 +5,8 @@
 @inject IArtVaultFacade IAVFacade
 @inject NavigationManager NavManager
 
-<h3>Click to Change Color</h3>
-
-<div style="cursor: pointer; background-color: @currentColor;" @onclick="ChangeColor">
-    Click me!
-</div>
-
 @code {
     [Parameter]
     public string id { get; set; }
-    private string currentColor = "lightblue";
 
-    private void ChangeColor()
-    {
-        // Change the color to a random color or any desired logic
-        currentColor = GetRandomColor();
-    }
-
-    private string GetRandomColor()
-    {
-        var random = new Random();
-        var color = String.Format("#{0:X6}", random.Next(0x1000000));
-
-        return color;
-    }
 }
-

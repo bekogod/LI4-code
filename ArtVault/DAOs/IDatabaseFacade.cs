@@ -192,6 +192,7 @@ namespace ArtVault.DAOs
             {
                 leiloesExtenso = leiloesExtenso.Remove(leiloesExtenso.Length - 1); // Remove the last character
             }
+            else return "";
 
             return leiloesExtenso;
 

@@ -50,9 +50,7 @@
         font-size: 24px;
     }
 
-        .heart-button:hover {
-            color: @heartHoverColor;
-        }
+        
 
     .scaleA {
         width: 100%;
@@ -84,9 +82,10 @@
         </div>
     </div>
 
-    <button class="heart-button" style="color: @heartColor;" @onclick="AddToWatchlist"><i class="fas fa-heart"></i></button>
-
     
+    <button class="heart-button" style="color: @heartColor" @onmouseover="OnMouseOver" @onmouseout="OnMouseOut" @onclick="AddToWatchlist">
+        <i class="fas fa-heart"></i>
+    </button>
    
 </div>
 
@@ -98,19 +97,16 @@
     public IArtVaultFacade IAVFacade { get; set; }
 
     private string heartColor;
-    private string heartHoverColor;
 
     protected override void  OnInitialized()
     {
         if(LeilaoInstance.GetInWL() == true)
         {
             heartColor = "red";
-            heartHoverColor = "grey";
         }
         else
         {
             heartColor = "grey";
-            heartHoverColor = "red";
         }
     }
 
@@ -119,14 +115,15 @@
 
         if (!LeilaoInstance.GetInWL())
         {
+            heartColor = "red";
+            LeilaoInstance.SetInWL(true);
             IAVFacade.AddLeilaoToWL(LeilaoInstance.GetId());
-            heartColor = "grey";
-            heartHoverColor = "red";
         }
         else{
+            heartColor = "grey";
+            LeilaoInstance.SetInWL(false);
+
             IAVFacade.RemoveFromWL(LeilaoInstance.GetId());
-            heartColor = "red";
-            heartHoverColor = "grey";
         }
 
     }
@@ -135,4 +132,17 @@
         Console.WriteLine($"Going to /leilao/{LeilaoInstance.GetId()}");
         NavManager.NavigateTo($"/leilao/{LeilaoInstance.GetId()}");
     }
+
+    private void OnMouseOver()
+    {
+        if (!LeilaoInstance.GetInWL()) heartColor = "red";
+        else heartColor = "grey"; 
+    }
+
+    private void OnMouseOut()
+    {
+        if (!LeilaoInstance.GetInWL()) heartColor = "grey";
+        else heartColor = "red";
+    }
+
 }
