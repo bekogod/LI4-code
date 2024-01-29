@@ -73,7 +73,7 @@ namespace ArtVault.DAOs
 
                     }
 
-                    // Close the connection when done
+
                     daoConfig.CloseConnection(connection);
                 }
                 catch (Exception ex)
