@@ -83,7 +83,16 @@ namespace ArtVault.DAOs
             leilaoDAO.UpdatePrecoReferencia(idLeilao, novoPrecoReferencia);
         }
 
-       
+
+
+        public void DeleteLeilao(int idLeilao)
+        {
+            leilaoDAO.DeleteLeilao(idLeilao);
+        }
+
+
+
+
 
 
 
@@ -207,7 +216,10 @@ namespace ArtVault.DAOs
         }
 
 
-
+        public void DeleteLeiloesFromWL(int idLeilao)
+        {
+            watchlistDAO.DeleteLeiloesFromWL(idLeilao);
+        }
 
 
 

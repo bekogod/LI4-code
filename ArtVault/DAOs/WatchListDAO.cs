@@ -244,6 +244,32 @@ namespace ArtVault.DAOs
 
 
 
+        public void DeleteLeiloesFromWL(int idLeilao)
+        {
+            using (SqlConnection connection = daoConfig.GetConnection())
+            {
+                try
+                {
+                    string query = @"DELETE FROM Watchlist WHERE id_leilao = @IdLeilao";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdLeilao", idLeilao);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    daoConfig.CloseConnection(connection);
+                }
+            }
+        }
+
+
 
 
 
