@@ -1,10 +1,12 @@
-﻿@inherits LayoutComponentBase
+﻿@using Business
+@inherits LayoutComponentBase
+@inject IArtVaultFacade IAVFacade
 
-<PageTitle>Blazing Blog</PageTitle>
+<PageTitle>ArtVault</PageTitle>
 
 <div class="page d-flex flex-column">
     <div class="container-fluid bg-grey">
-        <TopNavBar />
+        <TopNavBar UtilizadorInstance=IAVFacade.GetUserAtual()/>
     </div>
     <div class="container-fluid flex-grow-1 page-body">
         @Body
