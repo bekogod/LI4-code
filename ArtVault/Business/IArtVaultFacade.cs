@@ -139,10 +139,13 @@ namespace ArtVault.Business
                 return true;
         }
 
-        public void CancelarLeilao()
-        {
-            int id_leilao = leilao_atual.GetId();
+        public void CancelarLeilao(int id_leilao)
+        {   
+            //método DB que elimina todas as referências a um leilão das WLs
+            IDBFacade.DeleteLeiloesFromWL(id_leilao);
+            
             //método DB que elimina esse leilão dado o id
+            IDBFacade.DeleteLeilao(id_leilao);
         }
 
         public Leilao GetLeilaoWithID(int id_leilao)
