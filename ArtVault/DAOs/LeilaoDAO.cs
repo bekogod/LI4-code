@@ -52,37 +52,35 @@ namespace ArtVault.DAOs
                 }
             }
         }
-        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int? precoReserva, string imagem, string dimensoes, string? descricao,int tipoLeilao)
+        public int InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int? precoReserva, string imagem, string dimensoes, string? descricao, int tipoLeilao)
         {
+            int insertedLeilaoId = -1;
+
             using (SqlConnection connection = daoConfig.GetConnection())
             {
                 try
                 {
-                    string query = @"INSERT INTO Leilao (id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao,tipoLeilao)
-                                     VALUES (@IdUtilizador, @DataCom, @DataFim, @Nome, @PrecoReferencia, @PrecoReserva, @Imagem, @Dimensoes, @Descricao,@TipoLeilao)";
+                    string query = @"INSERT INTO Leilao (id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao, tipoLeilao)
+                              OUTPUT INSERTED.id
+                              VALUES (@IdUtilizador, @DataCom, @DataFim, @Nome, @PrecoReferencia, @PrecoReserva, @Imagem, @Dimensoes, @Descricao, @TipoLeilao)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-
                         command.Parameters.AddWithValue("@IdUtilizador", id_utilizador);
                         command.Parameters.AddWithValue("@DataCom", dataCom);
                         command.Parameters.AddWithValue("@DataFim", dataFim);
                         command.Parameters.AddWithValue("@Nome", nome);
-                        command.Parameters.AddWithValue("@PrecoReferencia", (object)precoReserva ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@PrecoReferencia", (object)precoReferencia ?? DBNull.Value);
                         command.Parameters.AddWithValue("@PrecoReserva", (object)precoReserva ?? DBNull.Value); // Handle nullability
                         command.Parameters.AddWithValue("@Imagem", imagem);
                         command.Parameters.AddWithValue("@Dimensoes", dimensoes);
                         command.Parameters.AddWithValue("@Descricao", (object)descricao ?? DBNull.Value);
                         command.Parameters.AddWithValue("@TipoLeilao", tipoLeilao);
 
+                        object insertedId = command.ExecuteScalar();
 
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        Console.WriteLine($"Rows affected: {rowsAffected}");
-
-
+                        if (insertedId != null) int.TryParse(insertedId.ToString(), out insertedLeilaoId);
                     }
-
 
                     daoConfig.CloseConnection(connection);
                 }
@@ -91,7 +89,10 @@ namespace ArtVault.DAOs
                     Console.WriteLine("Error: " + ex.Message);
                 }
             }
+
+            return insertedLeilaoId;
         }
+
 
 
         public string GetLeilaoByID(int id)

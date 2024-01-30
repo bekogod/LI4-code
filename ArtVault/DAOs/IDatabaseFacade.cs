@@ -53,9 +53,9 @@ namespace ArtVault.DAOs
         //LEILAO DAO
 
 
-        public void InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int precoReserva, string imagem, string dimensoes, string? descricao, int tipo)
+        public int InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int precoReserva, string imagem, string dimensoes, string? descricao, int tipo)
         {
-            leilaoDAO.InsertLeilao(id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao,tipo);
+           return leilaoDAO.InsertLeilao(id_utilizador, dataCom, dataFim, nome, precoReferencia, precoReserva, imagem, dimensoes, descricao,tipo);
         }
 
         public string GetLeilaoByID(int id)
@@ -93,9 +93,9 @@ namespace ArtVault.DAOs
         //UTILIZADOR DAO
         //UTILIZADOR DAO
 
-        public void InsertUtilizador(string username, string password, string email, string nome, string morada, int NIF, int CC, byte tipoConta, bool ativo)
+        public int InsertUtilizador(string username, string password, string email, string nome, string morada, int NIF, int CC, byte tipoConta, bool ativo)
         {
-            utilizadorDAO.InsertUtilizador(username, password, email, nome, morada, NIF, CC, tipoConta, ativo);
+            return utilizadorDAO.InsertUtilizador(username, password, email, nome, morada, NIF, CC, tipoConta, ativo);
         }
 
         public int ExisteUtilizador(int NIF, int CC, string username, string email)
