@@ -52,18 +52,20 @@ namespace ArtVault.DAOs
                 }
             }
         }
-        public void InsertUtilizador(string username, string password, string email, string nome, string morada, int NIF, int CC, byte tipoConta, bool ativo)
+        public int InsertUtilizador(string username, string password, string email, string nome, string morada, int NIF, int CC, byte tipoConta, bool ativo)
         {
+            int insertedUserId = -1;
+
             using (SqlConnection connection = daoConfig.GetConnection())
             {
                 try
                 {
                     string query = @"INSERT INTO Utilizador (username, password, email, nome, morada, NIF, CC, tipoConta, ativo)
-                                     VALUES (@Username, @Password, @Email, @Nome, @Morada, @NIF, @CC, @TipoConta, @Ativo)";
+                             OUTPUT INSERTED.id
+                             VALUES (@Username, @Password, @Email, @Nome, @Morada, @NIF, @CC, @TipoConta, @Ativo)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        // Add parameters to prevent SQL injection
                         command.Parameters.AddWithValue("@Username", username);
                         command.Parameters.AddWithValue("@Password", password);
                         command.Parameters.AddWithValue("@Email", email);
@@ -74,24 +76,25 @@ namespace ArtVault.DAOs
                         command.Parameters.AddWithValue("@TipoConta", tipoConta);
                         command.Parameters.AddWithValue("@Ativo", ativo);
 
-                        // Execute the query
-                        int rowsAffected = command.ExecuteNonQuery();
+                        object insertedId = command.ExecuteScalar();
 
-                        Console.WriteLine($"Rows affected: {rowsAffected}");
-
-
+                        if (insertedId != null) int.TryParse(insertedId.ToString(), out insertedUserId);  
                     }
-
 
                     daoConfig.CloseConnection(connection);
                 }
                 catch (Exception ex)
                 {
-
                     Console.WriteLine("Error: " + ex.Message);
                 }
             }
+
+            return insertedUserId;
         }
+
+
+
+
 
         public string GetUserByEmail(string email)
         {
