@@ -215,7 +215,7 @@
 }
 else
 {
-    <p>LeilaoInstance not found.</p>
+    <p style="font-size:25px"><strong>Ups!! Leilão não existe!</strong></p>
 }
 @code {
     [Parameter]
@@ -267,8 +267,9 @@ else
     private void CancelarLeilao()
     {
         int idInt = int.Parse(id);
-        NavManager.NavigateTo("/");
         IAVFacade.CancelarLeilao(idInt);
+        NavManager.NavigateTo("");
+
     }
 
     private async Task<byte[]> FetchImageData()
