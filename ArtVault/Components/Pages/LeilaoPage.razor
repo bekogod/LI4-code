@@ -148,8 +148,8 @@
                 <h3>Informações da Obra</h3>
                 <br/>
                 <p><strong>&emsp;Artist:</strong> @NomeArtista </p>
+                <p><strong>&emsp;Tipo:</strong> @(LeilaoInstance.GetTipo() == 1 ? "Inglês" : "Sealed Bid    ")</p>
                 <p><strong>&emsp;Description:</strong> @LeilaoInstance.GetDescricao()</p>
-                <p><strong>&emsp;Current Bid:</strong> @LeilaoInstance.GetPrecoReferencia()</p>
             </div>
 
             <div class="leilao-details">
@@ -159,25 +159,27 @@
             </div>
 
            
+            @if(LeilaoInstance.GetTipo() == 1){
+                <div class="leilao-details" style="width:200px">
+                    <h4>Bid History</h4>
+                    @if (BidHistory != null && BidHistory.Any())
+                    {
+                        <ul class="bid-history-list">
+                            @foreach (var bid in BidHistory)
+                            {
+                                <li class="bid-history-item">
+                                    <strong>@IAVFacade.GetNomeArtista(bid.GetIdUtilizador())</strong> licitou <strong>@bid.GetValor()</strong> em <em>@bid.GetDataHora()</em>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>No bid history available.</p>
+                    }
+                </div>
 
-            <div class="leilao-details" style="width:200px">
-                <h4>Bid History</h4>
-                @if (BidHistory != null && BidHistory.Any())
-                {
-                    <ul class="bid-history-list">
-                        @foreach (var bid in BidHistory)
-                        {
-                            <li class="bid-history-item">
-                                <strong>@IAVFacade.GetNomeArtista(bid.GetIdUtilizador())</strong> licitou <strong>@bid.GetValor()</strong> em <em>@bid.GetDataHora()</em>
-                            </li>
-                        }
-                    </ul>
-                }
-                else
-                {
-                    <p>No bid history available.</p>
-                }
-            </div>
+            }
             <div class="leilao-details" style="width:5px;">
                 <div class="button-container">
                     <label for="bidAmount">Bid Amount:</label>
