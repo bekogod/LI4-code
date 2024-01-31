@@ -156,7 +156,7 @@
     private string NIF { get; set; }
     private string CC { get; set; }
     private string TipoConta { get; set; }
-    private List<string> ErrorMessage { get; set; }
+    private List<string> ErrorMessage = new();
 
 
     private byte getTipoConta(string sTipo)
