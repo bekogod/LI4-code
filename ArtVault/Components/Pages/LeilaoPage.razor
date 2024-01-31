@@ -2,6 +2,7 @@
 @using ArtVault.Business
 @using ArtVault.Components.Layout
 
+@inject NavigationManager NavManager
 @inject IArtVaultFacade IAVFacade
 
 <style>
@@ -169,6 +170,7 @@
                     </div>
             </div>
 
+
            
             @if(LeilaoInstance.GetTipo() == 1){
                 <div class="leilao-details" style="width:200px">
@@ -193,10 +195,19 @@
             }
             <div class="leilao-details" style="width:5px;">
                 <div class="button-container">
-                    <label for="bidAmount">Bid Amount:</label>
-                    <input type="number" style="width:200px;margin-top:15px;margin-left:10px;" id="bidAmount" @bind="bidAmount" />
-                    <button @onclick="PlaceBid">Place Bid</button>
-                    <button @onclick="CancelarLeilao">Cancelar</button>
+                    @if (int.Parse(IAVFacade.GetUserAtualId()) == LeilaoInstance.GetIdUtilizador())
+                    {
+                        <button @onclick="CancelarLeilao">Cancelar</button>
+                    }
+                    else
+                    {
+                        <label for="bidAmount">Bid Amount:</label>
+                        <input type="number" style="width:200px;margin-top:15px;margin-left:10px;" id="bidAmount" @bind="bidAmount" />
+
+                        <button @onclick="PlaceBid">Place Bid</button>
+
+                    }
+
                 </div>
             </div>
         </form>
@@ -222,17 +233,21 @@ else
     {
         int idInt=int.Parse(id);
         LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
-        IAVFacade.SetLeilaoAtual(LeilaoInstance);
+        if (LeilaoInstance!=null)
+        {
 
-        NomeArtista = IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador());
+            IAVFacade.SetLeilaoAtual(LeilaoInstance);
 
-        BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt,6);
+            NomeArtista = IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador());
 
-        imageData = await FetchImageData();
-        string imageFormat = LeilaoInstance.GetImagem().EndsWith(".png", StringComparison.OrdinalIgnoreCase) ? "png" : "jpeg";
+            BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt, 6);
 
-        imageDataUrl = $"data:image/{imageFormat};base64,{Convert.ToBase64String(imageData)}";
+            imageData = await FetchImageData();
+            string imageFormat = LeilaoInstance.GetImagem().EndsWith(".png", StringComparison.OrdinalIgnoreCase) ? "png" : "jpeg";
 
+            imageDataUrl = $"data:image/{imageFormat};base64,{Convert.ToBase64String(imageData)}";
+
+        }
     }
 
     private async void PlaceBid()
@@ -252,6 +267,7 @@ else
     private void CancelarLeilao()
     {
         int idInt = int.Parse(id);
+        NavManager.NavigateTo("/");
         IAVFacade.CancelarLeilao(idInt);
     }
 
