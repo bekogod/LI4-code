@@ -41,6 +41,10 @@ namespace ArtVault.DAOs
             return lanceDAO.GetXLancesByLeilaoID(id_leilao, x);
         }
 
+        public void RemoveLancesFromLeilaoID(int idLeilao)
+        {
+            lanceDAO.RemoveLancesFromLeilaoID(idLeilao);
+        }
 
 
 
