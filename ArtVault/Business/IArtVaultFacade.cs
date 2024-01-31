@@ -265,14 +265,15 @@ namespace ArtVault.Business
             return result;
         }
 
-        public List<Utilizador> GetUsersPorValidar()
+        public async Task<List<Utilizador>> GetUsersPorValidarAsync()
         {
             List<Utilizador> result = new List<Utilizador>();
-            string users = IDBFacade.GetInactiveUsers();
+            string users = await Task.Run(() => IDBFacade.GetInactiveUsers());
+
             if (users.Length != 0)
             {
                 string[] uarray = users.Split('|');
-                foreach(string u in uarray)
+                foreach (string u in uarray)
                 {
                     string[] sUser = u.Split(';');
                     string type = sUser[8];
@@ -283,7 +284,9 @@ namespace ArtVault.Business
                     }
                 }
             }
+
             return result;
         }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿@page "/admin"
 @using ArtVault.Business.Utilizadores
+@using Business
 @using ArtVault.Components.Layout
 @inject NavigationManager NavManager
 @inject IArtVaultFacade IAVFacade
@@ -13,20 +14,6 @@
         row-gap: 20px;
     }
 
-    .redirect-container {
-        text-align: center;
-        padding: 20px;
-    }
-
-    .loading-spinner {
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        border-radius: 50%;
-        border-top: 4px solid #3498db;
-        width: 30px;
-        height: 30px;
-        animation: spin 1s linear infinite;
-        margin: 0 auto;
-    }
 </style>
 
 
@@ -34,12 +21,36 @@
 
 
 <div class="vendedores-grid-container">
-    @foreach(Artista a in IAVFacade.GetUsersPorValidar())
+    @if (UsersList != null)
     {
-        <UserComponent ArtistaInstance=a/>
+        @foreach (Artista a in UsersList)
+        {
+            <UserComponent ArtistaInstance=a />
+        }
+    }
+    else
+    {
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     }
 </div>
 
+
+
 @code {
-    @using Business
+    private List<Utilizador> UsersList;
+
+    private async Task GetUsers()
+    {
+        await Task.Delay(2000);
+        UsersList = await IAVFacade.GetUsersPorValidarAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetUsers();
+    }
 }
