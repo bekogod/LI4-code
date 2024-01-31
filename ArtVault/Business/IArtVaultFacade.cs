@@ -38,16 +38,19 @@ namespace ArtVault.Business
         }
 
         
-        public bool CheckCredentials(string email, string password)
+        public async Task<bool> CheckCredentialsAsync(string email, string password)
         {
-            string user = IDBFacade.GetUserByEmail(email);
+            string user = await Task.Run(() => IDBFacade.GetUserByEmail(email));
+            
             if (user != null)
             {
                 string[] sUser = user.Split(';');
+
                 if (sUser.Length == 10)
                 {
                     string type = sUser[8];
                     Utilizador u;
+
                     if (type == "1")
                     {
                         u = new Padrao(sUser);
@@ -55,7 +58,8 @@ namespace ArtVault.Business
                     else if (type == "2")
                     {
                         u = new Artista(sUser);
-                        if (bool.Parse(sUser[9]) == false)
+
+                        if (!bool.Parse(sUser[9]))
                         {
                             return false;
                         }
@@ -72,8 +76,10 @@ namespace ArtVault.Business
                     }
                 }
             }
+
             return false;
         } 
+
 
         public bool TryRegisto(string email, string password, string username, string nome, string morada, int nif, int cc, byte tipo)
         {
