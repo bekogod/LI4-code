@@ -259,7 +259,7 @@
                 await stream.ReadAsync(buffer);
                 var mimeType = file.ContentType;
                 string extensaoDoArquivo = Path.GetExtension(file.Name);
-                imageName = IAVFacade.GetUserAtualId() +  Nome + extensaoDoArquivo;
+                imageName = IAVFacade.GetUserAtualId() + extensaoDoArquivo;
                 Console.WriteLine(mimeType);
                 imagePreview = $"data:{mimeType};base64,{Convert.ToBase64String(buffer)}";
                 StateHasChanged();
@@ -348,6 +348,7 @@
         errors.Clear();
         if (ValidateFields())
         {
+            imageName = Nome + imageName;
             DateTime combined = new DateTime(DataFim.Year, DataFim.Month, DataFim.Day, Hora, Min, 0);
             IAVFacade.TryLeilao(Nome, TipoLeilao, PrecoRes, PrecoIni, imageName, Dimensoes, combined, Descricao, image);
             NavManager.NavigateTo("");
