@@ -122,20 +122,20 @@
         }
     }
 
-    private void AddToWatchlist()
+    private async void AddToWatchlist()
     {
 
         if (!LeilaoInstance.GetInWL())
         {
             heartColor = "red";
             LeilaoInstance.SetInWL(true);
-            IAVFacade.AddLeilaoToWL(LeilaoInstance.GetId());
+            await IAVFacade.AddLeilaoToWLAsync(LeilaoInstance.GetId());
         }
         else{
             heartColor = "grey";
             LeilaoInstance.SetInWL(false);
 
-            IAVFacade.RemoveFromWL(LeilaoInstance.GetId());
+            await IAVFacade.RemoveFromWLAsync(LeilaoInstance.GetId());
         }
 
     }

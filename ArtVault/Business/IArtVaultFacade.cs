@@ -221,14 +221,14 @@ namespace ArtVault.Business
         }
 
 
-        public void AddLeilaoToWL(int id_leilao)
+        public async Task AddLeilaoToWLAsync(int id_leilao)
         {
-            IDBFacade.InsertWatchlist(user_atual.GetId(), id_leilao);
+            await Task.Run(() => IDBFacade.InsertWatchlist(user_atual.GetId(), id_leilao));
         }
 
-        public void RemoveFromWL(int id_leilao)
+        public async Task RemoveFromWLAsync(int id_leilao)
         {
-            IDBFacade.RemoveFromWL(user_atual.GetId(), id_leilao);
+            await Task.Run(() => IDBFacade.RemoveFromWL(user_atual.GetId(), id_leilao));
         }
 
         public async Task<List<Leilao>> GetLeiloesWLAsync()
