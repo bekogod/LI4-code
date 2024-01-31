@@ -145,6 +145,9 @@ namespace ArtVault.Business
         {   
             //método DB que elimina todas as referências a um leilão das WLs
             IDBFacade.DeleteLeiloesFromWL(id_leilao);
+
+            //método DB eliminar lances de um leilão
+            IDBFacade.RemoveLancesFromLeilaoID(id_leilao);
             
             //método DB que elimina esse leilão dado o id
             IDBFacade.DeleteLeilao(id_leilao);
