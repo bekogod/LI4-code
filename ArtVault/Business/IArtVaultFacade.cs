@@ -270,7 +270,7 @@ namespace ArtVault.Business
                 {
                     Lance novo_lance = new Lance(l);
                     int id_utilizador = novo_lance.GetIdUtilizador();
-                    novo_lance.SetUsername(await Task.Run(() => IDBFacade.GetUserNameByID(id_utilizador)));
+                    novo_lance.SetUsername(await Task.Run(() => IDBFacade.GetNameByID(id_utilizador)));
                     result.Add(novo_lance);
                 }
             }

@@ -108,6 +108,10 @@
         box-sizing: border-box;
     }
 
+    .error-message {
+        color: red;
+    }
+
     
 </style>
 
@@ -123,14 +127,10 @@
       
         </label>
 
-        @if (errors.Count > 0)
-        {
-            <h2>Erros</h2>
-            @foreach (var error in errors)
+            @if (!string.IsNullOrEmpty(errors))
             {
-                <li>@error</li>
+                <div class="error-message">@errors</div>
             }
-        }
         </div>
         
         <div class="leilao-details"> 
@@ -232,7 +232,7 @@
     private int Hora { get; set; }
     private int Min { get; set; }
     private long maxFileSize = 1024 * 1024 * 15;
-    private List<string> errors = new();
+    private string errors;
     private bool ShowPrecoIni => TipoLeilao == 1;
     private string imagePreview = "/imgs/insert_image.png";
 
@@ -280,56 +280,67 @@
 
     private bool ValidateFields()
     {
-        // Check if string fields are not null or empty
-        if (string.IsNullOrWhiteSpace(Nome) ||
-            string.IsNullOrWhiteSpace(Dimensoes))
+
+        if (string.IsNullOrWhiteSpace(Nome))
         {
-            errors.Add("Faltam preencher campos");
+            errors = "Faltam o nome";
             return false;
         }
 
-        // Check if image is not null
+        if (string.IsNullOrWhiteSpace(Dimensoes))
+        {
+            errors = "Faltam as dimensões";
+            return false;
+        }
+
+´~
         if (image == null || image.Length == 0 || string.IsNullOrWhiteSpace(imageName))
         {
-            errors.Add("Falta escolher uma image");
+            errors = "Falta escolher uma imagem";
             return false;
         }
 
-        // Check if PrecoRes is more than 1
         if (PrecoRes <= 1)
         {
-            errors.Add("O preço de reserva não é valido");
+            errors = "O preço de reserva não é valido";
             return false;
         }
         if(TipoLeilao == 1)
         {
             if(PrecoIni <= 1)
             {
-                errors.Add("O preço inicial não é valido");
+                errors = "O preço inicial não é valido";
                 return false;
             }
         }
 
-        // Check if TipoLeilao is either 1 or 2
+
         if (TipoLeilao != 1 && TipoLeilao != 2)
         {
-            errors.Add("Escolha um tipo de Leilão");
+            errors = "Escolha um tipo de Leilão";
             return false;
         }
 
-        // Check if Hora is between 0 and 23
         if (Hora < 0 || Hora > 23)
         {
-            errors.Add("Escolha uma hora valida");
+            errors = "Escolha uma hora valida";
             return false;
         }
 
-        // Check if Min is between 0 and 59
         if (Min < 0 || Min > 59)
         {
-            errors.Add("Escolha uma hora valida");
+            errors = "Escolha uma hora valida";
             return false;
         }
+
+
+        DateTime combined = new DateTime(DataFim.Year, DataFim.Month, DataFim.Day, Hora, Min, 0);
+        if(combined < DateTime.Now)
+        {
+            errors = "A data inserida é inválida";
+            return false;
+        }
+
 
         // All checks passed
         return true;
@@ -339,6 +350,7 @@
 
     private void Criarleilao()
     {
+        errors = null;
         if (ValidateFields())
         {
             DateTime combined = new DateTime(DataFim.Year, DataFim.Month, DataFim.Day, Hora, Min, 0);
