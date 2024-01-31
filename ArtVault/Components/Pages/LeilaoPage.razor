@@ -136,6 +136,11 @@
         width: 100%;
         max-width: max-content;
     }
+
+    .error-message {
+        color: red;
+    }
+
 </style>
 
 @if (LeilaoInstance != null)
@@ -150,6 +155,12 @@
                 <p><strong>&emsp;Tipo:</strong> @(LeilaoInstance.GetTipo() == 1 ? "Inglês" : "Sealed Bid    ")</p>
                 <p><strong>&emsp;Dimensões:</strong> @LeilaoInstance.GetDimensoes()</p>
                 <p><strong>&emsp;Descrição:</strong> @LeilaoInstance.GetDescricao()</p>
+
+                @if (!string.IsNullOrEmpty(errors))
+                {
+                    <div class="error-message">@errors</div>
+                }
+
             </div>
 
             <div class="leilao-details">
@@ -205,6 +216,7 @@ else
     private byte[] imageData;
     private string imageDataUrl;
     private string NomeArtista;
+    private string errors;
 
     protected override async Task OnInitializedAsync()
     {
@@ -225,14 +237,17 @@ else
 
     private async void PlaceBid()
     {
-        
-        IAVFacade.TryLance(LeilaoInstance.GetId(),bidAmount);
+        errors = null;
+        bool result = IAVFacade.TryLance(LeilaoInstance.GetId(),bidAmount);
 
-        int idInt = int.Parse(id);
-        LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
+        if (result)
+        {
+            int idInt = int.Parse(id);
+            LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
 
-        BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt, 6);
-
+            BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt, 6);
+        }
+        else errors = "A bid é demasiado pequena";
     }
     private void CancelarLeilao()
     {

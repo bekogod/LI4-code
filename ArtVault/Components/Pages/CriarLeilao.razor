@@ -350,6 +350,7 @@
 
     private void Criarleilao()
     {
+        errors = null;
         if (ValidateFields())
         {
             DateTime combined = new DateTime(DataFim.Year, DataFim.Month, DataFim.Day, Hora, Min, 0);

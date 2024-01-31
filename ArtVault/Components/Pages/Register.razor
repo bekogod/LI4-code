@@ -233,7 +233,7 @@
 
     private void RegisterUser()
     {
-
+        ErrorMessage = null;
         if(ValidateFields()){
         bool result = IAVFacade.TryRegisto(Email,Password,Username,Nome,Morada,int.Parse( NIF),int.Parse( CC),getTipoConta(TipoConta));
         
