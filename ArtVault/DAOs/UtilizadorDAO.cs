@@ -222,8 +222,10 @@ namespace ArtVault.DAOs
             {
                 try
                 {
-                    string query = @"SELECT COUNT(*) FROM Utilizador 
-                             WHERE NIF = @NIF AND CC = @CC AND username = @Username AND email = @Email";
+                    string query = @"SELECT COUNT(*)
+                                    FROM Utilizador
+                                    WHERE (NIF = @NIF OR CC = @CC OR username = @Username OR email = @Email)
+                                    AND (NIF IS NOT NULL AND CC IS NOT NULL AND username IS NOT NULL AND email IS NOT NULL);";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
