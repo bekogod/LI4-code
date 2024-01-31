@@ -3,42 +3,167 @@
 @using ArtVault.Components.Layout
 
 @inject IArtVaultFacade IAVFacade
-@inject NavigationManager NavManager
 
-<h3>Auction Details for ID: @id</h3>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .leilao-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        max-width: 1600px;
+        height: 500px;
+        width: 80%;
+    }
+
+    .login-container h2 {
+        text-align: center;
+    }
+
+    .leilao-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 64px;
+    }
+
+    .leilao-details {
+        background-color:red;
+        margin: 0;
+    }
+
+    .image-container {
+        width: 300px;
+        height: 300px;
+        margin-bottom: 10px;
+        object-fit: contain;
+    }
+
+        .image-container img {
+            max-width: 300px; 
+            max-height: 300px; 
+            width: auto; 
+            height: auto; 
+            object-fit: contain; 
+        }
+
+    .login-container label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .leilao-details input {
+        padding: 8px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .leilao-details select {
+        padding: 11px;
+        box-sizing: border-box;
+    }
+
+    .button-container {
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        margin-bottom: 50px;
+        margin-right: 50px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+        .button-container button {
+            background-color: #305673;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            margin-right: 15px;
+            margin-left:15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            .button-container button:hover {
+                background-color: #25445c;
+            }
+
+    
+
+    #tipoLeilao {
+        padding: 8px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+</style>
 
 @if (LeilaoInstance != null)
 {
-    <div>
-        <h4>LeilaoInstance Information</h4>
-        <p><strong>Name:</strong> @LeilaoInstance.GetNome()</p>
-        <p><strong>Artist:</strong> @IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador())</p>
-        <p><strong>Description:</strong> @LeilaoInstance.GetDescricao()</p>
-        <p><strong>Current Bid:</strong> @LeilaoInstance.GetPrecoReferencia()</p>
-    </div>
 
-    <div>
-        <h4>Place Bid</h4>
-        <label for="bidAmount">Bid Amount:</label>
-        <input type="number" id="bidAmount" @bind="bidAmount" />
-        <button @onclick="PlaceBid">Place Bid</button>
-    </div>
-    <div>
-        <h4>Bid History</h4>
-        @if (BidHistory != null && BidHistory.Any())
-        {
-            <ul>
-                @foreach (var bid in BidHistory)
-                {
-                    <li>@bid.GetIdUtilizador() placed a bid of @bid.GetValor() at @bid.GetDataHora()</li>
-                }
-            </ul>
-        }
-        else
-        {
-            <p>No bid history available.</p>
-        }
-    </div>
+<div class="leilao-container">
+    <h2>Pagina do Leilão</h2>
+    <form class="leilao-grid">
+        <div class="leilao-details">
+            <p><strong>Name:</strong> @LeilaoInstance.GetNome()</p>
+            <p><strong>Artist:</strong> @IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador())</p>
+            <p><strong>Description:</strong> @LeilaoInstance.GetDescricao()</p>
+            <p><strong>Current Bid:</strong> @LeilaoInstance.GetPrecoReferencia()</p>
+        </div>
+
+        <div class="leilao-details">
+        
+            <label for="imagem">
+                <div class="image-container">
+                    <img src="./imgs/@LeilaoInstance.GetImagem()" width="300px" alt="Insira a sua imagem" />
+                </div>
+
+            </label>
+            </div>
+
+            <div class="leilao-details">
+             <div class="button-container">
+
+                    <label for="bidAmount">Bid Amount:</label>
+                    <input type="number" style="width:200px;margin-top:15px;margin-left:10px;" id="bidAmount" @bind="bidAmount" />
+
+                    <button @onclick="PlaceBid">Place Bid</button>
+                    <button @onclick="CancelarLeilao">Cancelar</button>
+
+                </div>
+        </div>
+
+        <div class="leilao-details">
+            <h4>Bid History</h4>
+            @if (BidHistory != null && BidHistory.Any())
+            {
+                <ul>
+                    @foreach (var bid in BidHistory)
+                    {
+                        <li>@bid.GetIdUtilizador() placed a bid of @bid.GetValor() at @bid.GetDataHora()</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No bid history available.</p>
+            }
+        </div>
+
+       
+
+    </form>
+
+</div>
+
 }
 else
 {
@@ -56,7 +181,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         // Retrieve auction infosrmation based on the provided ID
-    int idInt=int.Parse(id);
+        int idInt=int.Parse(id);
         LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
         IAVFacade.SetLeilaoAtual(LeilaoInstance);
 
@@ -76,4 +201,16 @@ else
         BidHistory = IAVFacade.GetXLancesByLeilaoID(idInt, 8);
 
     }
+    private void CancelarLeilao()
+    {
+        int idInt = int.Parse(id);
+        IAVFacade.CancelarLeilao(idInt);
+    }
+
+    /*
+     * 
+     * 
+     * 
+     */
+
 }
