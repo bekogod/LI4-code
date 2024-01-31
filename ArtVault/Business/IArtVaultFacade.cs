@@ -153,19 +153,15 @@ namespace ArtVault.Business
             return true;
         }
 
-        public bool ValidarArtista(int id_artista, bool decisao)
+        public async Task AceitarArtistaAsync(int id_artista)
         {
-            if (decisao)
-            {
-                IDBFacade.ActivateUtilizador(id_artista);
-            }
-            else
-            {
-                IDBFacade.DeleteUtilizador(id_artista);
-            }
-                return true;
+            await Task.Run(() => IDBFacade.ActivateUtilizador(id_artista));
         }
 
+        public async Task RejeitarArtistaAsync(int id_artista)
+        {
+            await Task.Run(() => IDBFacade.DeleteUtilizador(id_artista));
+        }
         public void CancelarLeilao(int id_leilao)
         {   
             //método DB que elimina todas as referências a um leilão das WLs

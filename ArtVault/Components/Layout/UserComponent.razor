@@ -1,6 +1,5 @@
 ﻿@using ArtVault.Business.Utilizadores
 @using ArtVault.Business
-@inject IJSRuntime JSRuntime
 @inject NavigationManager NavManager
 
 <style>
@@ -88,14 +87,14 @@
 
     public async Task Aceitar()
     {
-        IAVFacade.ValidarArtista(ArtistaInstance.GetId(), true);
+        await IAVFacade.AceitarArtistaAsync(ArtistaInstance.GetId());
         showButtons = false;
 
     }
 
     public async Task Rejeitar()
     {
-        IAVFacade.ValidarArtista(ArtistaInstance.GetId(), false);
+        await IAVFacade.RejeitarArtistaAsync(ArtistaInstance.GetId());
         showButtons = false;
     }   
 }
