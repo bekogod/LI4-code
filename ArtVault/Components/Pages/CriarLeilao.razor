@@ -200,13 +200,14 @@
                         <option value="@i">@@i.ToString("00")</option>
                 }
             </select>
-            :
+            h
             <select id="min" name="min" @bind="Min">
                 @for (int j = 0; j <= 59; j++)
                 {
                         <option value="@j">@j.ToString("00")</option>
                 }
             </select>
+            m
                 <div class="button-container">
                     <button type="button" @onclick="Criarleilao">Criar Leilão</button>
                     <button type="button" @onclick="Voltar">Voltar para Home</button>
