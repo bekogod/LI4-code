@@ -207,11 +207,6 @@
             ErrorMessage.Add("*Campo Obrigatório: CC");
         }
 
-        if (string.IsNullOrWhiteSpace(TipoConta))
-        {
-            ErrorMessage.Add("*Campo Obrigatório: Tipo de Conta");
-        }
-
         if(ErrorMessage.Count > 0)
         {
             return false;
@@ -231,7 +226,7 @@
         NavManager.NavigateTo("/login");
         else{
             
-                ErrorMessage = "Registo Falhou. Verifique as suas informaçoes e tente novamente.";
+                ErrorMessage.Add("Registo Falhou. Verifique as suas informaçoes e tente novamente.");
             }
         
         }
