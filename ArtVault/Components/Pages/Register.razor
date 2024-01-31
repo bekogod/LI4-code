@@ -169,9 +169,13 @@
     {
         bool result = IAVFacade.TryRegisto(Email,Password,Username,Nome,Morada,int.Parse( NIF),int.Parse( CC),getTipoConta(TipoConta));
         
-        //ToDo
         if(result)
         NavManager.NavigateTo("/login");
+        else{
+            
+                ErrorMessage = "Registo Falhou. Verifique as suas informaçoes e tente novamente.";
+            }
+        
     }
 
     private void GoToLogin()
