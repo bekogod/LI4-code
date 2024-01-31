@@ -175,7 +175,7 @@ namespace ArtVault.DAOs
         }
 
 
-        public string GetUserNameByID(int id)
+        public string GetNameByID(int id)
         {
             string nome = "";
 

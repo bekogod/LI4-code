@@ -116,9 +116,9 @@ namespace ArtVault.DAOs
             return utilizadorDAO.GetUserByID(id);
         }
 
-        public string GetUserNameByID(int id)
+        public string GetNameByID(int id)
         {
-            return utilizadorDAO.GetUserNameByID(id);
+            return utilizadorDAO.GetNameByID(id);
         }
 
         public void ActivateUtilizador(int idUtilizador)
