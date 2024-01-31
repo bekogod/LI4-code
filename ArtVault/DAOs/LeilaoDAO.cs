@@ -194,7 +194,14 @@ namespace ArtVault.DAOs
             {
                 try
                 {
-                    string query = @" SELECT * FROM  (SELECT *, ROW_NUMBER() OVER (ORDER BY id DESC) AS RowNum FROM Leilao ) AS LeiloesWithRowNum WHERE RowNum <= @X ORDER BY id DESC";
+                    string query = @"
+                    SELECT * FROM (
+                    SELECT *, ROW_NUMBER() OVER (ORDER BY id DESC) AS RowNum 
+                    FROM Leilao 
+                    WHERE dataFim > GETDATE())
+                    AS LeiloesWithRowNum 
+                    WHERE RowNum <= @X 
+                    ORDER BY id DESC";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
