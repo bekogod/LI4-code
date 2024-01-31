@@ -27,6 +27,11 @@
         animation: spin 1s linear infinite;
         margin: 0 auto;
     }
+
+    .load-more-button {
+        
+        transform: translateX(153%);
+    }
 </style>
 
 <PageTitle>artVault</PageTitle>
@@ -34,12 +39,15 @@
 @if (IAVFacade.GetUserAtual() != null)
 {
     <div class="leilao-grid-container">
-        @foreach (Leilao l in IAVFacade.GetXLeiloes(8))
+        @foreach (Leilao l in IAVFacade.GetXLeiloes(displayedLeiloes))
         {
-            Console.WriteLine(l.GetInWL());
             <LeilaoComponent LeilaoInstance=l />
         }
+        <div class="load-more-button">
+                <button class="btn btn-primary" @onclick="LoadMoreLeiloes">Load More</button>
+        </div>
     </div>
+    
 }
 else
 {
@@ -47,15 +55,24 @@ else
         <p>Redirecting to login...</p>
         <div class="loading-spinner"></div>
     </div>
+    
+    
+}
 
-    @code {
+@code {
+    private int displayedLeiloes = 8;
+
+    private void LoadMoreLeiloes()
+    {
+        displayedLeiloes += 8; 
+        StateHasChanged(); 
+    }
     protected override async Task OnInitializedAsync()
     {
         base.OnInitialized();
-        await Task.Delay(1000); 
+        await Task.Delay(1000);
         if (IAVFacade.GetUserAtual() == null)
-        NavManager.NavigateTo("/login");
-    
-    }
+            NavManager.NavigateTo("/login");
+
     }
 }
