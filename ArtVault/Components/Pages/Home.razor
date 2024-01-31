@@ -29,10 +29,15 @@
 @if (IAVFacade.GetUserAtual() != null)
 {
     <div class="leilao-grid-container">
-        @foreach (Leilao l in IAVFacade.GetXLeiloes(displayedLeiloes))
+        @foreach (Leilao l in LeiloesList)
         {
             <LeilaoComponent LeilaoInstance=l />
         }
+        @if (LeiloesList.Count % 2 != 0)
+        {
+            <div></div>
+        }
+
         <div class="load-more-button">
                 <button class="btn btn-primary" @onclick="LoadMoreLeiloes">Load More</button>
         </div>
@@ -54,10 +59,11 @@ else
 
 @code {
     private int displayedLeiloes = 8;
-
+    private List<Leilao> LeiloesList = new();
     private void LoadMoreLeiloes()
     {
         displayedLeiloes += 8; 
+        LeiloesList = IAVFacade.GetXLeiloes(displayedLeiloes);
         StateHasChanged(); 
     }
     protected override async Task OnInitializedAsync()
@@ -66,6 +72,8 @@ else
         await Task.Delay(1000);
         if (IAVFacade.GetUserAtual() == null)
             NavManager.NavigateTo("/login");
+        else LeiloesList = IAVFacade.GetXLeiloes(displayedLeiloes);
+    
 
     }
 }
