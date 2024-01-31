@@ -37,7 +37,7 @@ namespace ArtVault.Business
             leilao_atual = leilao;
         }
 
-        
+
         public async Task<bool> CheckCredentialsAsync(string email, string password)
         {
             string user = await Task.Run(() => IDBFacade.GetUserByEmail(email));
@@ -68,7 +68,7 @@ namespace ArtVault.Business
                     {
                         u = new Admin(sUser);
                     }
-                    
+
                     if (u.ValidPassword(password))
                     {
                         SetUserAtual(u);
@@ -78,7 +78,7 @@ namespace ArtVault.Business
             }
 
             return false;
-        } 
+        }
 
 
         public bool TryRegisto(string email, string password, string username, string nome, string morada, int nif, int cc, byte tipo)
@@ -253,23 +253,27 @@ namespace ArtVault.Business
             return result;
         }
 
-        public List<Lance> GetXLancesByLeilaoID(int id_leilao, int x)
+        public async Task<List<Lance>> GetXLancesByLeilaoIDAsync(int id_leilao, int x)
         {
             List<Lance> result = new List<Lance>();
-            string lances = IDBFacade.GetXLancesByLeilaoID(id_leilao, x);
+            string lances = await Task.Run(() => IDBFacade.GetXLancesByLeilaoID(id_leilao, x));
+
             if (lances.Length != 0)
             {
                 string[] larray = lances.Split('|');
-                foreach(string l in larray)
+
+                foreach (string l in larray)
                 {
                     Lance novo_lance = new Lance(l);
                     int id_utilizador = novo_lance.GetIdUtilizador();
-                    novo_lance.SetUsername(IDBFacade.GetUserNameByID(id_utilizador));
+                    novo_lance.SetUsername(await Task.Run(() => IDBFacade.GetUserNameByID(id_utilizador)));
                     result.Add(novo_lance);
                 }
             }
+            
             return result;
         }
+
 
         public async Task<List<Utilizador>> GetUsersPorValidarAsync()
         {
