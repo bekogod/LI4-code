@@ -140,7 +140,7 @@
         </label>
 
         <label for="dimensoes">
-            Dimensões:
+            Dimensões (cm):
             <input type="text" id="dimensoes" name="nome" @bind="Dimensoes" required>
         </label>
 
@@ -232,7 +232,7 @@
     private int Hora { get; set; }
     private int Min { get; set; }
     private long maxFileSize = 1024 * 1024 * 15;
-    private List<string> errors;
+    private List<string> errors = new ();
     private bool ShowPrecoIni => TipoLeilao == 1;
     private string imagePreview = "/imgs/insert_image.png";
 
