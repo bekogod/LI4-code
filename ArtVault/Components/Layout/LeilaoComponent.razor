@@ -61,7 +61,7 @@
 <div class="leilao-container" >
     <div class="leilao-grid">
         <div class="leilao-image-container" @onclick="NavigateToLeilaoPage">
-                <img class="leilao-image scaleA" src="./imgs/@LeilaoInstance.GetImagem()" alt="Imagem do Leilão" />
+                <img class="leilao-image scaleA" src=@imageDataUrl alt="Imagem do Leilão" />
             </div>
 
         <div class="leilao-details">
@@ -97,9 +97,21 @@
     public IArtVaultFacade IAVFacade { get; set; }
 
     private string heartColor;
+    private byte[] imageData;
+    private string imageDataUrl;
+
+    protected override async Task OnInitializedAsync()
+    {
+        imageData = await FetchImageData();
+        string imageFormat = LeilaoInstance.GetImagem().EndsWith(".png", StringComparison.OrdinalIgnoreCase) ? "png" : "jpeg";
+
+        imageDataUrl = $"data:image/{imageFormat};base64,{Convert.ToBase64String(imageData)}";
+
+    }
 
     protected override void  OnInitialized()
     {
+
         if(LeilaoInstance.GetInWL() == true)
         {
             heartColor = "red";
@@ -144,13 +156,11 @@
         if (!LeilaoInstance.GetInWL()) heartColor = "grey";
         else heartColor = "red";
     }
-    private async Task<string> FetchImageData()
+    private async Task<byte[]> FetchImageData()
     {
-        // Simulate fetching image data from a server
-        // Replace this with your actual logic to get the image URL or data
-        await A// Simulating a delay (replace with actual async operation)
+        byte[] imagem = await IAVFacade.GetImg(LeilaoInstance.GetImagem());
 
-        return "https://example.com/sample-image.jpg"; // Replace with your image URL or data
+        return imagem;
     }
 
 }
