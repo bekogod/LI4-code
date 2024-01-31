@@ -123,6 +123,26 @@ namespace ArtVault.Business
                 fs.Write(bytesDaImagem, 0, bytesDaImagem.Length);
             }
         }
+        public async Task<byte[]> GetImg(string imagePath)
+        {
+            try
+            {
+                // Specify the full path to the image on the server
+                string fullImagePath = "./ImgsLeiloes/" + imagePath;
+
+                // Read the image file as a byte array
+                byte[] imageData = await File.ReadAllBytesAsync(fullImagePath);
+
+                return imageData;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions (e.g., file not found, access denied) appropriately
+                // Log the exception or return a default image, depending on your requirements
+                Console.WriteLine($"Error fetching image: {ex.Message}");
+                return null;
+            }
+        }
 
         public bool TryLeilao(string nome, int tipo, int precoReservado, int? precoInicial, string imageName, string dimensoes, DateTime dataFim, string? descricao, byte[] bImagem)
         {
