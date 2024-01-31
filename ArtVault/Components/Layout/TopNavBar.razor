@@ -9,13 +9,20 @@
 
             @if (UtilizadorInstance.UserType() == 2)
             {
-                <NavLink href="/criarleilao" class="link-dark nav-link">Criar Leilao</NavLink>
-            }
-
-            @if (UtilizadorInstance.UserType() == 3)
+                <NavLink href="/criarleilao" class="link-dark nav-link">Criar Leilão</NavLink>
+            }else if (UtilizadorInstance.UserType() == 3)
             {
                 <NavLink href="/admin" class="link-dark nav-link">Admin Page</NavLink>
             }
+            else
+            {
+                <NavLink> </NavLink>
+
+            }
+
+        }else{
+            <NavLink> </NavLink>
+            <NavLink ></NavLink>
         }
        
 
