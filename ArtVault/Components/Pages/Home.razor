@@ -13,21 +13,11 @@
         row-gap: 20px;
     }
 
-    .redirect-container {
-        text-align: center;
-        padding: 20px;
-    }
-
+    
+    
     .loading-spinner {
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        border-radius: 50%;
-        border-top: 4px solid #3498db;
-        width: 30px;
-        height: 30px;
-        animation: spin 1s linear infinite;
-        margin: 0 auto;
+        text-align: center;
     }
-
     .load-more-button {
         
         transform: translateX(153%);
@@ -51,11 +41,14 @@
 }
 else
 {
-    <div class="redirect-container">
+
+    <div class="loading-spinner">
         <p>Redirecting to login...</p>
-        <div class="loading-spinner"></div>
+
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
-    
     
 }
 
