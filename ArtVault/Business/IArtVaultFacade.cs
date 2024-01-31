@@ -55,11 +55,16 @@ namespace ArtVault.Business
                     else if (type == "2")
                     {
                         u = new Artista(sUser);
+                        if (bool.Parse(sUser[9]) == false)
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
                         u = new Admin(sUser);
                     }
+                    
                     if (u.ValidPassword(password))
                     {
                         SetUserAtual(u);

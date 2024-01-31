@@ -18,6 +18,7 @@
             else this.ativo =true;
         }
 
+        public bool GetAtivo() { return ativo; }
 
 
         public void AtivarConta()
