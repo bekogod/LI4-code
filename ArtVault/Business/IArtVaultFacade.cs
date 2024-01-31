@@ -231,10 +231,12 @@ namespace ArtVault.Business
             IDBFacade.RemoveFromWL(user_atual.GetId(), id_leilao);
         }
 
-        public List<Leilao> GetLeiloesWL()
+        public async Task<List<Leilao>> GetLeiloesWLAsync()
         {
             List<Leilao> result = new List<Leilao>();
-            string leiloes = IDBFacade.GetAllLeiloesInWLofUtilizadorString(user_atual.GetId());
+
+            string leiloes = await Task.Run(() => IDBFacade.GetAllLeiloesInWLofUtilizadorString(user_atual.GetId()));
+
             if (leiloes.Length != 0)
             {
                 string[] larray = leiloes.Split('|');
@@ -245,6 +247,7 @@ namespace ArtVault.Business
                     result.Add(novo_leilao);
                 }
             }
+
             return result;
         }
 

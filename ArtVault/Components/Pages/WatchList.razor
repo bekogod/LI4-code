@@ -20,8 +20,34 @@
 <PageTitle>artVault</PageTitle>
 
 <div class="leilao-grid-container">
-    @foreach (Leilao l in IAVFacade.GetLeiloesWL())
+    @if (LeiloesList != null)
     {
-        <LeilaoComponent LeilaoInstance=l />
+        @foreach (Leilao l in LeiloesList)
+        {
+            <LeilaoComponent LeilaoInstance="@l" />
+        }
+    }
+    else
+    {
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     }
 </div>
+
+@code {
+    private List<Leilao> LeiloesList;
+
+    private async Task GetLeiloes()
+    {
+        await Task.Delay(2000);
+        LeiloesList = await IAVFacade.GetLeiloesWLAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetLeiloes();
+    }
+}
