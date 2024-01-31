@@ -232,7 +232,7 @@
     private DateTime DataFim { get; set; } = DateTime.Now;
     private int Hora { get; set; }
     private int Min { get; set; }
-    private long maxFileSize = 1024 * 1024 * 15;
+    private long maxFileSize = 1024 * 500;
     private List<string> errors = new ();
     private bool ShowPrecoIni => TipoLeilao == 1;
     private string imagePreview = "/imgs/insert_image.png";
@@ -248,7 +248,7 @@
         {
             if (file.Size > maxFileSize)
             {
-                errors.Add("The file is too large. Please upload a file smaller than 15 MB.");
+                errors.Add("The file is too large. Please upload a file smaller than 500 kB.");
                 return;
             }
 
