@@ -16,7 +16,7 @@ namespace ArtVault
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
 
-            builder.Services.AddScoped<IArtVaultFacade>();
+            builder.Services.AddSingleton<IArtVaultFacade>();
 
             var app = builder.Build();
 
