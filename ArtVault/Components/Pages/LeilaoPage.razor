@@ -162,6 +162,11 @@
                 <p><strong>&emsp;Artist:</strong> @NomeArtista </p>
                 <p><strong>&emsp;Tipo:</strong> @(LeilaoInstance.GetTipo() == 1 ? "Inglês" : "Sealed Bid    ")</p>
                 <p><strong>&emsp;Dimensões:</strong> @LeilaoInstance.GetDimensoes()</p>
+                @if (LeilaoInstance.GetTipo() == 1)
+                {
+                    <p><strong>&emsp;Bid Atual:</strong> @LeilaoInstance.GetPrecoReferencia()</p>
+
+                }
                 <p><strong>&emsp;Tempo Restante: </strong> <br /> </p>
                 <p>&emsp;&emsp;@LeilaoInstance.GetTempoRestante()</p>
                 <p><strong>Descrição:</strong><br/> @LeilaoInstance.GetDescricao()</p>
