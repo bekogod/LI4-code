@@ -214,14 +214,6 @@ namespace ArtVault.DAOs
 
 
 
-
-
-
-
-
-
-
-
         public int ExisteUtilizador(int NIF, int CC, string username, string email)
         {
             int existeUtilizador = 0;
@@ -263,8 +255,6 @@ namespace ArtVault.DAOs
             }
             return existeUtilizador;
         }
-
-
 
 
 
@@ -368,8 +358,6 @@ namespace ArtVault.DAOs
             if (inactiveUsersString == null) return "";
             else return inactiveUsersString;
         }
-
-
 
 
 

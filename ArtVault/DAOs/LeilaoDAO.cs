@@ -233,22 +233,6 @@ namespace ArtVault.DAOs
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public string GetLeilaoByUserID(int id_utilizador)
         {
             string leilaoString = "";
@@ -340,10 +324,6 @@ namespace ArtVault.DAOs
                 }
             }
         }
-
-
-
-
 
 
 

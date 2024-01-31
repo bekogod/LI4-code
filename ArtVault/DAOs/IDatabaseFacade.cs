@@ -25,7 +25,6 @@ namespace ArtVault.DAOs
         }
 
 
-
         //LANCE DAO 
         //LANCE DAO
         //LANCE DAO 
@@ -47,15 +46,12 @@ namespace ArtVault.DAOs
         }
 
 
-
-
-
-
         //LEILAO DAO
         //LEILAO DAO
         //LEILAO DAO
         //LEILAO DAO
-
+        //LEILAO DAO
+        //LEILAO DAO
 
         public int InsertLeilao(int id_utilizador, DateTime dataCom, DateTime dataFim, string nome, int? precoReferencia, int precoReserva, string imagem, string dimensoes, string? descricao, int tipo)
         {
@@ -87,20 +83,14 @@ namespace ArtVault.DAOs
             leilaoDAO.UpdatePrecoReferencia(idLeilao, novoPrecoReferencia);
         }
 
-
-
         public void DeleteLeilao(int idLeilao)
         {
             leilaoDAO.DeleteLeilao(idLeilao);
         }
 
 
-
-
-
-
-
-
+        //UTILIZADOR DAO
+        //UTILIZADOR DAO
         //UTILIZADOR DAO
         //UTILIZADOR DAO
         //UTILIZADOR DAO
@@ -121,7 +111,6 @@ namespace ArtVault.DAOs
             return utilizadorDAO.GetUserByEmail(email);
         }
 
-
         public string GetUserByID(int id)
         {
             return utilizadorDAO.GetUserByID(id);
@@ -131,7 +120,6 @@ namespace ArtVault.DAOs
         {
             return utilizadorDAO.GetUserNameByID(id);
         }
-
 
         public void ActivateUtilizador(int idUtilizador)
         {
@@ -149,22 +137,17 @@ namespace ArtVault.DAOs
         }
 
 
-
-
-
-
-
         //WATCHLIST DAO
         //WATCHLIST DAO
         //WATCHLIST DAO
         //WATCHLIST DAO
-
+        //WATCHLIST DAO
+        //WATCHLIST DAO
 
         public void InsertWatchlist(int id_utilizador, int id_leilao)
         {
             watchlistDAO.InsertWatchlist(id_utilizador, id_leilao);
         }
-
 
         public string GetLeiloesWatchListByUserId(int id_utilizador)
         {
@@ -189,12 +172,6 @@ namespace ArtVault.DAOs
             return watchlistDAO.GetLeiloesOfUtilizadorInWatchList(id_utilizador);
         }
 
-
-
-
-
-
-
         public string GetAllLeiloesInWLofUtilizadorString(int id_utilizador)
         {
             string? leiloesExtenso = null;
@@ -211,7 +188,7 @@ namespace ArtVault.DAOs
 
             if (leiloesExtenso != null)
             {
-                leiloesExtenso = leiloesExtenso.Remove(leiloesExtenso.Length - 1); // Remove the last character
+                leiloesExtenso = leiloesExtenso.Remove(leiloesExtenso.Length - 1);
             }
             else return "";
 
@@ -219,17 +196,10 @@ namespace ArtVault.DAOs
 
         }
 
-
         public void DeleteLeiloesFromWL(int idLeilao)
         {
             watchlistDAO.DeleteLeiloesFromWL(idLeilao);
         }
-
-
-
-
-
-
 
     }
 }
