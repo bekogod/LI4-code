@@ -14,7 +14,7 @@
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         display: flex;
-        flex-direction: column; /* Align children vertically */
+        flex-direction: column; 
         justify-content: center;
         align-items: center;
         width: 25vw; 
@@ -85,24 +85,21 @@
     private string Password { get; set; }
     private string ErrorMessage { get; set; }
 
-    private void SubmitForm()
+    private async void SubmitForm()
     {
-        bool isValid =  IAVFacade.CheckCredentials(Username, Password);
+        bool isValid =  await IAVFacade.CheckCredentialsAsync(Username, Password);
         if (isValid)
         {
-            // Redirect to a success page or perform other actions
             NavManager.NavigateTo("/");
         }
         else
         {
-            // Handle invalid credentials, show an error message, etc.
             ErrorMessage = "Invalid credentials. Please try again.";
         }
     }
 
     private void Register()
     {
-        Console.WriteLine("Register button clicked");
         NavManager.NavigateTo("/register");
     }
 }

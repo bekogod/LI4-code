@@ -211,7 +211,7 @@ else
 
         NomeArtista = IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador());
 
-        BidHistory = IAVFacade.GetXLancesByLeilaoID(idInt,8);
+        BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt,8);
 
         imageData = await FetchImageData();
         string imageFormat = LeilaoInstance.GetImagem().EndsWith(".png", StringComparison.OrdinalIgnoreCase) ? "png" : "jpeg";
@@ -220,7 +220,7 @@ else
 
     }
 
-    private void PlaceBid()
+    private async void PlaceBid()
     {
         
         IAVFacade.TryLance(LeilaoInstance.GetId(),bidAmount);
@@ -228,7 +228,7 @@ else
         int idInt = int.Parse(id);
         LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
 
-        BidHistory = IAVFacade.GetXLancesByLeilaoID(idInt, 8);
+        BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt, 8);
 
     }
     private void CancelarLeilao()
