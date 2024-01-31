@@ -8,7 +8,10 @@
 <i>**Leilões</i>**<i>**Online**</i>
 
 - Motivação:
-  Passar à Cadeira
+  Uma aplicação para <i>Leiloes Online</i>
+	O sítio deverá ser capaz de acolher e gerir diversos tipos de leilões, numa
+dada área de negócio (Arte). 
+
 ---
 <h3 align="center">Equipa</h3>
 
