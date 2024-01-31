@@ -142,13 +142,14 @@
 @if (LeilaoInstance != null)
 {
     <div class="leilao-container">
-        <h2>Leilão de: <i>"@LeilaoInstance.GetNome()"</i></h2>
+        <h1 style="margin-bottom:30px">Leilão de: <i>"@LeilaoInstance.GetNome()"</i></h1>
         <form class="leilao-grid">
-            <div class="leilao-details" style="width: 250px">
+            <div class="leilao-details" style="width: 300px;">
                 <h3>Informações da Obra</h3>
-                <p><strong>Artist:</strong> @NomeArtista </p>
-                <p><strong>Description:</strong> @LeilaoInstance.GetDescricao()</p>
-                <p><strong>Current Bid:</strong> @LeilaoInstance.GetPrecoReferencia()</p>
+                <br/>
+                <p><strong>&emsp;Artist:</strong> @NomeArtista </p>
+                <p><strong>&emsp;Description:</strong> @LeilaoInstance.GetDescricao()</p>
+                <p><strong>&emsp;Current Bid:</strong> @LeilaoInstance.GetPrecoReferencia()</p>
             </div>
 
             <div class="leilao-details">
