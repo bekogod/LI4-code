@@ -189,7 +189,7 @@ namespace ArtVault.Business
 
         public string GetNomeArtista(int id_artista)
         {
-            return IDBFacade.GetUserNameByID(id_artista);
+            return IDBFacade.GetNameByID(id_artista);
             
         }
 
