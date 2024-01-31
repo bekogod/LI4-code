@@ -127,9 +127,9 @@
       
         </label>
 
-            @if (!string.IsNullOrEmpty(errors))
+            @foreach(var error in errors)
             {
-                <div class="error-message">@errors</div>
+                <div class="error-message">@error</div>
             }
         </div>
         
@@ -232,7 +232,7 @@
     private int Hora { get; set; }
     private int Min { get; set; }
     private long maxFileSize = 1024 * 1024 * 15;
-    private string errors;
+    private List<string> errors;
     private bool ShowPrecoIni => TipoLeilao == 1;
     private string imagePreview = "/imgs/insert_image.png";
 
@@ -240,14 +240,14 @@
 
     private async Task LoadFile (InputFileChangeEventArgs e)
     {
-        errors = null;
+        errors.Clear();
         var file = e.File;
 
         if (file != null)
         {
             if (file.Size > maxFileSize)
             {
-                errors = "The file is too large. Please upload a file smaller than 15 MB.";
+                errors.Add("The file is too large. Please upload a file smaller than 15 MB.");
                 return;
             }
 
@@ -266,7 +266,7 @@
             }
             catch (Exception ex)
             {
-                errors="An error occurred while uploading the file.";
+                errors.Add("An error occurred while uploading the file.");
             }
         }
     }
@@ -283,66 +283,61 @@
 
         if (string.IsNullOrWhiteSpace(Nome))
         {
-            errors = "*Campo Obrigatório: nome";
-            return false;
+            errors.Add("*Campo Obrigatório: Nome");
         }
 
         if (string.IsNullOrWhiteSpace(Dimensoes))
         {
-            errors = "Faltam as dimensões";
-            return false;
+            errors.Add("*Campo Obrigatório: Dimensões");
         }
 
 
         if (image == null || image.Length == 0 || string.IsNullOrWhiteSpace(imageName))
         {
-            errors = "Falta escolher uma imagem";
-            return false;
+            errors.Add("*Campo Obrigatório: Imagem");
         }
 
         if (PrecoRes <= 1)
         {
-            errors = "O preço de reserva não é valido";
-            return false;
+            errors.Add("*Campo Obrigatório: Preço de reserva");
         }
         if(TipoLeilao == 1)
         {
             if(PrecoIni <= 1)
             {
-                errors = "O preço inicial não é valido";
-                return false;
+                errors.Add("*Campo Obrigatório: Preço de inicial");
             }
         }
 
 
         if (TipoLeilao != 1 && TipoLeilao != 2)
         {
-            errors = "Escolha um tipo de Leilão";
-            return false;
+            errors.Add("*Campo Obrigatório: Tipo de leilão");
+
         }
 
         if (Hora < 0 || Hora > 23)
         {
-            errors = "Escolha uma hora valida";
-            return false;
+            errors.Add("*Campo Obrigatório: Hora");
         }
 
         if (Min < 0 || Min > 59)
         {
-            errors = "Escolha uma hora valida";
-            return false;
+            errors.Add("*Campo Obrigatório: Min");
         }
 
 
         DateTime combined = new DateTime(DataFim.Year, DataFim.Month, DataFim.Day, Hora, Min, 0);
         if(combined < DateTime.Now)
         {
-            errors = "A data inserida é inválida";
+            errors.Add("A data inserida é inválida");
             return false;
         }
 
-
-        // All checks passed
+        if(errors.Count > 0)
+        {
+            return false;
+        }
         return true;
     }
 
@@ -350,7 +345,7 @@
 
     private void Criarleilao()
     {
-        errors = null;
+        errors.Clear();
         if (ValidateFields())
         {
             DateTime combined = new DateTime(DataFim.Year, DataFim.Month, DataFim.Day, Hora, Min, 0);
