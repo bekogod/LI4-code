@@ -149,9 +149,16 @@
     <div class="leilao-container">
         <h1 style="margin-bottom:30px">Leilão de: <i>"@LeilaoInstance.GetNome()"</i></h1>
         <form class="leilao-grid">
+
+            <div class="leilao-details">
+                  <div class="leilao-image-container">
+                        <img class="leilao-image scaleA" src=@imageDataUrl alt="Imagem do Leilão" />
+                    </div>
+            </div>
+
             <div class="leilao-details" style="width: 300px;">
                 <h3>Informações da Obra</h3>
-                <br/>
+                <br />
                 <p><strong>&emsp;Artist:</strong> @NomeArtista </p>
                 <p><strong>&emsp;Tipo:</strong> @(LeilaoInstance.GetTipo() == 1 ? "Inglês" : "Sealed Bid    ")</p>
                 <p><strong>&emsp;Dimensões:</strong> @LeilaoInstance.GetDimensoes()</p>
@@ -162,12 +169,6 @@
                     <div class="error-message">@errors</div>
                 }
 
-            </div>
-
-            <div class="leilao-details">
-                  <div class="leilao-image-container">
-                        <img class="leilao-image scaleA" src=@imageDataUrl alt="Imagem do Leilão" />
-                    </div>
             </div>
 
 
