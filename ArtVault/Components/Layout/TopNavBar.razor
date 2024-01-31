@@ -2,7 +2,9 @@
 
 <div class="container">
     <header class="d-flex justify-content-md-between flex-wrap py-3">
-        <img src="/imgs/artVault_Logo_nobg.png" alt="artVault Logo" width="210" height="50">
+        <NavLink href="/">
+            <img src="/imgs/artVault_Logo_nobg.png" alt="artVault Logo" width="210" height="50">
+        </NavLink>
         <NavLink href="/" class="link-dark nav-link" style="align-content:left">Home</NavLink>
         @if(UtilizadorInstance != null){
             <NavLink href="/watchList" class="link-dark nav-link">WatchList</NavLink>
