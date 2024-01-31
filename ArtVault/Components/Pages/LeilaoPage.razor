@@ -32,7 +32,6 @@
     }
 
     .leilao-details {
-        /* background-color: red; */
         margin: 0;
     }
 
@@ -215,7 +214,7 @@ else
 
         NomeArtista = IAVFacade.GetNomeArtista(LeilaoInstance.GetIdUtilizador());
 
-        BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt,8);
+        BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt,6);
 
         imageData = await FetchImageData();
         string imageFormat = LeilaoInstance.GetImagem().EndsWith(".png", StringComparison.OrdinalIgnoreCase) ? "png" : "jpeg";
@@ -232,7 +231,7 @@ else
         int idInt = int.Parse(id);
         LeilaoInstance = IAVFacade.GetLeilaoWithID(idInt);
 
-        BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt, 8);
+        BidHistory = await IAVFacade.GetXLancesByLeilaoIDAsync(idInt, 6);
 
     }
     private void CancelarLeilao()
