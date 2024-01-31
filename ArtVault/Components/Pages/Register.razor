@@ -135,9 +135,9 @@
             <button type="button" @onclick="GoToLogin">Voltar para Iniciar Sessão</button>
         </div>
 
-        @if (!string.IsNullOrEmpty(ErrorMessage))
+        @foreach (var error in ErrorMessage)
         {
-            <div class="error-message">@ErrorMessage</div>
+            <div class="error-message">@error</div>
         }
     </form>
 </div>
@@ -156,7 +156,7 @@
     private string NIF { get; set; }
     private string CC { get; set; }
     private string TipoConta { get; set; }
-    private string ErrorMessage { get; set; }
+    private List<string> ErrorMessage { get; set; }
 
 
     private byte getTipoConta(string sTipo)
@@ -169,61 +169,51 @@
     private bool ValidateFields()
     {
         if (string.IsNullOrWhiteSpace(Username)){
-            ErrorMessage = "Falta preencher username";
-            return false;
+            ErrorMessage.Add("*Campo Obrigatório: Username");
         }
 
         if (string.IsNullOrWhiteSpace(Email))
         {
-            ErrorMessage = "Falta preencher email";
-            return false;
+            ErrorMessage.Add("*Campo Obrigatório: Email");
         }
 
         if (string.IsNullOrWhiteSpace(Password))
         {
-            ErrorMessage = "Falta preencher password";
-            return false;
-        }
-
-        if (string.IsNullOrWhiteSpace(ConfirmPassword))
-        {
-            ErrorMessage = "Falta preencher a corfirmação da password";
-            return false;
+            ErrorMessage.Add("*Campo Obrigatório: Password");
         }
 
         if(Password != ConfirmPassword)
         {
-            ErrorMessage = "A Password e a confirmação não são iguais";
-            return false;
+            ErrorMessage.Add("A Password e a confirmação não são iguais");
         }
 
         if (string.IsNullOrWhiteSpace(Nome))
         {
-            ErrorMessage = "Falta preencher o nome";
-            return false;
+            ErrorMessage.Add("*Campo Obrigatório: Nome");
         }
 
         if (string.IsNullOrWhiteSpace(Morada))
         {
-            ErrorMessage = "Falta preencher a morada";
-            return false;
+            ErrorMessage.Add("*Campo Obrigatório: Morada");
         }
 
         if (string.IsNullOrWhiteSpace(NIF) || NIF.Length != 9)
         {
-            ErrorMessage = "O NIF não é válido";
-            return false;
+            ErrorMessage.Add("*Campo Obrigatório: NIF");
         }
 
         if (string.IsNullOrWhiteSpace(CC) || CC.Length !=  9)
         {
-            ErrorMessage = "O CC não é válido";
-            return false;
+            ErrorMessage.Add("*Campo Obrigatório: CC");
         }
 
         if (string.IsNullOrWhiteSpace(TipoConta))
         {
-            ErrorMessage = "Falta preencher o tipo de conta";
+            ErrorMessage.Add("*Campo Obrigatório: Tipo de Conta");
+        }
+
+        if(ErrorMessage.Count > 0)
+        {
             return false;
         }
 
@@ -233,7 +223,7 @@
 
     private void RegisterUser()
     {
-        ErrorMessage = null;
+        ErrorMessage.Clear();
         if(ValidateFields()){
         bool result = IAVFacade.TryRegisto(Email,Password,Username,Nome,Morada,int.Parse( NIF),int.Parse( CC),getTipoConta(TipoConta));
         
